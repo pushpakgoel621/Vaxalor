@@ -31,18 +31,14 @@ export function ServiceDetailBlock({
   return (
     <section className={`${bgColor} py-section-sm`}>
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
-        <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center ${
-            reversed ? "lg:direction-rtl" : ""
-          }`}
-          style={reversed ? { direction: "rtl" } : undefined}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text Content */}
           <ScrollReveal
             direction={reversed ? "right" : "left"}
             distance={30}
+            className={reversed ? "lg:order-2" : ""}
           >
-            <div style={{ direction: "ltr" }}>
+            <div>
               <p className="text-signal text-sm font-semibold font-mono uppercase tracking-wider mb-3">
                 {number}
               </p>
@@ -77,16 +73,14 @@ export function ServiceDetailBlock({
           <ScrollReveal
             direction={reversed ? "left" : "right"}
             distance={30}
+            className={reversed ? "lg:order-1" : ""}
           >
-            <div
-              className="aspect-[4/3] rounded-card border border-canvas-border overflow-hidden"
-              style={{ direction: "ltr" }}
-            >
+            <div className="aspect-[4/3] rounded-card border border-canvas-border overflow-hidden">
               <div
                 className={`w-full h-full ${
                   highlighted
                     ? "bg-gradient-to-br from-signal-tint via-signal-wash to-signal/20"
-                    : `bg-gradient-to-br from-canvas-alt via-signal-wash/30 to-signal-tint`
+                    : "bg-gradient-to-br from-canvas-alt via-signal-wash/30 to-signal-tint"
                 }`}
               />
             </div>

@@ -1,4 +1,4 @@
-import type { NavLink, Service, ProcessStep, Testimonial, Stat, SocialLink } from "@/types";
+import type { NavLink, Service, ProcessStep, Testimonial, Stat, SocialLink, Project, TeamMember, Value } from "@/types";
 
 export const SITE_NAME = "Vaxalor";
 export const SITE_URL = "https://vaxalor.com";
@@ -7,8 +7,9 @@ export const SITE_TAGLINE = "We build digital products with soul.";
 
 export const NAV_LINKS: NavLink[] = [
   { label: "Services", href: "/services" },
-  { label: "Work", href: "/work", disabled: true },
-  { label: "About", href: "/about", disabled: true },
+  { label: "Work", href: "/work" },
+  { label: "Blog", href: "/blog" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -199,4 +200,133 @@ export const BUDGET_OPTIONS = [
   "$5K – $10K",
   "$10K+",
   "Not sure yet",
+];
+
+export const PROJECTS: Project[] = [
+  {
+    slug: "freshbite",
+    title: "FreshBite",
+    hook: "A popular restaurant had zero online presence. We changed that in 14 days.",
+    category: "Website",
+    description:
+      "FreshBite is a modern restaurant website with integrated online ordering, menu browsing with categories and photos, reservation system, and a fully mobile-responsive design.",
+    challenge:
+      "FreshBite was a popular local restaurant with zero online presence. They were losing customers to competitors with modern websites and online ordering.",
+    solution:
+      "We designed and built a fast, mobile-first website with an integrated menu browser, online ordering system, and reservation booking — all shipped in 14 days.",
+    result:
+      "Online orders accounted for 35% of total revenue within the first month. Mobile traffic increased by 280%, and the average session time doubled.",
+    timeline: "Shipped in 14 days",
+    year: "2026",
+    techStack: ["Next.js", "Tailwind CSS", "Stripe", "PostgreSQL"],
+    gradient: "from-signal-tint via-signal-wash to-signal/20",
+    pattern: "grid",
+    conceptProject: true,
+  },
+  {
+    slug: "trackflow",
+    title: "TrackFlow",
+    hook: "An idea on a napkin became a funded startup in 20 days.",
+    category: "MVP",
+    description:
+      "TrackFlow is a project management dashboard with task boards, team management, analytics, and a clean onboarding flow — built as an investor-ready MVP.",
+    challenge:
+      "A first-time founder needed to validate a project management concept and pitch to investors, but had no technical co-founder and limited runway.",
+    solution:
+      "We built a fully functional MVP with Kanban task boards, team management, and analytics dashboards in 20 days at 50% off through our MVP program.",
+    result:
+      "The founder used the MVP to close a $200K pre-seed round. The product now has 400+ active users in private beta.",
+    timeline: "Shipped in 20 days",
+    year: "2026",
+    techStack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
+    gradient: "from-canvas-alt via-signal-tint to-signal-wash/60",
+    pattern: "dots",
+    conceptProject: true,
+  },
+  {
+    slug: "shopassist-ai",
+    title: "ShopAssist AI",
+    hook: "A support team drowning in 200 daily tickets needed a smarter way. We built it.",
+    category: "AI",
+    description:
+      "ShopAssist AI is an intelligent chatbot for e-commerce with product recommendations, order tracking, lead capture, and a performance analytics dashboard.",
+    challenge:
+      "An e-commerce company was spending 6+ hours daily on repetitive customer support queries — order tracking, return policies, product questions.",
+    solution:
+      "We built an AI chatbot powered by OpenAI that handles product recommendations, order tracking, and FAQ responses with 95% accuracy. Integrated directly into their existing Shopify store.",
+    result:
+      "The chatbot now handles 80% of support tickets automatically. Average response time dropped from 4 hours to 8 seconds. Support team reclaimed 30+ hours per week.",
+    timeline: "Shipped in 18 days",
+    year: "2026",
+    techStack: ["React", "Node.js", "OpenAI", "MongoDB", "Shopify API"],
+    gradient: "from-signal-wash/50 via-signal-tint to-canvas-alt",
+    pattern: "waves",
+    conceptProject: true,
+  },
+  {
+    slug: "buildcrm",
+    title: "BuildCRM",
+    hook: "A sales team stuck in spreadsheets needed a system that actually fit their workflow.",
+    category: "CRM",
+    description:
+      "BuildCRM is a custom CRM with contact management, sales pipeline visualization, reporting dashboards, and role-based access control.",
+    challenge:
+      "A growing B2B company was managing 500+ leads across 3 different spreadsheets. Deals were falling through the cracks, and reporting took hours of manual work.",
+    solution:
+      "We built a custom CRM with a visual sales pipeline, automated lead scoring, one-click reporting, and role-based access — designed around their actual workflow, not a generic template.",
+    result:
+      "Lead response time dropped by 60%. Monthly reporting that took 8 hours now takes 2 clicks. The team closed 40% more deals in the first quarter.",
+    timeline: "Shipped in 19 days",
+    year: "2026",
+    techStack: ["Next.js", "PostgreSQL", "Prisma", "Tailwind CSS", "AWS"],
+    gradient: "from-signal-tint via-canvas-alt to-signal-wash/40",
+    pattern: "circles",
+    conceptProject: true,
+  },
+];
+
+export const PROJECT_FILTERS = ["All", "Websites", "Mobile", "AI", "MVP"] as const;
+
+export const TEAM_MEMBERS: TeamMember[] = [
+  {
+    name: "Abhinav Rastogi",
+    role: "Founder & Lead Developer",
+    oneLiner: "Obsessed with shipping fast and building things that matter.",
+  },
+  {
+    name: "Design Lead",
+    role: "UI/UX Design",
+    oneLiner: "Believes every pixel has a purpose.",
+  },
+  {
+    name: "Backend Engineer",
+    role: "Backend & Infrastructure",
+    oneLiner: "If it scales, it ships.",
+  },
+  {
+    name: "AI Engineer",
+    role: "AI & Machine Learning",
+    oneLiner: "Making machines understand humans, not the other way around.",
+  },
+];
+
+export const VALUES: Value[] = [
+  {
+    number: "01",
+    title: "Soul in the code",
+    description:
+      "Every line of code we write has intention. We don't cut corners.",
+  },
+  {
+    number: "02",
+    title: "Speed without compromise",
+    description:
+      "20 days maximum. But we never sacrifice quality for speed.",
+  },
+  {
+    number: "03",
+    title: "Radical honesty",
+    description:
+      "We'll tell you if your idea needs tweaking. We're partners, not yes-men.",
+  },
 ];

@@ -84,34 +84,55 @@ export function CustomCursor() {
       : "transparent";
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 z-[10000] pointer-events-none mix-blend-difference"
-      style={{
-        x: ringX,
-        y: ringY,
-        translateX: "-50%",
-        translateY: "-50%",
-      }}
-      animate={{
-        opacity: isVisible ? 1 : 0,
-        width: ringSize,
-        height: ringSize,
-        scale: isClicking ? 0.85 : 1,
-      }}
-      transition={{
-        width: { type: "spring", stiffness: 300, damping: 20 },
-        height: { type: "spring", stiffness: 300, damping: 20 },
-        opacity: { duration: 0.15 },
-        scale: { duration: 0.15 },
-      }}
-    >
-      <div
-        className="w-full h-full rounded-full transition-colors duration-150"
+    <>
+      {/* Small dot — follows cursor exactly */}
+      <motion.div
+        className="fixed top-0 left-0 z-[10000] pointer-events-none"
         style={{
-          border: "1.5px solid rgba(29, 92, 191, 0.8)",
-          backgroundColor: ringFill,
+          x: cursorX,
+          y: cursorY,
+          translateX: "-50%",
+          translateY: "-50%",
         }}
-      />
-    </motion.div>
+        animate={{
+          opacity: isVisible ? 1 : 0,
+          scale: hoverState !== "none" ? 0 : isClicking ? 0.6 : 1,
+        }}
+        transition={{ duration: 0.15 }}
+      >
+        <div className="w-1.5 h-1.5 rounded-full bg-ink" />
+      </motion.div>
+
+      {/* Ring — follows with spring delay */}
+      <motion.div
+        className="fixed top-0 left-0 z-[10000] pointer-events-none"
+        style={{
+          x: ringX,
+          y: ringY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          opacity: isVisible ? 1 : 0,
+          width: ringSize,
+          height: ringSize,
+          scale: isClicking ? 0.85 : 1,
+        }}
+        transition={{
+          width: { type: "spring", stiffness: 300, damping: 20 },
+          height: { type: "spring", stiffness: 300, damping: 20 },
+          opacity: { duration: 0.15 },
+          scale: { duration: 0.15 },
+        }}
+      >
+        <div
+          className="w-full h-full rounded-full transition-all duration-150"
+          style={{
+            border: `1.5px solid ${hoverState !== "none" ? "rgba(29, 92, 191, 0.9)" : "rgba(15, 23, 42, 0.35)"}`,
+            backgroundColor: ringFill,
+          }}
+        />
+      </motion.div>
+    </>
   );
 }

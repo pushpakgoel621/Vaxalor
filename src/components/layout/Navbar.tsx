@@ -20,7 +20,7 @@ export function Navbar() {
           hidden && !mobileOpen ? "-translate-y-full" : "translate-y-0"
         } ${
           scrolled
-            ? "bg-white/90 backdrop-blur-[12px] border-b border-canvas-border"
+            ? "bg-canvas/90 backdrop-blur-[12px] border-b border-canvas-border shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
             : "bg-transparent"
         }`}
       >
@@ -30,6 +30,7 @@ export function Navbar() {
             href="/"
             className="text-ink font-heading font-bold text-xl tracking-tight"
             data-cursor="hover"
+            data-logo
           >
             {SITE_NAME}
           </Link>

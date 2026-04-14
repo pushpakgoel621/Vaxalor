@@ -11,25 +11,29 @@ const PLACEHOLDER_PROJECTS = [
     title: "FreshBite",
     category: "Website",
     description: "Modern restaurant website with online ordering",
-    gradient: "from-signal-wash via-signal-tint to-signal/30",
+    gradient: "from-signal-tint via-signal-wash to-signal/20",
+    pattern: "grid" as const,
   },
   {
     title: "TrackFlow",
     category: "MVP",
     description: "Project management dashboard for startups",
-    gradient: "from-signal/20 via-signal-wash to-canvas-alt",
+    gradient: "from-canvas-alt via-signal-tint to-signal-wash/60",
+    pattern: "dots" as const,
   },
   {
     title: "ShopAssist AI",
     category: "AI",
     description: "Smart chatbot for e-commerce support",
-    gradient: "from-canvas-alt via-signal-tint to-signal-wash",
+    gradient: "from-signal-wash/50 via-signal-tint to-canvas-alt",
+    pattern: "waves" as const,
   },
   {
     title: "BuildCRM",
     category: "CRM",
     description: "Custom CRM with sales pipeline management",
-    gradient: "from-signal-wash to-signal/40",
+    gradient: "from-signal-tint via-canvas-alt to-signal-wash/40",
+    pattern: "circles" as const,
   },
 ];
 

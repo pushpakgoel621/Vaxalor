@@ -39,3 +39,35 @@ export interface SocialLink {
   platform: string;
   href: string;
 }
+
+export interface Project {
+  slug: string;
+  title: string;
+  hook: string;
+  category: "Website" | "Mobile" | "AI" | "MVP" | "CRM";
+  description: string;
+  challenge: string;
+  solution: string;
+  result: string;
+  timeline: string;
+  year: string;
+  techStack: string[];
+  gradient: string;
+  pattern: "grid" | "dots" | "waves" | "circles";
+  conceptProject?: boolean;
+}
+
+export type ProjectFilter = "All" | "Websites" | "Mobile" | "AI" | "MVP";
+
+export interface TeamMember {
+  name: string;
+  role: string;
+  oneLiner: string;
+  image?: string;
+}
+
+export interface Value {
+  number: string;
+  title: string;
+  description: string;
+}

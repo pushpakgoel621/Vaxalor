@@ -60,6 +60,24 @@
 }
 
 /* ================================================================
+   DARK MODE OVERRIDES
+   ================================================================ */
+
+.dark {
+  --color-ink: #F8FAFC;
+  --color-ink-100: #E2E8F0;
+  --color-ink-200: #CBD5E1;
+  --color-ink-300: #94A3B8;
+  --color-ink-400: #64748B;
+  --color-ink-500: #334155;
+
+  --color-canvas: #0F172A;
+  --color-canvas-white: #1E293B;
+  --color-canvas-alt: #1A2332;
+  --color-canvas-border: #334155;
+}
+
+/* ================================================================
    BASE STYLES
    ================================================================ */
 
@@ -133,10 +151,10 @@ body {
    ================================================================ */
 
 .dot-grid {
-  background-image: radial-gradient(circle, var(--color-ink-400) 0.75px, transparent 0.75px);
+  background-image: radial-gradient(circle, var(--color-ink-300) 0.75px, transparent 0.75px);
   background-size: 24px 24px;
   background-position: center;
-  opacity: 0.02;
+  opacity: 0.07;
   position: absolute;
   inset: 0;
   pointer-events: none;

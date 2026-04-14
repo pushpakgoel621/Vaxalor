@@ -5,6 +5,7 @@ import { ServicesOverview } from "@/components/sections/home/ServicesOverview";
 import { WhyChooseUs } from "@/components/sections/home/WhyChooseUs";
 import { PortfolioPreview } from "@/components/sections/home/PortfolioPreview";
 import { ProcessTimeline } from "@/components/sections/home/ProcessTimeline";
+import { InteractiveQuiz } from "@/components/sections/home/InteractiveQuiz";
 import { Testimonials } from "@/components/sections/home/Testimonials";
 import { CTASection } from "@/components/sections/home/CTASection";
 
@@ -17,6 +18,7 @@ export default function HomePage() {
       <WhyChooseUs />
       <PortfolioPreview />
       <ProcessTimeline />
+      <InteractiveQuiz />
       <Testimonials />
       <CTASection />
     </PageTransition>

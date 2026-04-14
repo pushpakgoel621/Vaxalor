@@ -35,8 +35,9 @@ export function ServiceCard({
       <p className="text-ink-300 text-sm leading-relaxed mb-4">
         {description}
       </p>
-      <span className="text-signal text-sm font-medium">
-        Learn more →
+      <span className="inline-flex items-center gap-1 text-signal text-sm font-medium">
+        Learn more
+        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
       </span>
     </Link>
   );

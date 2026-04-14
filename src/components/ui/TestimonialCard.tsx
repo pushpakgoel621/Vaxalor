@@ -13,10 +13,10 @@ export function TestimonialCard({
 }: TestimonialCardProps) {
   return (
     <div className="bg-canvas-white border border-canvas-border rounded-[14px] p-10 md:p-12 max-w-3xl mx-auto relative">
-      <span className="absolute top-6 left-8 text-signal-wash text-[120px] font-heading leading-none select-none pointer-events-none">
+      <span className="absolute -top-2 left-6 md:left-8 text-signal-wash/60 text-[140px] font-heading leading-none select-none pointer-events-none">
         &ldquo;
       </span>
-      <blockquote className="relative z-10 text-ink-100 text-[20px] leading-[1.7] italic mb-8 pt-8">
+      <blockquote className="relative z-10 text-ink-100 text-[18px] md:text-[20px] leading-[1.8] italic mb-8 pt-10">
         {quote}
       </blockquote>
       <div className="flex items-center gap-3">
