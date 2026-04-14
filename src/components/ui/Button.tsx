@@ -1,10 +1,14 @@
+"use client";
+
 import Link from "next/link";
+import { MagneticWrapper } from "./MagneticWrapper";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
 
 interface ButtonBaseProps {
   variant?: ButtonVariant;
   arrow?: boolean;
+  magnetic?: boolean;
   className?: string;
   children: React.ReactNode;
   "data-cursor"?: string;
@@ -38,6 +42,7 @@ const variants: Record<ButtonVariant, string> = {
 export function Button({
   variant = "primary",
   arrow = false,
+  magnetic = true,
   className = "",
   children,
   ...props
@@ -51,8 +56,12 @@ export function Button({
     </>
   );
 
+  const useMagnetic = magnetic && variant !== "ghost";
+
+  let button: React.ReactNode;
+
   if ("href" in props && props.href) {
-    return (
+    button = (
       <Link
         href={props.href}
         onClick={props.onClick}
@@ -62,18 +71,24 @@ export function Button({
         {content}
       </Link>
     );
+  } else {
+    const { type = "button", onClick, disabled } = props as ButtonAsButton;
+    button = (
+      <button
+        type={type}
+        onClick={onClick}
+        disabled={disabled}
+        className={`group ${baseClasses}`}
+        data-cursor={props["data-cursor"] ?? "cta"}
+      >
+        {content}
+      </button>
+    );
   }
 
-  const { type = "button", onClick, disabled } = props as ButtonAsButton;
-  return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className={`group ${baseClasses}`}
-      data-cursor={props["data-cursor"] ?? "cta"}
-    >
-      {content}
-    </button>
-  );
+  if (useMagnetic) {
+    return <MagneticWrapper>{button}</MagneticWrapper>;
+  }
+
+  return button;
 }

@@ -15,77 +15,88 @@ export function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          hidden && !mobileOpen ? "-translate-y-full" : "translate-y-0"
-        } ${
-          scrolled
-            ? "bg-canvas/90 backdrop-blur-[12px] border-b border-canvas-border shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
-            : "bg-transparent"
-        }`}
+      <div
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          hidden && !mobileOpen ? "-translate-y-[calc(100%+20px)]" : "translate-y-0"
+        } ${scrolled ? "pt-3 px-4 md:px-8" : "pt-4 px-4 md:px-10"}`}
       >
-        <nav className="max-w-[1200px] mx-auto px-6 sm:px-8 flex items-center justify-between h-16 xl:h-[72px]">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="text-ink font-heading font-bold text-xl tracking-tight"
-            data-cursor="hover"
-            data-logo
-          >
-            {SITE_NAME}
-          </Link>
+        <header
+          className={`max-w-[1200px] mx-auto rounded-full border transition-all duration-500 ${
+            scrolled
+              ? "bg-white/95 backdrop-blur-[16px] border-canvas-border shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
+              : "bg-white/80 backdrop-blur-[8px] border-signal-wash/60 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+          }`}
+        >
+          <nav className="flex items-center justify-between h-14 md:h-[60px] px-5 md:px-7">
+            {/* Logo */}
+            <Link
+              href="/"
+              className="flex items-center gap-2 shrink-0"
+              data-cursor="hover"
+              data-logo
+            >
+              {/* Logo icon */}
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-signal to-signal-bright flex items-center justify-center">
+                <span className="text-white font-heading font-bold text-sm">V</span>
+              </div>
+              <span className="text-ink font-heading font-bold text-lg tracking-tight">
+                {SITE_NAME}
+              </span>
+            </Link>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.disabled ? "#" : link.href}
-                  className={`relative text-[15px] font-medium transition-colors duration-200 ${
-                    link.disabled
-                      ? "text-ink-400 pointer-events-none"
-                      : isActive
-                      ? "text-signal"
-                      : "text-ink-100 hover:text-signal"
-                  }`}
-                  data-cursor="hover"
-                  aria-disabled={link.disabled}
-                  tabIndex={link.disabled ? -1 : undefined}
-                >
-                  {link.label}
-                  {isActive && (
-                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-signal" />
-                  )}
-                </Link>
-              );
-            })}
-            <Button href="/contact" arrow>
-              Let&apos;s Talk
-            </Button>
-          </div>
+            {/* Desktop Nav Links */}
+            <div className="hidden lg:flex items-center gap-1">
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.disabled ? "#" : link.href}
+                    className={`relative px-4 py-2 rounded-full text-[14px] font-medium transition-all duration-200 ${
+                      link.disabled
+                        ? "text-ink-400 pointer-events-none"
+                        : isActive
+                        ? "text-signal bg-signal-tint"
+                        : "text-ink-200 hover:text-ink hover:bg-canvas-alt"
+                    }`}
+                    data-cursor="hover"
+                    aria-disabled={link.disabled}
+                    tabIndex={link.disabled ? -1 : undefined}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            className="md:hidden flex flex-col gap-1.5 p-2"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            data-cursor="hover"
-          >
-            <span
-              className={`block w-6 h-[2px] bg-ink transition-all duration-300 ${
-                mobileOpen ? "rotate-45 translate-y-[5px]" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-[2px] bg-ink transition-all duration-300 ${
-                mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""
-              }`}
-            />
-          </button>
-        </nav>
-      </header>
+            {/* Right side: CTA */}
+            <div className="hidden lg:flex items-center">
+              <Button href="/contact" className="!px-5 !py-2 !text-[14px] !rounded-full">
+                Let&apos;s Talk
+              </Button>
+            </div>
+
+            {/* Mobile Hamburger */}
+            <button
+              className="lg:hidden flex flex-col gap-1.5 p-2"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              data-cursor="hover"
+            >
+              <span
+                className={`block w-5 h-[2px] bg-ink transition-all duration-300 ${
+                  mobileOpen ? "rotate-45 translate-y-[5px]" : ""
+                }`}
+              />
+              <span
+                className={`block w-5 h-[2px] bg-ink transition-all duration-300 ${
+                  mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""
+                }`}
+              />
+            </button>
+          </nav>
+        </header>
+      </div>
 
       <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
     </>
