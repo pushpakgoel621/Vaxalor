@@ -1,14 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-
-const Logo3D = dynamic(() => import("@/components/global/Logo3D").then(mod => ({ default: mod.Logo3D })), {
-  ssr: false,
-  loading: () => <div className="w-full h-full" />,
-});
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -163,14 +158,20 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: 3D Logo */}
+          {/* Right: Hero Logo Image */}
           <motion.div
-            className="hidden lg:block w-[380px] h-[340px]"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            className="hidden lg:block w-[400px] h-[360px] relative"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8, ease: EASE_OUT_EXPO }}
           >
-            <Logo3D />
+            <Image
+              src="/images/vaxalor-hero-logo.png"
+              alt="Vaxalor VAi Logo"
+              fill
+              className="object-contain drop-shadow-[0_10px_40px_rgba(29,92,191,0.15)]"
+              priority
+            />
           </motion.div>
         </div>
       </div>

@@ -1,8 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { SITE_NAME, SITE_EMAIL, SITE_TAGLINE, NAV_LINKS, SERVICES, SOCIAL_LINKS } from "@/lib/constants";
+
+const Logo3D = dynamic(() => import("@/components/global/Logo3D").then(mod => ({ default: mod.Logo3D })), {
+  ssr: false,
+  loading: () => <div className="w-full h-[200px]" />,
+});
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -24,7 +30,12 @@ export function Footer() {
 
   return (
     <footer className="bg-ink text-white">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 pt-20 pb-10">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 pt-16 pb-10">
+        {/* 3D Logo */}
+        <div className="hidden md:block w-full h-[220px] mb-12">
+          <Logo3D />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 md:gap-8">
           {/* Column 1: Logo + Tagline + Social */}
           <div className="md:col-span-2 xl:col-span-1">
