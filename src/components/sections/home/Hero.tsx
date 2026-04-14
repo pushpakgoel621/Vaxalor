@@ -21,17 +21,23 @@ export function Hero() {
       ref={sectionRef}
       className="relative overflow-hidden bg-canvas pt-[180px] pb-[140px] md:pt-[200px]"
     >
-      {/* Subtle radial gradient wash */}
+      {/* Radial gradient washes */}
       <div
-        className="absolute -top-[200px] -right-[200px] w-[700px] h-[700px] pointer-events-none opacity-30 blur-3xl"
+        className="absolute -top-[150px] -right-[100px] w-[800px] h-[800px] pointer-events-none opacity-80 blur-3xl"
         style={{
-          background: "radial-gradient(circle, var(--color-signal-wash) 0%, transparent 70%)",
+          background: "radial-gradient(circle, var(--color-signal-wash) 0%, transparent 65%)",
         }}
       />
       <div
-        className="absolute -bottom-[100px] -left-[100px] w-[400px] h-[400px] pointer-events-none opacity-20 blur-3xl"
+        className="absolute -bottom-[50px] -left-[50px] w-[500px] h-[500px] pointer-events-none opacity-70 blur-3xl"
         style={{
-          background: "radial-gradient(circle, var(--color-signal-tint) 0%, transparent 70%)",
+          background: "radial-gradient(circle, var(--color-signal-wash) 0%, transparent 60%)",
+        }}
+      />
+      <div
+        className="absolute top-[30%] left-[40%] w-[300px] h-[300px] pointer-events-none opacity-50 blur-2xl"
+        style={{
+          background: "radial-gradient(circle, var(--color-signal-bright) 0%, transparent 70%)",
         }}
       />
 
@@ -44,52 +50,64 @@ export function Hero() {
         style={{ y: shapesY, opacity: shapesOpacity }}
       >
         {/* Large angular V-pattern */}
-        <svg className="absolute top-[10%] right-[8%] w-48 h-48" viewBox="0 0 200 200" fill="none">
-          <path d="M100 20L40 180h30l30-100 30 100h30L100 20z" stroke="var(--color-signal-wash)" strokeWidth="1.5" opacity="0.5" />
-          <path d="M100 50L60 170h20l20-80 20 80h20L100 50z" stroke="var(--color-signal)" strokeWidth="0.5" opacity="0.15" />
+        <svg className="absolute top-[8%] right-[6%] w-56 h-56" viewBox="0 0 200 200" fill="none">
+          <path d="M100 20L40 180h30l30-100 30 100h30L100 20z" stroke="var(--color-signal)" strokeWidth="2" opacity="0.45" />
+          <path d="M100 50L60 170h20l20-80 20 80h20L100 50z" stroke="var(--color-signal)" strokeWidth="1.5" opacity="0.3" />
+          <path d="M100 20L40 180h30l30-100 30 100h30L100 20z" fill="var(--color-signal-wash)" opacity="0.2" />
         </svg>
 
         {/* Concentric circles */}
-        <svg className="absolute top-[35%] right-[28%] w-32 h-32" viewBox="0 0 120 120" fill="none">
-          <circle cx="60" cy="60" r="55" stroke="var(--color-canvas-border)" strokeWidth="1" opacity="0.4" />
-          <circle cx="60" cy="60" r="40" stroke="var(--color-signal-wash)" strokeWidth="1" opacity="0.5" />
-          <circle cx="60" cy="60" r="25" stroke="var(--color-signal)" strokeWidth="0.5" opacity="0.2" />
-          <circle cx="60" cy="60" r="4" fill="var(--color-signal)" opacity="0.15" />
+        <svg className="absolute top-[30%] right-[25%] w-40 h-40" viewBox="0 0 120 120" fill="none">
+          <circle cx="60" cy="60" r="55" stroke="var(--color-signal)" strokeWidth="1.5" opacity="0.3" />
+          <circle cx="60" cy="60" r="40" stroke="var(--color-signal)" strokeWidth="2" opacity="0.4" />
+          <circle cx="60" cy="60" r="25" stroke="var(--color-signal)" strokeWidth="1.5" opacity="0.35" />
+          <circle cx="60" cy="60" r="4" fill="var(--color-signal)" opacity="0.5" />
         </svg>
 
         {/* Dot grid cluster */}
-        <svg className="absolute top-[18%] right-[42%] w-20 h-20" viewBox="0 0 80 80" fill="none">
+        <svg className="absolute top-[15%] right-[40%] w-24 h-24" viewBox="0 0 80 80" fill="none">
           {Array.from({ length: 25 }).map((_, i) => (
             <circle
               key={i}
               cx={(i % 5) * 16 + 8}
               cy={Math.floor(i / 5) * 16 + 8}
-              r="1.5"
-              fill="var(--color-signal-wash)"
-              opacity="0.6"
+              r="2.5"
+              fill="var(--color-signal)"
+              opacity="0.35"
             />
           ))}
         </svg>
 
         {/* Crossed diagonal lines */}
-        <svg className="absolute top-[50%] right-[12%] w-36 h-36" viewBox="0 0 140 140" fill="none">
-          <line x1="0" y1="140" x2="140" y2="0" stroke="var(--color-canvas-border)" strokeWidth="1" opacity="0.3" />
-          <line x1="20" y1="140" x2="140" y2="20" stroke="var(--color-signal-wash)" strokeWidth="0.5" opacity="0.4" />
+        <svg className="absolute top-[48%] right-[10%] w-44 h-44" viewBox="0 0 140 140" fill="none">
+          <line x1="0" y1="140" x2="140" y2="0" stroke="var(--color-signal)" strokeWidth="1.5" opacity="0.3" />
+          <line x1="20" y1="140" x2="140" y2="20" stroke="var(--color-signal)" strokeWidth="1.5" opacity="0.2" />
+          <line x1="40" y1="140" x2="140" y2="40" stroke="var(--color-signal)" strokeWidth="1" opacity="0.15" />
         </svg>
 
-        {/* Small triangle */}
-        <svg className="absolute top-[60%] right-[35%] w-12 h-12" viewBox="0 0 50 50" fill="none">
-          <polygon points="25,5 45,45 5,45" stroke="var(--color-signal)" strokeWidth="1" opacity="0.12" fill="var(--color-signal-tint)" fillOpacity="0.3" />
+        {/* Triangle */}
+        <svg className="absolute top-[58%] right-[33%] w-16 h-16" viewBox="0 0 50 50" fill="none">
+          <polygon points="25,5 45,45 5,45" stroke="var(--color-signal)" strokeWidth="2" opacity="0.35" fill="var(--color-signal-wash)" fillOpacity="0.3" />
         </svg>
 
-        {/* Floating plus signs */}
-        <svg className="absolute top-[8%] right-[55%] w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <line x1="12" y1="4" x2="12" y2="20" stroke="var(--color-signal-wash)" strokeWidth="1.5" opacity="0.5" />
-          <line x1="4" y1="12" x2="20" y2="12" stroke="var(--color-signal-wash)" strokeWidth="1.5" opacity="0.5" />
+        {/* Plus signs */}
+        <svg className="absolute top-[6%] right-[52%] w-8 h-8" viewBox="0 0 24 24" fill="none">
+          <line x1="12" y1="4" x2="12" y2="20" stroke="var(--color-signal)" strokeWidth="2.5" opacity="0.4" />
+          <line x1="4" y1="12" x2="20" y2="12" stroke="var(--color-signal)" strokeWidth="2.5" opacity="0.4" />
         </svg>
-        <svg className="absolute top-[70%] right-[50%] w-4 h-4" viewBox="0 0 24 24" fill="none">
-          <line x1="12" y1="4" x2="12" y2="20" stroke="var(--color-canvas-border)" strokeWidth="2" opacity="0.4" />
-          <line x1="4" y1="12" x2="20" y2="12" stroke="var(--color-canvas-border)" strokeWidth="2" opacity="0.4" />
+        <svg className="absolute top-[68%] right-[48%] w-5 h-5" viewBox="0 0 24 24" fill="none">
+          <line x1="12" y1="4" x2="12" y2="20" stroke="var(--color-signal)" strokeWidth="2.5" opacity="0.35" />
+          <line x1="4" y1="12" x2="20" y2="12" stroke="var(--color-signal)" strokeWidth="2.5" opacity="0.35" />
+        </svg>
+
+        {/* Small diamond */}
+        <svg className="absolute top-[40%] right-[45%] w-6 h-6" viewBox="0 0 24 24" fill="none">
+          <rect x="4" y="4" width="16" height="16" rx="2" transform="rotate(45 12 12)" stroke="var(--color-signal)" strokeWidth="2" opacity="0.3" />
+        </svg>
+
+        {/* Dotted arc */}
+        <svg className="absolute top-[75%] right-[20%] w-20 h-10" viewBox="0 0 80 40" fill="none">
+          <path d="M5 35 Q40 0 75 35" stroke="var(--color-signal)" strokeWidth="2" strokeDasharray="4 4" opacity="0.35" />
         </svg>
       </motion.div>
 
