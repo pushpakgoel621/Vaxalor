@@ -10,6 +10,7 @@ export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [onDark, setOnDark] = useState(false);
   const isVisibleRef = useRef(false);
 
   const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
@@ -31,6 +32,17 @@ export function CustomCursor() {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       if (!isVisibleRef.current) setVisible(true);
+
+      // Detect if cursor is over a dark background
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      if (el) {
+        const bg = window.getComputedStyle(el).backgroundColor;
+        const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (match) {
+          const luminance = (parseInt(match[1]) * 299 + parseInt(match[2]) * 587 + parseInt(match[3]) * 114) / 1000;
+          setOnDark(luminance < 80);
+        }
+      }
     };
 
     const handleMouseEnter = () => setVisible(true);
@@ -76,6 +88,15 @@ export function CustomCursor() {
   const ringSize =
     hoverState === "cta" ? 50 : hoverState === "interactive" ? 40 : 20;
 
+  const dotColor = onDark ? "rgba(255, 255, 255, 0.9)" : "rgba(15, 23, 42, 0.9)";
+
+  const ringBorder =
+    hoverState !== "none"
+      ? "rgba(29, 92, 191, 0.9)"
+      : onDark
+      ? "rgba(255, 255, 255, 0.4)"
+      : "rgba(15, 23, 42, 0.35)";
+
   const ringFill =
     hoverState === "cta"
       ? "rgba(29, 92, 191, 0.15)"
@@ -100,7 +121,10 @@ export function CustomCursor() {
         }}
         transition={{ duration: 0.15 }}
       >
-        <div className="w-1.5 h-1.5 rounded-full bg-ink" />
+        <div
+          className="w-1.5 h-1.5 rounded-full transition-colors duration-150"
+          style={{ backgroundColor: dotColor }}
+        />
       </motion.div>
 
       {/* Ring — follows with spring delay */}
@@ -128,7 +152,7 @@ export function CustomCursor() {
         <div
           className="w-full h-full rounded-full transition-all duration-150"
           style={{
-            border: `1.5px solid ${hoverState !== "none" ? "rgba(29, 92, 191, 0.9)" : "rgba(15, 23, 42, 0.35)"}`,
+            border: `1.5px solid ${ringBorder}`,
             backgroundColor: ringFill,
           }}
         />

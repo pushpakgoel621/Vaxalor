@@ -1,9 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { SITE_NAME, SITE_EMAIL, SITE_TAGLINE, NAV_LINKS, SERVICES, SOCIAL_LINKS } from "@/lib/constants";
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+
+  async function handleEmailSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: "Newsletter", email, service: "Newsletter", message: "Newsletter signup from footer" }),
+      });
+      setSent(true);
+      setEmail("");
+    } catch {}
+  }
+
   return (
     <footer className="bg-ink text-white">
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8 pt-20 pb-10">
@@ -80,23 +98,27 @@ export function Footer() {
             <p className="text-ink-400 text-sm mb-4">
               Drop us your email and we&apos;ll get back within 24 hours.
             </p>
-            <form
-              className="flex gap-2"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="flex-1 bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white placeholder:text-ink-300 focus:border-signal-bright focus:outline-none transition-colors duration-200"
-              />
-              <button
-                type="submit"
-                className="bg-signal hover:bg-signal-hover text-white text-sm font-medium px-4 py-2.5 rounded-input transition-colors duration-200"
-                data-cursor="cta"
-              >
-                Send
-              </button>
-            </form>
+            {sent ? (
+              <p className="text-signal-bright text-sm">Thanks! We&apos;ll be in touch.</p>
+            ) : (
+              <form className="flex gap-2" onSubmit={handleEmailSubmit}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  required
+                  className="flex-1 bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white placeholder:text-ink-300 focus:border-signal-bright focus:outline-none transition-colors duration-200"
+                />
+                <button
+                  type="submit"
+                  className="bg-signal hover:bg-signal-hover text-white text-sm font-medium px-4 py-2.5 rounded-input transition-colors duration-200"
+                  data-cursor="cta"
+                >
+                  Send
+                </button>
+              </form>
+            )}
             <a
               href={`mailto:${SITE_EMAIL}`}
               className="block text-signal text-sm mt-4 hover:underline"

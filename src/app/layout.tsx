@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { sora, inter } from "@/lib/fonts";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { CustomCursor } from "@/components/global/CustomCursor";
-import { ChatbotWidget } from "@/components/global/ChatbotWidget";
-import { ScrollProgress } from "@/components/global/ScrollProgress";
-import { EasterEggs } from "@/components/global/EasterEggs";
-import { SmoothScrollProvider } from "@/components/animation/SmoothScrollProvider";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/constants";
 import "./globals.css";
 
@@ -42,15 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sora.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col antialiased">
-        <CustomCursor />
-        <ScrollProgress />
-        <SmoothScrollProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </SmoothScrollProvider>
-        <ChatbotWidget />
-        <EasterEggs />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );
