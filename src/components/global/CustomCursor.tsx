@@ -10,7 +10,6 @@ export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const [onDark, setOnDark] = useState(false);
   const isVisibleRef = useRef(false);
 
   const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
@@ -32,17 +31,6 @@ export function CustomCursor() {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       if (!isVisibleRef.current) setVisible(true);
-
-      // Detect if cursor is over a dark background
-      const el = document.elementFromPoint(e.clientX, e.clientY);
-      if (el) {
-        const bg = window.getComputedStyle(el).backgroundColor;
-        const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-        if (match) {
-          const luminance = (parseInt(match[1]) * 299 + parseInt(match[2]) * 587 + parseInt(match[3]) * 114) / 1000;
-          setOnDark(luminance < 80);
-        }
-      }
     };
 
     const handleMouseEnter = () => setVisible(true);
@@ -85,28 +73,12 @@ export function CustomCursor() {
 
   if (isTouchDevice) return null;
 
-  const ringSize =
-    hoverState === "cta" ? 50 : hoverState === "interactive" ? 40 : 20;
-
-  const dotColor = onDark ? "rgba(255, 255, 255, 0.9)" : "rgba(15, 23, 42, 0.9)";
-
-  const ringBorder =
-    hoverState !== "none"
-      ? "rgba(29, 92, 191, 0.9)"
-      : onDark
-      ? "rgba(255, 255, 255, 0.4)"
-      : "rgba(15, 23, 42, 0.35)";
-
-  const ringFill =
-    hoverState === "cta"
-      ? "rgba(29, 92, 191, 0.15)"
-      : hoverState === "interactive"
-      ? "rgba(29, 92, 191, 0.1)"
-      : "transparent";
+  const isHovering = hoverState !== "none";
+  const ringSize = hoverState === "cta" ? 56 : hoverState === "interactive" ? 44 : 20;
 
   return (
     <>
-      {/* Small dot — follows cursor exactly */}
+      {/* Dot — always visible, shrinks on hover */}
       <motion.div
         className="fixed top-0 left-0 z-[10000] pointer-events-none"
         style={{
@@ -117,17 +89,14 @@ export function CustomCursor() {
         }}
         animate={{
           opacity: isVisible ? 1 : 0,
-          scale: hoverState !== "none" ? 0 : isClicking ? 0.6 : 1,
+          scale: isHovering ? 0.5 : isClicking ? 0.6 : 1,
         }}
         transition={{ duration: 0.15 }}
       >
-        <div
-          className="w-1.5 h-1.5 rounded-full transition-colors duration-150"
-          style={{ backgroundColor: dotColor }}
-        />
+        <div className="w-2.5 h-2.5 rounded-full bg-signal" />
       </motion.div>
 
-      {/* Ring — follows with spring delay */}
+      {/* Ring — follows with spring */}
       <motion.div
         className="fixed top-0 left-0 z-[10000] pointer-events-none"
         style={{
@@ -150,10 +119,10 @@ export function CustomCursor() {
         }}
       >
         <div
-          className="w-full h-full rounded-full transition-all duration-150"
+          className="w-full h-full rounded-full transition-all duration-200"
           style={{
-            border: `1.5px solid ${ringBorder}`,
-            backgroundColor: ringFill,
+            border: `2px solid ${isHovering ? "rgba(29, 92, 191, 1)" : "rgba(29, 92, 191, 0.4)"}`,
+            backgroundColor: isHovering ? "rgba(29, 92, 191, 0.08)" : "transparent",
           }}
         />
       </motion.div>
