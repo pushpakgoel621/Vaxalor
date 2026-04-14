@@ -1,8 +1,14 @@
 "use client";
 
 import { useRef } from "react";
+import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+
+const Logo3D = dynamic(() => import("@/components/global/Logo3D").then(mod => ({ default: mod.Logo3D })), {
+  ssr: false,
+  loading: () => <div className="w-full h-full" />,
+});
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -112,50 +118,61 @@ export function Hero() {
       </motion.div>
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8">
-        {/* Overline */}
-        <motion.p
-          className="text-eyebrow mb-6"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 0.5, ease: EASE_OUT_EXPO }}
-        >
-          Digital products that ship fast
-        </motion.p>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-center">
+          {/* Left: Text content */}
+          <div>
+            <motion.p
+              className="text-eyebrow mb-6"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0, duration: 0.5, ease: EASE_OUT_EXPO }}
+            >
+              Digital products that ship fast
+            </motion.p>
 
-        {/* Headline */}
-        <motion.h1
-          className="text-display max-w-3xl"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
-        >
-          We build digital products with soul.
-        </motion.h1>
+            <motion.h1
+              className="text-display max-w-2xl"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
+            >
+              We build digital products with soul.
+            </motion.h1>
 
-        {/* Subtext */}
-        <motion.p
-          className="text-body mt-6 max-w-[560px] text-ink-200"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.5, ease: EASE_OUT_EXPO }}
-        >
-          From websites to AI solutions — shipped in 20 days, built to last.
-        </motion.p>
+            <motion.p
+              className="text-body mt-6 max-w-[520px] text-ink-200"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.5, ease: EASE_OUT_EXPO }}
+            >
+              From websites to AI solutions — shipped in 20 days, built to last.
+            </motion.p>
 
-        {/* CTA Buttons */}
-        <motion.div
-          className="flex flex-wrap gap-4 mt-10"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.4, ease: EASE_OUT_EXPO }}
-        >
-          <Button href="/contact" arrow>
-            Start your project
-          </Button>
-          <Button href="/work" variant="secondary">
-            See our work
-          </Button>
-        </motion.div>
+            <motion.div
+              className="flex flex-wrap gap-4 mt-10"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.4, ease: EASE_OUT_EXPO }}
+            >
+              <Button href="/contact" arrow>
+                Start your project
+              </Button>
+              <Button href="/work" variant="secondary">
+                See our work
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Right: 3D Logo */}
+          <motion.div
+            className="hidden lg:block w-[380px] h-[340px]"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.8, ease: EASE_OUT_EXPO }}
+          >
+            <Logo3D />
+          </motion.div>
+        </div>
       </div>
     </section>
   );

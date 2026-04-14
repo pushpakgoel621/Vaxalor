@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { USPCard } from "@/components/ui/USPCard";
 import { CountUp } from "@/components/animation/CountUp";
@@ -42,8 +44,20 @@ const USP_DATA = [
 ];
 
 export function WhyChooseUs() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const card1Y = useTransform(scrollYProgress, [0, 1], [40, -20]);
+  const card2Y = useTransform(scrollYProgress, [0, 1], [20, -10]);
+  const card3Y = useTransform(scrollYProgress, [0, 1], [50, -30]);
+  const statsY = useTransform(scrollYProgress, [0, 1], [30, -15]);
+  const cardYValues = [card1Y, card2Y, card3Y];
+
   return (
-    <section className="bg-ink py-[120px]">
+    <section ref={sectionRef} className="bg-ink py-[120px] overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
         <ScrollReveal>
           <SectionHeading
@@ -54,40 +68,46 @@ export function WhyChooseUs() {
         </ScrollReveal>
 
         <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-14">
-          {USP_DATA.map((usp) => (
+          {USP_DATA.map((usp, i) => (
             <StaggerItem key={usp.title}>
-              <USPCard icon={usp.icon} title={usp.title} description={usp.description} />
+              <motion.div style={{ y: cardYValues[i] }} className="hidden md:block">
+                <USPCard icon={usp.icon} title={usp.title} description={usp.description} />
+              </motion.div>
+              {/* Mobile: no parallax */}
+              <div className="md:hidden">
+                <USPCard icon={usp.icon} title={usp.title} description={usp.description} />
+              </div>
             </StaggerItem>
           ))}
         </StaggerChildren>
 
-        {/* Divider */}
         <div className="border-t border-ink-200 my-14" />
 
-        {/* Stats Row */}
-        <ScrollReveal>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {STATS.map((stat, i) => (
-              <div key={stat.label} className="flex items-center gap-8 md:gap-16">
-                <div className="text-center">
-                  <p
-                    className={`text-[40px] font-bold tracking-tight ${
-                      stat.highlight ? "text-signal-bright" : "text-white"
-                    }`}
-                  >
-                    <CountUp target={stat.number} suffix={stat.suffix} />
-                  </p>
-                  <p className="text-ink-300 text-xs uppercase tracking-[0.06em] mt-1">
-                    {stat.label}
-                  </p>
+        <motion.div style={{ y: statsY }}>
+          <ScrollReveal>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+              {STATS.map((stat, i) => (
+                <div key={stat.label} className="flex items-center gap-8 md:gap-16">
+                  <div className="text-center">
+                    <p
+                      className={`text-[40px] font-bold tracking-tight ${
+                        stat.highlight ? "text-signal-bright" : "text-white"
+                      }`}
+                    >
+                      <CountUp target={stat.number} suffix={stat.suffix} />
+                    </p>
+                    <p className="text-ink-300 text-xs uppercase tracking-[0.06em] mt-1">
+                      {stat.label}
+                    </p>
+                  </div>
+                  {i < STATS.length - 1 && (
+                    <div className="hidden md:block w-px h-10 bg-ink-200" />
+                  )}
                 </div>
-                {i < STATS.length - 1 && (
-                  <div className="hidden md:block w-px h-10 bg-ink-200" />
-                )}
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
+              ))}
+            </div>
+          </ScrollReveal>
+        </motion.div>
       </div>
     </section>
   );
