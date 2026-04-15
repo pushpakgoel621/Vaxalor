@@ -23,7 +23,7 @@ export default function AdminLoginPage() {
       });
 
       if (res.ok) {
-        router.push("/admin/blogs");
+        router.push("/admin/dashboard");
       } else {
         const data = await res.json();
         setError(data.error || "Invalid password");

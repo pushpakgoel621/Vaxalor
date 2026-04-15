@@ -1,6 +1,7 @@
 "use client";
 
 import { use } from "react";
+import { AdminShell } from "@/components/admin/AdminShell";
 import { ProjectEditor } from "@/components/admin/ProjectEditor";
 
 export default function EditProjectPage({
@@ -9,5 +10,5 @@ export default function EditProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
-  return <ProjectEditor slug={slug} />;
+  return <AdminShell><ProjectEditor slug={slug} /></AdminShell>;
 }

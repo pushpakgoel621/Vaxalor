@@ -1,6 +1,7 @@
 "use client";
 
 import { use } from "react";
+import { AdminShell } from "@/components/admin/AdminShell";
 import { BlogEditor } from "@/components/admin/BlogEditor";
 
 export default function EditBlogPage({
@@ -9,5 +10,5 @@ export default function EditBlogPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
-  return <BlogEditor slug={slug} />;
+  return <AdminShell><BlogEditor slug={slug} /></AdminShell>;
 }
