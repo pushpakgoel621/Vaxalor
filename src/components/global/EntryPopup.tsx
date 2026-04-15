@@ -15,7 +15,10 @@ export function EntryPopup() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const dismissed = localStorage.getItem("vaxalor_popup_dismissed");
+    // Show popup on every page load/refresh after 3 seconds
+    // Uses sessionStorage so it only shows once per browser session (tab),
+    // but reappears on refresh or new tab
+    const dismissed = sessionStorage.getItem("vaxalor_popup_dismissed");
     if (dismissed) return;
     const timer = setTimeout(() => setShow(true), 3000);
     return () => clearTimeout(timer);
@@ -23,7 +26,7 @@ export function EntryPopup() {
 
   function dismiss() {
     setShow(false);
-    localStorage.setItem("vaxalor_popup_dismissed", "true");
+    sessionStorage.setItem("vaxalor_popup_dismissed", "true");
   }
 
   function validate() {

@@ -19,12 +19,21 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: SITE_NAME,
     type: "website",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} — ${SITE_TAGLINE}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description:
       "We build custom websites, mobile apps, AI chatbots, and MVPs. 20-day delivery. Built with soul.",
+    images: ["/images/og-image.png"],
   },
   icons: {
     icon: "/favicon.ico",
