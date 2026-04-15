@@ -59,7 +59,7 @@ export function Footer() {
                 alt={SITE_NAME}
                 width={32}
                 height={26}
-                className="h-6 w-auto brightness-0 invert"
+                className="h-6 w-auto brightness-125 drop-shadow-[0_0_8px_rgba(59,139,245,0.3)]"
               />
               <span className="text-white font-heading font-bold text-xl tracking-tight">
                 {SITE_NAME}
