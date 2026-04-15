@@ -24,8 +24,8 @@ export function Navbar() {
         <header
           className={`max-w-[1200px] mx-auto rounded-full border transition-all duration-500 ${
             scrolled
-              ? "bg-white/95 backdrop-blur-[16px] border-canvas-border shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
-              : "bg-white/80 backdrop-blur-[8px] border-signal-wash/60 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+              ? "bg-gradient-to-r from-white/95 via-signal-tint/30 to-white/95 backdrop-blur-[16px] border-canvas-border shadow-[0_4px_24px_rgba(29,92,191,0.08)]"
+              : "bg-gradient-to-r from-white/80 via-signal-tint/20 to-white/80 backdrop-blur-[8px] border-signal-wash/60 shadow-[0_2px_16px_rgba(29,92,191,0.06)]"
           }`}
         >
           <nav className="flex items-center justify-between h-14 md:h-[60px] px-5 md:px-7">

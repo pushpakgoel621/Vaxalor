@@ -161,7 +161,7 @@ export function Hero() {
 
           {/* Right: Hero Logo Image */}
           <motion.div
-            className="hidden lg:block w-[400px] h-[360px] relative"
+            className="hidden lg:block w-[700px] h-[620px] relative -mr-16"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8, ease: EASE_OUT_EXPO }}
