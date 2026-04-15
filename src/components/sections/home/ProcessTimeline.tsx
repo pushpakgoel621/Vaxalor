@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
+import { PeekingMascot } from "@/components/ui/PeekingMascot";
 import { PROCESS_STEPS } from "@/lib/constants";
 
 const STEP_ICONS = [
@@ -92,7 +93,7 @@ export function ProcessTimeline() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-canvas-alt py-section min-h-[70vh]">
+    <section ref={sectionRef} className="bg-canvas-alt py-section min-h-[70vh] relative">
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
         <ScrollReveal>
           <SectionHeading
@@ -237,6 +238,8 @@ export function ProcessTimeline() {
           </div>
         </div>
       </div>
+
+      <PeekingMascot position="right" size={75} className="!-right-2 !top-[30%]" delay={0.5} />
     </section>
   );
 }

@@ -1,11 +1,12 @@
 "use client";
 
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
+import { PeekingMascot } from "@/components/ui/PeekingMascot";
 
 export function OurStory() {
   return (
-    <section className="bg-canvas-white py-section">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
+    <section className="bg-canvas-white py-section relative">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Visual */}
           <ScrollReveal direction="left" distance={30}>
@@ -45,6 +46,8 @@ export function OurStory() {
             </div>
           </ScrollReveal>
         </div>
+
+        <PeekingMascot position="bottom-right" size={80} className="!-bottom-6 !-right-4" delay={0.4} />
       </div>
     </section>
   );

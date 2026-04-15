@@ -4,12 +4,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { StaggerChildren, StaggerItem } from "@/components/animation/StaggerChildren";
+import { PeekingMascot } from "@/components/ui/PeekingMascot";
 import { SERVICES } from "@/lib/constants";
 
 export function ServicesOverview() {
   return (
-    <section className="bg-canvas py-section">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
+    <section className="bg-canvas py-section relative overflow-visible">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 relative">
         <ScrollReveal>
           <SectionHeading
             eyebrow="What we create"
@@ -31,6 +32,8 @@ export function ServicesOverview() {
             </StaggerItem>
           ))}
         </StaggerChildren>
+
+        <PeekingMascot position="bottom-left" size={70} flip delay={0.3} className="!-bottom-8 !left-2" />
       </div>
     </section>
   );

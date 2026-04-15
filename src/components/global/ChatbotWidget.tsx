@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface Message {
@@ -146,8 +147,8 @@ export function ChatbotWidget() {
             {/* Header */}
             <div className="bg-ink px-5 py-4 flex items-center justify-between shrink-0 rounded-t-2xl">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-signal/20 flex items-center justify-center">
-                  <span className="text-signal-bright text-xs font-bold">AI</span>
+                <div className="w-8 h-8 rounded-full overflow-hidden bg-signal/10 flex items-center justify-center">
+                  <Image src="/images/mascot.png" alt="Vaxalor AI" width={32} height={32} className="object-cover scale-125" />
                 </div>
                 <div>
                   <p className="text-white text-sm font-semibold">Vaxalor AI</p>
@@ -180,8 +181,8 @@ export function ChatbotWidget() {
                   transition={{ duration: 0.2 }}
                 >
                   {msg.role === "assistant" && (
-                    <div className="w-6 h-6 rounded-full bg-signal/10 flex items-center justify-center mr-2 mt-1 shrink-0">
-                      <span className="text-signal text-[9px] font-bold">AI</span>
+                    <div className="w-6 h-6 rounded-full overflow-hidden bg-signal/5 flex items-center justify-center mr-2 mt-1 shrink-0">
+                      <Image src="/images/mascot.png" alt="" width={24} height={24} className="object-cover scale-125" />
                     </div>
                   )}
                   <div

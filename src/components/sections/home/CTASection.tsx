@@ -13,6 +13,7 @@ import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { contactFormSchema, type ContactFormData } from "@/lib/validations";
 import { SERVICE_OPTIONS } from "@/lib/constants";
 import { IndicTexture } from "@/components/ui/IndicTexture";
+import { PeekingMascot } from "@/components/ui/PeekingMascot";
 
 export function CTASection() {
   const [submitted, setSubmitted] = useState(false);
@@ -43,6 +44,7 @@ export function CTASection() {
   return (
     <section className="bg-ink py-[120px] relative overflow-hidden">
       <IndicTexture variant="mandala" />
+      <PeekingMascot position="top-left" size={65} flip className="!top-6 !left-6 md:!left-[8%]" delay={0.3} />
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8">
         <ScrollReveal>
           <SectionHeading
