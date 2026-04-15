@@ -26,6 +26,10 @@ export const metadata: Metadata = {
     description:
       "We build custom websites, mobile apps, AI chatbots, and MVPs. 20-day delivery. Built with soul.",
   },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

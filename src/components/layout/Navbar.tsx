@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
@@ -35,10 +36,14 @@ export function Navbar() {
               data-cursor="hover"
               data-logo
             >
-              {/* Logo icon */}
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-signal to-signal-bright flex items-center justify-center">
-                <span className="text-white font-heading font-bold text-sm">V</span>
-              </div>
+              <Image
+                src="/images/logo.png"
+                alt={SITE_NAME}
+                width={36}
+                height={30}
+                className="h-7 w-auto"
+                priority
+              />
               <span className="text-ink font-heading font-bold text-lg tracking-tight">
                 {SITE_NAME}
               </span>

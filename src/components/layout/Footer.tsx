@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { SITE_NAME, SITE_EMAIL, SITE_TAGLINE, NAV_LINKS, SERVICES, SOCIAL_LINKS } from "@/lib/constants";
 import { IndicTexture } from "@/components/ui/IndicTexture";
@@ -31,7 +32,7 @@ export function Footer() {
 
   return (
     <footer className="bg-ink text-white relative overflow-hidden">
-      <IndicTexture variant="paisley" opacity={0.03} />
+      <IndicTexture variant="paisley" />
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8 pt-16 pb-10">
         {/* 3D Logo */}
         <div className="hidden md:block w-full h-[220px] mb-12">
@@ -41,8 +42,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 md:gap-8">
           {/* Column 1: Logo + Tagline + Social */}
           <div className="md:col-span-2 xl:col-span-1">
-            <Link href="/" className="text-white font-heading font-bold text-xl tracking-tight">
-              {SITE_NAME}
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/images/logo.png"
+                alt={SITE_NAME}
+                width={32}
+                height={26}
+                className="h-6 w-auto brightness-0 invert"
+              />
+              <span className="text-white font-heading font-bold text-xl tracking-tight">
+                {SITE_NAME}
+              </span>
             </Link>
             <p className="text-ink-400 text-sm mt-3 max-w-xs">{SITE_TAGLINE}</p>
             <div className="flex gap-4 mt-5">

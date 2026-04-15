@@ -42,7 +42,7 @@ export function CTASection() {
 
   return (
     <section className="bg-ink py-[120px] relative overflow-hidden">
-      <IndicTexture variant="mandala" opacity={0.04} />
+      <IndicTexture variant="mandala" />
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8">
         <ScrollReveal>
           <SectionHeading

@@ -15,7 +15,7 @@ export function ServicePageClient({ service }: { service: ServicePage }) {
     <PageTransition>
       {/* Hero */}
       <section className="relative bg-ink pt-[140px] pb-[80px] overflow-hidden">
-        <IndicTexture variant="mandala" opacity={0.03} />
+        <IndicTexture variant="mandala" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8">
           <ScrollReveal>
             <Link
