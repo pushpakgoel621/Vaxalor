@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { WorkHero } from "@/components/sections/work/WorkHero";
 import { ProjectGrid } from "@/components/sections/work/ProjectGrid";
@@ -38,9 +39,11 @@ function dbToProject(p: Record<string, unknown>): Project {
 }
 
 export function WorkPageClient() {
+  const searchParams = useSearchParams();
   const [filter, setFilter] = useState<ProjectFilter>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [projects, setProjects] = useState<Project[]>(PROJECTS);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     fetch("/api/projects")
@@ -50,8 +53,19 @@ export function WorkPageClient() {
           setProjects(data.projects.map(dbToProject));
         }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoaded(true));
   }, []);
+
+  // Auto-open project modal from URL query param
+  useEffect(() => {
+    if (!loaded) return;
+    const projectSlug = searchParams.get("project");
+    if (projectSlug) {
+      const found = projects.find((p) => p.slug === projectSlug);
+      if (found) setSelectedProject(found);
+    }
+  }, [loaded, searchParams, projects]);
 
   const filtered = useMemo(() => {
     const category = FILTER_MAP[filter];

@@ -9,35 +9,21 @@ import { ActiveTickers } from "@/components/ui/ActiveTickers";
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { StaggerChildren, StaggerItem } from "@/components/animation/StaggerChildren";
 
-const PLACEHOLDER_PROJECTS = [
-  {
-    title: "FreshBite",
-    category: "Website",
-    description: "Modern restaurant website with online ordering",
-    gradient: "from-signal-tint via-signal-wash to-signal/20",
-    pattern: "grid" as const,
-  },
-  {
-    title: "TrackFlow",
-    category: "MVP",
-    description: "Project management dashboard for startups",
-    gradient: "from-canvas-alt via-signal-tint to-signal-wash/60",
-    pattern: "dots" as const,
-  },
-  {
-    title: "ShopAssist AI",
-    category: "AI",
-    description: "Smart chatbot for e-commerce support",
-    gradient: "from-signal-wash/50 via-signal-tint to-canvas-alt",
-    pattern: "waves" as const,
-  },
-  {
-    title: "BuildCRM",
-    category: "CRM",
-    description: "Custom CRM with sales pipeline management",
-    gradient: "from-signal-tint via-canvas-alt to-signal-wash/40",
-    pattern: "circles" as const,
-  },
+interface DisplayProject {
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  gradient: string;
+  pattern: string;
+  thumbnailUrl?: string | null;
+}
+
+const PLACEHOLDER_PROJECTS: DisplayProject[] = [
+  { slug: "freshbite", title: "FreshBite", category: "Website", description: "Modern restaurant website with online ordering", gradient: "from-signal-tint via-signal-wash to-signal/20", pattern: "grid" },
+  { slug: "trackflow", title: "TrackFlow", category: "MVP", description: "Project management dashboard for startups", gradient: "from-canvas-alt via-signal-tint to-signal-wash/60", pattern: "dots" },
+  { slug: "shopassist-ai", title: "ShopAssist AI", category: "AI", description: "Smart chatbot for e-commerce support", gradient: "from-signal-wash/50 via-signal-tint to-canvas-alt", pattern: "waves" },
+  { slug: "buildcrm", title: "BuildCRM", category: "CRM", description: "Custom CRM with sales pipeline management", gradient: "from-signal-tint via-canvas-alt to-signal-wash/40", pattern: "circles" },
 ];
 
 export function PortfolioPreview() {
@@ -49,6 +35,7 @@ export function PortfolioPreview() {
       .then((data) => {
         if (data.projects?.length > 0) {
           const mapped = data.projects.slice(0, 4).map((p: Record<string, unknown>) => ({
+            slug: p.slug as string,
             title: p.title as string,
             category: p.category as string,
             description: (p.hook as string) || (p.description as string) || "",
@@ -101,14 +88,15 @@ export function PortfolioPreview() {
           ].map(({ idx, span, size, y }) => {
             const project = displayProjects[idx];
             if (!project) return null;
+            const { slug: _slug, thumbnailUrl: _thumb, pattern: _pattern, ...cardProps } = project;
             return (
               <StaggerItem key={idx} className={span}>
-                <Link href="/work" data-cursor="hover">
+                <Link href={`/work?project=${project.slug}`} data-cursor="hover">
                   <motion.div style={{ y }} className="hidden md:block">
-                    <ProjectCard {...project} size={size} />
+                    <ProjectCard {...cardProps} pattern={project.pattern as "dots" | "grid" | "waves" | "circles"} imageSrc={project.thumbnailUrl ?? undefined} size={size} />
                   </motion.div>
                   <div className="md:hidden">
-                    <ProjectCard {...project} size={size} />
+                    <ProjectCard {...cardProps} pattern={project.pattern as "dots" | "grid" | "waves" | "circles"} imageSrc={project.thumbnailUrl ?? undefined} size={size} />
                   </div>
                 </Link>
               </StaggerItem>

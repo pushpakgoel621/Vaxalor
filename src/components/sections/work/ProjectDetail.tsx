@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -12,31 +12,48 @@ interface ProjectDetailProps {
 }
 
 export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
+  const scrollYRef = useRef(0);
+  const modalRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (project) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-      // Stop Lenis smooth scroll
+      scrollYRef.current = window.scrollY;
       document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-      document.body.style.top = `-${window.scrollY}px`;
+      document.body.style.top = `-${scrollYRef.current}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.overflow = "hidden";
     } else {
-      const scrollY = document.body.style.top;
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
       document.body.style.position = "";
-      document.body.style.width = "";
       document.body.style.top = "";
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, scrollYRef.current);
     }
     return () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
       document.body.style.position = "";
-      document.body.style.width = "";
       document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.overflow = "";
     };
   }, [project]);
+
+  // Block wheel events from reaching the page behind the modal
+  const handleBackdropWheel = useCallback((e: React.WheelEvent) => {
+    e.stopPropagation();
+  }, []);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!project) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [project, onClose]);
 
   return (
     <AnimatePresence>
@@ -49,15 +66,18 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
+            onWheel={handleBackdropWheel}
           />
 
           {/* Modal */}
           <motion.div
+            ref={modalRef}
             className="fixed inset-4 md:inset-8 lg:inset-y-12 lg:inset-x-[10%] z-[70] bg-canvas-white rounded-xl overflow-y-auto overscroll-contain"
             initial={{ opacity: 0, y: 40, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.97 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            onWheel={(e) => e.stopPropagation()}
           >
             {/* Close button */}
             <button
@@ -72,7 +92,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             </button>
 
             {/* Hero image */}
-            <div className={`w-full h-56 md:h-72 bg-gradient-to-br ${project.gradient} rounded-t-xl`}>
+            <div className={`w-full h-56 md:h-72 bg-gradient-to-br ${project.gradient} rounded-t-xl relative overflow-hidden`}>
               <svg className="w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
                 {project.pattern === "grid" &&
                   Array.from({ length: 8 }).map((_, i) => (
@@ -108,36 +128,44 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
 
               {/* Challenge / Solution / Result */}
               <div className="space-y-8">
-                <div>
-                  <h3 className="text-ink text-[24px] font-semibold font-heading mb-3">Challenge</h3>
-                  <p className="text-ink-200 text-base leading-[1.8]">{project.challenge}</p>
-                </div>
-                <div>
-                  <h3 className="text-ink text-[24px] font-semibold font-heading mb-3">Solution</h3>
-                  <p className="text-ink-200 text-base leading-[1.8]">{project.solution}</p>
-                </div>
-                <div>
-                  <h3 className="text-ink text-[24px] font-semibold font-heading mb-3">Result</h3>
-                  <p className="text-ink-200 text-base leading-[1.8]">{project.result}</p>
-                </div>
+                {project.challenge && (
+                  <div>
+                    <h3 className="text-ink text-[24px] font-semibold font-heading mb-3">Challenge</h3>
+                    <p className="text-ink-200 text-base leading-[1.8]">{project.challenge}</p>
+                  </div>
+                )}
+                {project.solution && (
+                  <div>
+                    <h3 className="text-ink text-[24px] font-semibold font-heading mb-3">Solution</h3>
+                    <p className="text-ink-200 text-base leading-[1.8]">{project.solution}</p>
+                  </div>
+                )}
+                {project.result && (
+                  <div>
+                    <h3 className="text-ink text-[24px] font-semibold font-heading mb-3">Result</h3>
+                    <p className="text-ink-200 text-base leading-[1.8]">{project.result}</p>
+                  </div>
+                )}
               </div>
 
               {/* Tech Stack */}
-              <div className="mt-10">
-                <h4 className="text-ink-300 text-xs uppercase tracking-[0.08em] font-semibold mb-3">
-                  Tech Stack
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1.5 bg-canvas-alt border border-canvas-border rounded-lg text-ink-200 text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              {project.techStack?.length > 0 && (
+                <div className="mt-10">
+                  <h4 className="text-ink-300 text-xs uppercase tracking-[0.08em] font-semibold mb-3">
+                    Tech Stack
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {project.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1.5 bg-canvas-alt border border-canvas-border rounded-lg text-ink-200 text-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* CTA */}
               <div className="mt-12 pt-8 border-t border-canvas-border">
