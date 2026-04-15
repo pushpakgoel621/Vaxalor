@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { PeekingMascot } from "@/components/ui/PeekingMascot";
+import { HeroLogoAnimations } from "@/components/global/HeroLogoAnimations";
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -173,6 +174,7 @@ export function Hero() {
               className="object-contain drop-shadow-[0_10px_40px_rgba(29,92,191,0.15)]"
               priority
             />
+            <HeroLogoAnimations />
             <PeekingMascot position="bottom-right" size={90} delay={0.8} />
           </motion.div>
         </div>
