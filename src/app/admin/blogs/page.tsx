@@ -74,6 +74,12 @@ export default function AdminBlogsPage() {
         </div>
         <div className="flex items-center gap-3">
           <Link
+            href="/admin/projects"
+            className="px-4 py-2 text-xs text-ink-400 border border-ink-200 rounded-input hover:border-signal/40 transition-colors"
+          >
+            Projects
+          </Link>
+          <Link
             href="/admin/submissions"
             className="px-4 py-2 text-xs text-ink-400 border border-ink-200 rounded-input hover:border-signal/40 transition-colors"
           >

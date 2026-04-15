@@ -185,10 +185,21 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-ink-100 mt-12 pt-6 text-center">
+        <div className="border-t border-ink-100 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-ink-300 text-[13px]">
             &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </p>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="text-ink-400 text-[13px] hover:text-white transition-colors" data-cursor="hover">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-ink-400 text-[13px] hover:text-white transition-colors" data-cursor="hover">
+              Terms of Service
+            </Link>
+            <Link href="/faq" className="text-ink-400 text-[13px] hover:text-white transition-colors" data-cursor="hover">
+              FAQ
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

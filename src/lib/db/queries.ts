@@ -198,6 +198,155 @@ export async function getAllSubmissions(): Promise<Submission[]> {
   return rows as Submission[];
 }
 
+// ========== PROJECTS ==========
+
+export interface DBProject {
+  id: number;
+  slug: string;
+  title: string;
+  hook: string;
+  category: string;
+  description: string;
+  challenge: string;
+  solution: string;
+  result: string;
+  timeline: string;
+  year: string;
+  tech_stack: string[];
+  gradient: string;
+  pattern: string;
+  thumbnail_url: string | null;
+  concept_project: boolean;
+  featured: boolean;
+  published: boolean;
+  display_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export async function createProject(data: {
+  slug: string;
+  title: string;
+  hook?: string;
+  category?: string;
+  description?: string;
+  challenge?: string;
+  solution?: string;
+  result?: string;
+  timeline?: string;
+  year?: string;
+  tech_stack?: string[];
+  gradient?: string;
+  pattern?: string;
+  thumbnail_url?: string;
+  concept_project?: boolean;
+  featured?: boolean;
+  published?: boolean;
+  display_order?: number;
+}): Promise<DBProject> {
+  const sql = getDB();
+  const rows = await sql`
+    INSERT INTO projects (slug, title, hook, category, description, challenge, solution, result, timeline, year, tech_stack, gradient, pattern, thumbnail_url, concept_project, featured, published, display_order)
+    VALUES (
+      ${data.slug},
+      ${data.title},
+      ${data.hook || ""},
+      ${data.category || "Website"},
+      ${data.description || ""},
+      ${data.challenge || ""},
+      ${data.solution || ""},
+      ${data.result || ""},
+      ${data.timeline || ""},
+      ${data.year || new Date().getFullYear().toString()},
+      ${data.tech_stack || []},
+      ${data.gradient || "from-signal-tint via-signal-wash to-signal/20"},
+      ${data.pattern || "dots"},
+      ${data.thumbnail_url || null},
+      ${data.concept_project ?? true},
+      ${data.featured ?? false},
+      ${data.published ?? false},
+      ${data.display_order ?? 0}
+    )
+    RETURNING *
+  `;
+  return rows[0] as DBProject;
+}
+
+export async function getAllProjects(publishedOnly = true): Promise<DBProject[]> {
+  const sql = getDB();
+  if (publishedOnly) {
+    const rows = await sql`
+      SELECT * FROM projects WHERE published = true ORDER BY display_order ASC, created_at DESC
+    `;
+    return rows as DBProject[];
+  }
+  const rows = await sql`
+    SELECT * FROM projects ORDER BY display_order ASC, created_at DESC
+  `;
+  return rows as DBProject[];
+}
+
+export async function getProjectBySlug(slug: string): Promise<DBProject | null> {
+  const sql = getDB();
+  const rows = await sql`
+    SELECT * FROM projects WHERE slug = ${slug} LIMIT 1
+  `;
+  return (rows[0] as DBProject) || null;
+}
+
+export async function updateProject(slug: string, data: Partial<{
+  slug: string; title: string; hook: string; category: string; description: string;
+  challenge: string; solution: string; result: string; timeline: string; year: string;
+  tech_stack: string[]; gradient: string; pattern: string; thumbnail_url: string;
+  concept_project: boolean; featured: boolean; published: boolean; display_order: number;
+}>): Promise<DBProject | null> {
+  const sql = getDB();
+  const existing = await getProjectBySlug(slug);
+  if (!existing) return null;
+
+  const merged = {
+    slug: data.slug ?? existing.slug,
+    title: data.title ?? existing.title,
+    hook: data.hook ?? existing.hook,
+    category: data.category ?? existing.category,
+    description: data.description ?? existing.description,
+    challenge: data.challenge ?? existing.challenge,
+    solution: data.solution ?? existing.solution,
+    result: data.result ?? existing.result,
+    timeline: data.timeline ?? existing.timeline,
+    year: data.year ?? existing.year,
+    tech_stack: data.tech_stack ?? existing.tech_stack,
+    gradient: data.gradient ?? existing.gradient,
+    pattern: data.pattern ?? existing.pattern,
+    thumbnail_url: data.thumbnail_url ?? existing.thumbnail_url,
+    concept_project: data.concept_project ?? existing.concept_project,
+    featured: data.featured ?? existing.featured,
+    published: data.published ?? existing.published,
+    display_order: data.display_order ?? existing.display_order,
+  };
+
+  const rows = await sql`
+    UPDATE projects SET
+      slug = ${merged.slug}, title = ${merged.title}, hook = ${merged.hook},
+      category = ${merged.category}, description = ${merged.description},
+      challenge = ${merged.challenge}, solution = ${merged.solution}, result = ${merged.result},
+      timeline = ${merged.timeline}, year = ${merged.year}, tech_stack = ${merged.tech_stack},
+      gradient = ${merged.gradient}, pattern = ${merged.pattern}, thumbnail_url = ${merged.thumbnail_url},
+      concept_project = ${merged.concept_project}, featured = ${merged.featured},
+      published = ${merged.published}, display_order = ${merged.display_order},
+      updated_at = NOW()
+    WHERE id = ${existing.id}
+    RETURNING *
+  `;
+  return (rows[0] as DBProject) || null;
+}
+
+export async function deleteProject(slug: string): Promise<boolean> {
+  const sql = getDB();
+  const rows = await sql`DELETE FROM projects WHERE slug = ${slug} RETURNING id`;
+  return rows.length > 0;
+}
+
 // ========== SITE CONFIG ==========
 
 export async function getSiteConfig(key: string): Promise<string | null> {

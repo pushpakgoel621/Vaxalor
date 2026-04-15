@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -41,6 +41,27 @@ const PLACEHOLDER_PROJECTS = [
 ];
 
 export function PortfolioPreview() {
+  const [displayProjects, setDisplayProjects] = useState(PLACEHOLDER_PROJECTS);
+
+  useEffect(() => {
+    fetch("/api/projects")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.projects?.length > 0) {
+          const mapped = data.projects.slice(0, 4).map((p: Record<string, unknown>) => ({
+            title: p.title as string,
+            category: p.category as string,
+            description: (p.hook as string) || (p.description as string) || "",
+            gradient: (p.gradient as string) || "from-signal-tint via-signal-wash to-signal/20",
+            pattern: (p.pattern as string) || "dots",
+            thumbnailUrl: p.thumbnail_url as string | null,
+          }));
+          setDisplayProjects(mapped);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -75,36 +96,36 @@ export function PortfolioPreview() {
           {/* Row 1 */}
           <StaggerItem className="md:col-span-7">
             <motion.div style={{ y: leftColY }} className="hidden md:block">
-              <ProjectCard {...PLACEHOLDER_PROJECTS[0]} size="large" />
+              <ProjectCard {...displayProjects[0]} size="large" />
             </motion.div>
             <div className="md:hidden">
-              <ProjectCard {...PLACEHOLDER_PROJECTS[0]} size="large" />
+              <ProjectCard {...displayProjects[0]} size="large" />
             </div>
           </StaggerItem>
           <StaggerItem className="md:col-span-5">
             <motion.div style={{ y: rightColY }} className="hidden md:block">
-              <ProjectCard {...PLACEHOLDER_PROJECTS[1]} size="small" />
+              <ProjectCard {...displayProjects[1]} size="small" />
             </motion.div>
             <div className="md:hidden">
-              <ProjectCard {...PLACEHOLDER_PROJECTS[1]} size="small" />
+              <ProjectCard {...displayProjects[1]} size="small" />
             </div>
           </StaggerItem>
 
           {/* Row 2 */}
           <StaggerItem className="md:col-span-5">
             <motion.div style={{ y: rightColY }} className="hidden md:block">
-              <ProjectCard {...PLACEHOLDER_PROJECTS[2]} size="small" />
+              <ProjectCard {...displayProjects[2]} size="small" />
             </motion.div>
             <div className="md:hidden">
-              <ProjectCard {...PLACEHOLDER_PROJECTS[2]} size="small" />
+              <ProjectCard {...displayProjects[2]} size="small" />
             </div>
           </StaggerItem>
           <StaggerItem className="md:col-span-7">
             <motion.div style={{ y: leftColY }} className="hidden md:block">
-              <ProjectCard {...PLACEHOLDER_PROJECTS[3]} size="large" />
+              <ProjectCard {...displayProjects[3]} size="large" />
             </motion.div>
             <div className="md:hidden">
-              <ProjectCard {...PLACEHOLDER_PROJECTS[3]} size="large" />
+              <ProjectCard {...displayProjects[3]} size="large" />
             </div>
           </StaggerItem>
         </StaggerChildren>

@@ -61,6 +61,32 @@ export async function initDB() {
   `;
 
   await sql`
+    CREATE TABLE IF NOT EXISTS projects (
+      id SERIAL PRIMARY KEY,
+      slug VARCHAR(255) UNIQUE NOT NULL,
+      title VARCHAR(255) NOT NULL,
+      hook TEXT,
+      category VARCHAR(50) DEFAULT 'Website',
+      description TEXT,
+      challenge TEXT,
+      solution TEXT,
+      result TEXT,
+      timeline VARCHAR(100),
+      year VARCHAR(10),
+      tech_stack TEXT[] DEFAULT '{}',
+      gradient VARCHAR(255) DEFAULT 'from-signal-tint via-signal-wash to-signal/20',
+      pattern VARCHAR(20) DEFAULT 'dots',
+      thumbnail_url TEXT,
+      concept_project BOOLEAN DEFAULT true,
+      featured BOOLEAN DEFAULT false,
+      published BOOLEAN DEFAULT false,
+      display_order INT DEFAULT 0,
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+      updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    )
+  `;
+
+  await sql`
     CREATE TABLE IF NOT EXISTS chat_conversations (
       id SERIAL PRIMARY KEY,
       session_id VARCHAR(100) NOT NULL,

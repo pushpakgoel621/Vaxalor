@@ -248,6 +248,67 @@ body {
 }
 
 /* ================================================================
+   PROSE (Legal pages)
+   ================================================================ */
+
+.prose-vaxalor h2 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-vaxalor p {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--color-ink-200);
+  margin-bottom: 1rem;
+}
+
+.prose-vaxalor ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.prose-vaxalor li {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-ink-200);
+  padding-left: 1.25rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.prose-vaxalor li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-signal);
+}
+
+.prose-vaxalor a {
+  color: var(--color-signal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-vaxalor a:hover {
+  color: var(--color-signal-hover);
+}
+
+.prose-vaxalor strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+/* ================================================================
    REDUCED MOTION
    ================================================================ */
 
