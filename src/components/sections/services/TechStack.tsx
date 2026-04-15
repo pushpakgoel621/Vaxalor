@@ -29,7 +29,7 @@ function TechPill({ name }: { name: string }) {
   const icon = TECH_ICONS[name];
 
   return (
-    <div className="flex items-center gap-2.5 px-5 py-3 bg-canvas-white/80 backdrop-blur-sm border border-canvas-border/80 rounded-xl text-ink-200 text-[13px] font-medium whitespace-nowrap hover:border-signal/30 hover:text-signal hover:bg-canvas-white hover:shadow-[0_2px_12px_rgba(29,92,191,0.06)] transition-all duration-300 shrink-0">
+    <div className="flex items-center gap-2.5 px-6 py-3.5 bg-canvas-white backdrop-blur-sm border border-canvas-border rounded-xl text-ink font-semibold text-[15px] whitespace-nowrap hover:border-signal/30 hover:text-signal hover:shadow-[0_2px_12px_rgba(29,92,191,0.06)] transition-all duration-300 shrink-0">
       {icon ? (
         <span className="text-ink-400 group-hover:text-signal transition-colors">{icon}</span>
       ) : (
