@@ -158,10 +158,10 @@ export const STATS: Stat[] = [
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { platform: "LinkedIn", href: "https://linkedin.com/company/vaxalor" },
-  { platform: "Twitter", href: "https://twitter.com/vaxalor" },
-  { platform: "Instagram", href: "https://instagram.com/vaxalor" },
-  { platform: "GitHub", href: "https://github.com/vaxalor" },
+  { platform: "LinkedIn", href: "https://www.linkedin.com/company/vaxalor-ai/" },
+  { platform: "Twitter", href: "https://x.com/VaxalorAI" },
+  { platform: "Instagram", href: "https://www.instagram.com/vaxalor.ai/" },
+  { platform: "Facebook", href: "https://www.facebook.com/people/Vaxalor/61586723278901/" },
 ];
 
 export const TECH_STACK = [

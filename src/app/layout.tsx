@@ -68,10 +68,10 @@ export default function RootLayout({
                 availableLanguage: ["English", "Hindi"],
               },
               sameAs: [
-                "https://linkedin.com/company/vaxalor",
-                "https://twitter.com/vaxalor",
-                "https://instagram.com/vaxalor",
-                "https://github.com/vaxalor",
+                "https://www.linkedin.com/company/vaxalor-ai/",
+                "https://x.com/VaxalorAI",
+                "https://www.instagram.com/vaxalor.ai/",
+                "https://www.facebook.com/people/Vaxalor/61586723278901/",
               ],
               hasOfferCatalog: {
                 "@type": "OfferCatalog",

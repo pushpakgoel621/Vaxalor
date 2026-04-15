@@ -55,6 +55,7 @@ export interface Project {
   gradient: string;
   pattern: "grid" | "dots" | "waves" | "circles";
   conceptProject?: boolean;
+  projectUrl?: string | null;
 }
 
 export type ProjectFilter = "All" | "Websites" | "Mobile" | "AI" | "MVP";

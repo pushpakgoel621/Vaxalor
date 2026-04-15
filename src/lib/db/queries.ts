@@ -216,6 +216,7 @@ export interface DBProject {
   gradient: string;
   pattern: string;
   thumbnail_url: string | null;
+  project_url: string | null;
   concept_project: boolean;
   featured: boolean;
   published: boolean;
@@ -239,6 +240,7 @@ export async function createProject(data: {
   gradient?: string;
   pattern?: string;
   thumbnail_url?: string;
+  project_url?: string;
   concept_project?: boolean;
   featured?: boolean;
   published?: boolean;
@@ -246,7 +248,7 @@ export async function createProject(data: {
 }): Promise<DBProject> {
   const sql = getDB();
   const rows = await sql`
-    INSERT INTO projects (slug, title, hook, category, description, challenge, solution, result, timeline, year, tech_stack, gradient, pattern, thumbnail_url, concept_project, featured, published, display_order)
+    INSERT INTO projects (slug, title, hook, category, description, challenge, solution, result, timeline, year, tech_stack, gradient, pattern, thumbnail_url, project_url, concept_project, featured, published, display_order)
     VALUES (
       ${data.slug},
       ${data.title},
@@ -262,6 +264,7 @@ export async function createProject(data: {
       ${data.gradient || "from-signal-tint via-signal-wash to-signal/20"},
       ${data.pattern || "dots"},
       ${data.thumbnail_url || null},
+      ${data.project_url || null},
       ${data.concept_project ?? true},
       ${data.featured ?? false},
       ${data.published ?? false},
@@ -298,7 +301,7 @@ export async function updateProject(slug: string, data: Partial<{
   slug: string; title: string; hook: string; category: string; description: string;
   challenge: string; solution: string; result: string; timeline: string; year: string;
   tech_stack: string[]; gradient: string; pattern: string; thumbnail_url: string;
-  concept_project: boolean; featured: boolean; published: boolean; display_order: number;
+  project_url: string; concept_project: boolean; featured: boolean; published: boolean; display_order: number;
 }>): Promise<DBProject | null> {
   const sql = getDB();
   const existing = await getProjectBySlug(slug);
@@ -319,6 +322,7 @@ export async function updateProject(slug: string, data: Partial<{
     gradient: data.gradient ?? existing.gradient,
     pattern: data.pattern ?? existing.pattern,
     thumbnail_url: data.thumbnail_url ?? existing.thumbnail_url,
+    project_url: data.project_url ?? existing.project_url,
     concept_project: data.concept_project ?? existing.concept_project,
     featured: data.featured ?? existing.featured,
     published: data.published ?? existing.published,
@@ -332,7 +336,7 @@ export async function updateProject(slug: string, data: Partial<{
       challenge = ${merged.challenge}, solution = ${merged.solution}, result = ${merged.result},
       timeline = ${merged.timeline}, year = ${merged.year}, tech_stack = ${merged.tech_stack},
       gradient = ${merged.gradient}, pattern = ${merged.pattern}, thumbnail_url = ${merged.thumbnail_url},
-      concept_project = ${merged.concept_project}, featured = ${merged.featured},
+      project_url = ${merged.project_url}, concept_project = ${merged.concept_project}, featured = ${merged.featured},
       published = ${merged.published}, display_order = ${merged.display_order},
       updated_at = NOW()
     WHERE id = ${existing.id}

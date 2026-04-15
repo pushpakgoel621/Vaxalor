@@ -40,6 +40,7 @@ export function ProjectEditor({ slug }: ProjectEditorProps) {
   const [gradient, setGradient] = useState(GRADIENTS[0]);
   const [pattern, setPattern] = useState("dots");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [projectUrl, setProjectUrl] = useState("");
   const [conceptProject, setConceptProject] = useState(true);
   const [featured, setFeatured] = useState(false);
   const [published, setPublished] = useState(false);
@@ -69,6 +70,7 @@ export function ProjectEditor({ slug }: ProjectEditorProps) {
         setGradient(p.gradient || GRADIENTS[0]);
         setPattern(p.pattern || "dots");
         setThumbnailUrl(p.thumbnail_url || "");
+        setProjectUrl(p.project_url || "");
         setConceptProject(p.concept_project);
         setFeatured(p.featured);
         setPublished(p.published);
@@ -96,6 +98,7 @@ export function ProjectEditor({ slug }: ProjectEditorProps) {
       title, slug: projectSlug, hook, category, description, challenge, solution, result,
       timeline, year, tech_stack: techStackStr.split(",").map((s) => s.trim()).filter(Boolean),
       gradient, pattern, thumbnail_url: thumbnailUrl || null,
+      project_url: projectUrl || null,
       concept_project: conceptProject, featured, published, display_order: displayOrder,
     };
 
@@ -175,6 +178,10 @@ export function ProjectEditor({ slug }: ProjectEditorProps) {
         <div className="md:col-span-2">
           <label className={labelClass}>Description</label>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Full project description..." rows={3} className={inputClass} />
+        </div>
+        <div className="md:col-span-2">
+          <label className={labelClass}>Live Project URL (optional)</label>
+          <input value={projectUrl} onChange={(e) => setProjectUrl(e.target.value)} placeholder="https://freshbite.com" className={inputClass} />
         </div>
         <div>
           <label className={labelClass}>Tech Stack (comma-separated)</label>

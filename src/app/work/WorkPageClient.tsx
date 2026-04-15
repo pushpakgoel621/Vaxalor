@@ -35,6 +35,7 @@ function dbToProject(p: Record<string, unknown>): Project {
     gradient: (p.gradient as string) || "from-signal-tint via-signal-wash to-signal/20",
     pattern: (p.pattern as Project["pattern"]) || "dots",
     conceptProject: p.concept_project as boolean,
+    projectUrl: (p.project_url as string) || null,
   };
 }
 

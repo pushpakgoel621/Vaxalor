@@ -77,6 +77,7 @@ export async function initDB() {
       gradient VARCHAR(255) DEFAULT 'from-signal-tint via-signal-wash to-signal/20',
       pattern VARCHAR(20) DEFAULT 'dots',
       thumbnail_url TEXT,
+      project_url TEXT,
       concept_project BOOLEAN DEFAULT true,
       featured BOOLEAN DEFAULT false,
       published BOOLEAN DEFAULT false,
@@ -84,6 +85,11 @@ export async function initDB() {
       created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     )
+  `;
+
+  // Add project_url column if table already exists without it
+  await sql`
+    ALTER TABLE projects ADD COLUMN IF NOT EXISTS project_url TEXT
   `;
 
   await sql`
