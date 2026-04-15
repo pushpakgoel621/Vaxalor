@@ -93,41 +93,27 @@ export function PortfolioPreview() {
         </ScrollReveal>
 
         <StaggerChildren className="grid grid-cols-1 md:grid-cols-12 gap-5">
-          {/* Row 1 */}
-          <StaggerItem className="md:col-span-7">
-            <motion.div style={{ y: leftColY }} className="hidden md:block">
-              <ProjectCard {...displayProjects[0]} size="large" />
-            </motion.div>
-            <div className="md:hidden">
-              <ProjectCard {...displayProjects[0]} size="large" />
-            </div>
-          </StaggerItem>
-          <StaggerItem className="md:col-span-5">
-            <motion.div style={{ y: rightColY }} className="hidden md:block">
-              <ProjectCard {...displayProjects[1]} size="small" />
-            </motion.div>
-            <div className="md:hidden">
-              <ProjectCard {...displayProjects[1]} size="small" />
-            </div>
-          </StaggerItem>
-
-          {/* Row 2 */}
-          <StaggerItem className="md:col-span-5">
-            <motion.div style={{ y: rightColY }} className="hidden md:block">
-              <ProjectCard {...displayProjects[2]} size="small" />
-            </motion.div>
-            <div className="md:hidden">
-              <ProjectCard {...displayProjects[2]} size="small" />
-            </div>
-          </StaggerItem>
-          <StaggerItem className="md:col-span-7">
-            <motion.div style={{ y: leftColY }} className="hidden md:block">
-              <ProjectCard {...displayProjects[3]} size="large" />
-            </motion.div>
-            <div className="md:hidden">
-              <ProjectCard {...displayProjects[3]} size="large" />
-            </div>
-          </StaggerItem>
+          {[
+            { idx: 0, span: "md:col-span-7", size: "large" as const, y: leftColY },
+            { idx: 1, span: "md:col-span-5", size: "small" as const, y: rightColY },
+            { idx: 2, span: "md:col-span-5", size: "small" as const, y: rightColY },
+            { idx: 3, span: "md:col-span-7", size: "large" as const, y: leftColY },
+          ].map(({ idx, span, size, y }) => {
+            const project = displayProjects[idx];
+            if (!project) return null;
+            return (
+              <StaggerItem key={idx} className={span}>
+                <Link href="/work" data-cursor="hover">
+                  <motion.div style={{ y }} className="hidden md:block">
+                    <ProjectCard {...project} size={size} />
+                  </motion.div>
+                  <div className="md:hidden">
+                    <ProjectCard {...project} size={size} />
+                  </div>
+                </Link>
+              </StaggerItem>
+            );
+          })}
         </StaggerChildren>
 
         <div className="md:hidden mt-8 text-center">

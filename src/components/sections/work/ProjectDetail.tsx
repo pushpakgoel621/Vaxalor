@@ -15,11 +15,26 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
   useEffect(() => {
     if (project) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      // Stop Lenis smooth scroll
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
     } else {
+      const scrollY = document.body.style.top;
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
     }
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
     };
   }, [project]);
 
@@ -38,7 +53,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
 
           {/* Modal */}
           <motion.div
-            className="fixed inset-4 md:inset-8 lg:inset-y-12 lg:inset-x-[10%] z-[70] bg-canvas-white rounded-xl overflow-y-auto"
+            className="fixed inset-4 md:inset-8 lg:inset-y-12 lg:inset-x-[10%] z-[70] bg-canvas-white rounded-xl overflow-y-auto overscroll-contain"
             initial={{ opacity: 0, y: 40, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.97 }}
