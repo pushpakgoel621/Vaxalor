@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { ActiveTickers } from "@/components/ui/ActiveTickers";
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { StaggerChildren, StaggerItem } from "@/components/animation/StaggerChildren";
 
@@ -117,6 +118,8 @@ export function PortfolioPreview() {
             View all work →
           </Link>
         </div>
+
+        <ActiveTickers />
       </div>
     </section>
   );

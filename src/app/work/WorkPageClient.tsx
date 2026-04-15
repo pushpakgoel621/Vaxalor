@@ -6,6 +6,7 @@ import { WorkHero } from "@/components/sections/work/WorkHero";
 import { ProjectGrid } from "@/components/sections/work/ProjectGrid";
 import { ProjectDetail } from "@/components/sections/work/ProjectDetail";
 import { CTASection } from "@/components/sections/home/CTASection";
+import { ActiveTickers } from "@/components/ui/ActiveTickers";
 import { PROJECTS } from "@/lib/constants";
 import type { Project, ProjectFilter } from "@/types";
 
@@ -31,6 +32,11 @@ export function WorkPageClient() {
     <PageTransition>
       <WorkHero activeFilter={filter} onFilterChange={setFilter} />
       <ProjectGrid projects={filtered} onProjectClick={setSelectedProject} />
+      <section className="bg-canvas pb-section">
+        <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
+          <ActiveTickers />
+        </div>
+      </section>
       <CTASection />
       <ProjectDetail
         project={selectedProject}
