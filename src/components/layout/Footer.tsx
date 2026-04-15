@@ -4,6 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { SITE_NAME, SITE_EMAIL, SITE_TAGLINE, NAV_LINKS, SERVICES, SOCIAL_LINKS } from "@/lib/constants";
+import { IndicTexture } from "@/components/ui/IndicTexture";
 
 const Logo3D = dynamic(() => import("@/components/global/Logo3D").then(mod => ({ default: mod.Logo3D })), {
   ssr: false,
@@ -29,8 +30,9 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-ink text-white">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 pt-16 pb-10">
+    <footer className="bg-ink text-white relative overflow-hidden">
+      <IndicTexture variant="paisley" opacity={0.03} />
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8 pt-16 pb-10">
         {/* 3D Logo */}
         <div className="hidden md:block w-full h-[220px] mb-12">
           <Logo3D />

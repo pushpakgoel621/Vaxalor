@@ -31,7 +31,33 @@ export async function initDB() {
     )
   `;
 
+  await sql`
+    CREATE TABLE IF NOT EXISTS submissions (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL,
+      phone VARCHAR(50),
+      service VARCHAR(100),
+      budget VARCHAR(50),
+      message TEXT,
+      source VARCHAR(50) DEFAULT 'contact',
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    )
+  `;
+
   return { success: true };
+}
+
+export interface Submission {
+  id: number;
+  name: string;
+  email: string;
+  phone: string | null;
+  service: string | null;
+  budget: string | null;
+  message: string | null;
+  source: string;
+  created_at: string;
 }
 
 export interface ContentBlock {

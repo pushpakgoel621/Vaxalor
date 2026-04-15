@@ -26,8 +26,8 @@ export const SERVICES: Service[] = [
       "Lightning-fast loading speeds",
       "CMS integration for easy updates",
     ],
-    ctaText: "Start a web project →",
-    ctaHref: "/contact?service=website",
+    ctaText: "Learn more →",
+    ctaHref: "/services/website-development",
   },
   {
     number: "02",
@@ -40,8 +40,8 @@ export const SERVICES: Service[] = [
       "Marketing materials and collateral",
       "Social media graphics and templates",
     ],
-    ctaText: "Start a design project →",
-    ctaHref: "/contact?service=design",
+    ctaText: "Learn more →",
+    ctaHref: "/services/design-and-posters",
   },
   {
     number: "03",
@@ -54,8 +54,8 @@ export const SERVICES: Service[] = [
       "Offline support and push notifications",
       "App Store and Play Store deployment",
     ],
-    ctaText: "Start an app project →",
-    ctaHref: "/contact?service=mobile",
+    ctaText: "Learn more →",
+    ctaHref: "/services/mobile-applications",
   },
   {
     number: "04",
@@ -68,8 +68,8 @@ export const SERVICES: Service[] = [
       "Advanced analytics and reporting",
       "Role-based access control",
     ],
-    ctaText: "Start a CRM project →",
-    ctaHref: "/contact?service=erp",
+    ctaText: "Learn more →",
+    ctaHref: "/services/erp-crm-solutions",
   },
   {
     number: "05",
@@ -82,8 +82,8 @@ export const SERVICES: Service[] = [
       "24/7 automated customer support",
       "Analytics and conversation insights",
     ],
-    ctaText: "Start an AI project →",
-    ctaHref: "/contact?service=ai",
+    ctaText: "Learn more →",
+    ctaHref: "/services/ai-chatbots",
     highlighted: true,
   },
   {
@@ -97,8 +97,8 @@ export const SERVICES: Service[] = [
       "Iterative, feedback-driven approach",
       "Investor-ready product and pitch",
     ],
-    ctaText: "Start your MVP →",
-    ctaHref: "/contact?service=mvp",
+    ctaText: "Learn more →",
+    ctaHref: "/services/mvp-development",
     badge: "50% off",
   },
 ];
@@ -200,6 +200,161 @@ export const BUDGET_OPTIONS = [
   "$5K – $10K",
   "$10K+",
   "Not sure yet",
+];
+
+export interface ServicePage {
+  slug: string;
+  title: string;
+  tagline: string;
+  description: string;
+  heroImage?: string;
+  process: { step: string; title: string; description: string; days: string }[];
+  features: string[];
+  caseStudy?: {
+    client: string;
+    challenge: string;
+    solution: string;
+    result: string;
+    quote?: string;
+  };
+  faq: { q: string; a: string }[];
+}
+
+export const SERVICE_PAGES: ServicePage[] = [
+  {
+    slug: "website-development",
+    title: "Website Development",
+    tagline: "Custom websites that look incredible and actually bring in customers.",
+    description: "No templates, no shortcuts — every website we build is handcrafted for your business, optimized for speed, SEO, and conversions. Shipped in 20 days.",
+    process: [
+      { step: "01", title: "Discovery Call", description: "We learn your business, goals, audience, and competitors. One conversation, no fluff.", days: "Day 1" },
+      { step: "02", title: "Wireframes & Design", description: "We design every page in Figma. You approve the look before we write a single line of code.", days: "Day 2-5" },
+      { step: "03", title: "Development", description: "We build with Next.js, Tailwind CSS, and modern tech. Daily progress updates so you're never in the dark.", days: "Day 6-16" },
+      { step: "04", title: "Testing & Launch", description: "We test on every device, optimize performance, and launch. You get a site that works beautifully from day one.", days: "Day 17-20" },
+    ],
+    features: ["Custom responsive design", "SEO-optimized from day one", "Lightning-fast loading (90+ Lighthouse)", "CMS integration for easy updates", "Analytics and conversion tracking", "SSL certificate and security hardening"],
+    caseStudy: {
+      client: "FreshBite Restaurant",
+      challenge: "A popular local restaurant with zero online presence was losing customers to competitors with modern websites and online ordering.",
+      solution: "We built a mobile-first website with integrated menu browsing, online ordering, and reservation booking — all shipped in 14 days.",
+      result: "Online orders accounted for 35% of total revenue within the first month. Mobile traffic increased by 280%.",
+      quote: "They redesigned our entire online presence and our lead generation doubled. Best investment we've made this year.",
+    },
+    faq: [
+      { q: "How long does it take?", a: "20 days maximum. Most websites ship in 14-18 days." },
+      { q: "Do I need to provide content?", a: "We can work with what you have. We'll guide you on what's needed and can help write copy if needed." },
+      { q: "Can I update the website myself?", a: "Yes. We integrate a CMS so you can edit text, images, and blog posts without touching code." },
+      { q: "What if I don't like the design?", a: "You approve designs before development starts. If you hate the first draft, we redo it free." },
+    ],
+  },
+  {
+    slug: "design-and-posters",
+    title: "Design & Posters",
+    tagline: "Visual design that captures attention and communicates with clarity.",
+    description: "From brand identity to marketing materials — we design everything your business needs to look professional, consistent, and memorable.",
+    process: [
+      { step: "01", title: "Brand Brief", description: "We understand your vision, values, audience, and competitors.", days: "Day 1" },
+      { step: "02", title: "Concepts & Moodboards", description: "We explore 2-3 directions with moodboards and initial concepts.", days: "Day 2-4" },
+      { step: "03", title: "Design Refinement", description: "We refine the chosen direction into polished, pixel-perfect deliverables.", days: "Day 5-12" },
+      { step: "04", title: "Final Delivery", description: "All files delivered in every format you need — print, web, social media.", days: "Day 13-15" },
+    ],
+    features: ["Complete brand identity systems", "UI/UX design for web and mobile", "Marketing materials and collateral", "Social media graphics and templates", "Print-ready poster and flyer design", "Brand guidelines document"],
+    faq: [
+      { q: "What do I get?", a: "Logo, brand colors, typography, business cards, social templates, and a brand guidelines PDF." },
+      { q: "How many revisions?", a: "Unlimited revisions until you're happy. No extra charge." },
+      { q: "Can you design for print?", a: "Yes. We deliver print-ready files (CMYK, bleed marks, correct DPI)." },
+    ],
+  },
+  {
+    slug: "mobile-applications",
+    title: "Mobile Applications",
+    tagline: "Your app, on every phone, ready in 20 days.",
+    description: "Cross-platform mobile apps built with React Native or Flutter. Native-quality experiences without the native price tag.",
+    process: [
+      { step: "01", title: "Requirements & UX", description: "We map out user flows, screens, and features. Nothing starts without clarity.", days: "Day 1-3" },
+      { step: "02", title: "UI Design", description: "Every screen designed in Figma. You see exactly what your app will look like.", days: "Day 4-7" },
+      { step: "03", title: "Development", description: "We build with React Native for iOS + Android from one codebase. Daily builds for you to test.", days: "Day 8-17" },
+      { step: "04", title: "Testing & Store Submit", description: "We test on real devices, fix edge cases, and submit to App Store + Play Store.", days: "Day 18-20" },
+    ],
+    features: ["iOS & Android from a single codebase", "Offline support and push notifications", "App Store and Play Store deployment", "Backend API integration", "Analytics and crash reporting", "Post-launch support and updates"],
+    faq: [
+      { q: "iOS and Android?", a: "Yes. We build cross-platform with React Native or Flutter — one codebase, both stores." },
+      { q: "Do you handle App Store submission?", a: "Yes. We handle the entire submission process including screenshots and descriptions." },
+      { q: "What about backend?", a: "We build the backend API too. Everything you need, end to end." },
+    ],
+  },
+  {
+    slug: "erp-crm-solutions",
+    title: "ERP & CRM Solutions",
+    tagline: "Business tools that actually fit your workflow.",
+    description: "Custom dashboards, workflow automation, and analytics — built around how your team really works, not a generic template.",
+    process: [
+      { step: "01", title: "Workflow Audit", description: "We sit with your team and understand how you actually work. Every pain point, every bottleneck.", days: "Day 1-3" },
+      { step: "02", title: "System Design", description: "We design the data model, dashboards, and user flows. You sign off before we build.", days: "Day 4-7" },
+      { step: "03", title: "Development", description: "We build modular, scalable systems. Daily demos so you can course-correct in real time.", days: "Day 8-17" },
+      { step: "04", title: "Training & Launch", description: "We train your team, migrate your data, and go live with zero downtime.", days: "Day 18-20" },
+    ],
+    features: ["Custom dashboards with real-time data", "Workflow automation that saves hours", "Advanced analytics and reporting", "Role-based access control", "Data import/export and integrations", "Mobile-friendly interface"],
+    caseStudy: {
+      client: "BuildCRM",
+      challenge: "A growing B2B company was managing 500+ leads across 3 different spreadsheets. Deals were falling through the cracks.",
+      solution: "We built a custom CRM with a visual sales pipeline, automated lead scoring, and one-click reporting.",
+      result: "Lead response time dropped by 60%. The team closed 40% more deals in the first quarter.",
+    },
+    faq: [
+      { q: "Can it integrate with our existing tools?", a: "Yes. We build integrations with email, Slack, accounting software, and more." },
+      { q: "Is it customizable after launch?", a: "Absolutely. We build modular systems so you can add features as you grow." },
+    ],
+  },
+  {
+    slug: "ai-chatbots",
+    title: "AI Chatbots & Solutions",
+    tagline: "A chatbot that handles your customer questions 24/7 — so you don't have to.",
+    description: "Smart AI solutions powered by OpenAI and custom models. From customer support to lead capture to internal tools.",
+    process: [
+      { step: "01", title: "Use Case Definition", description: "We identify exactly where AI adds value in your business. No hype, just practical impact.", days: "Day 1-2" },
+      { step: "02", title: "Training & Design", description: "We train the model on your data, design the conversation flows, and build the UI.", days: "Day 3-8" },
+      { step: "03", title: "Integration", description: "We plug the chatbot into your website, app, or internal tools. Works with your existing stack.", days: "Day 9-15" },
+      { step: "04", title: "Testing & Optimization", description: "We test with real scenarios, tune responses, and optimize for accuracy.", days: "Day 16-20" },
+    ],
+    features: ["Natural language processing", "Integration with existing tools", "24/7 automated customer support", "Lead capture and qualification", "Analytics and conversation insights", "Continuous learning and improvement"],
+    caseStudy: {
+      client: "ShopAssist AI",
+      challenge: "An e-commerce company was spending 6+ hours daily on repetitive customer support queries.",
+      solution: "We built an AI chatbot that handles product recommendations, order tracking, and FAQ responses with 95% accuracy.",
+      result: "The chatbot handles 80% of support tickets. Response time dropped from 4 hours to 8 seconds.",
+      quote: "The AI chatbot they built handles 80% of our support tickets now. Our team can finally focus on what matters.",
+    },
+    faq: [
+      { q: "How smart is it?", a: "Very. It uses GPT-4 level models fine-tuned on your specific data. It learns from every conversation." },
+      { q: "Can it capture leads?", a: "Yes. It naturally collects contact info during conversations and sends it to your CRM." },
+    ],
+  },
+  {
+    slug: "mvp-development",
+    title: "MVP Development",
+    tagline: "Test your idea without burning through your savings.",
+    description: "We build your MVP in 20 days at 50% off — just enough to validate, pitch to investors, and start growing. No bloat, no over-engineering.",
+    process: [
+      { step: "01", title: "Idea Validation", description: "We challenge your assumptions, identify the core value proposition, and define the minimum viable scope.", days: "Day 1-2" },
+      { step: "02", title: "Rapid Prototyping", description: "We design key screens and user flows. You see a clickable prototype before we code.", days: "Day 3-5" },
+      { step: "03", title: "Sprint Build", description: "We build the core features — nothing more, nothing less. Ship fast, learn fast.", days: "Day 6-17" },
+      { step: "04", title: "Launch & Learn", description: "We deploy, set up analytics, and help you read the data. Your MVP is live and learning.", days: "Day 18-20" },
+    ],
+    features: ["20-day guaranteed delivery", "50% discount on development", "Iterative, feedback-driven approach", "Investor-ready product and pitch deck", "Built-in analytics from day one", "Post-launch iteration support"],
+    caseStudy: {
+      client: "TrackFlow",
+      challenge: "A first-time founder needed to validate a project management concept and pitch to investors, but had no technical co-founder.",
+      solution: "We built a fully functional MVP with Kanban task boards, team management, and analytics dashboards in 20 days at 50% off.",
+      result: "The founder used the MVP to close a $200K pre-seed round. The product now has 400+ active users in private beta.",
+      quote: "We went from idea to a working product in 18 days. The speed and quality were honestly unbelievable.",
+    },
+    faq: [
+      { q: "What counts as an MVP?", a: "The smallest version of your product that delivers core value. We help you define what to build and what to skip." },
+      { q: "Why 50% off?", a: "Because we believe in startups. A cheaper MVP means more runway for you to grow." },
+      { q: "What happens after launch?", a: "We offer post-launch iteration packages. Or you can take the code and run — it's yours." },
+    ],
+  },
 ];
 
 export const PROJECTS: Project[] = [

@@ -1,4 +1,4 @@
-import { getDB, type Blog, type ContentBlock } from "./index";
+import { getDB, type Blog, type ContentBlock, type Submission } from "./index";
 
 export async function createBlog(data: {
   title: string;
@@ -156,4 +156,44 @@ export async function deleteBlog(slug: string): Promise<boolean> {
   `;
 
   return rows.length > 0;
+}
+
+// ========== SUBMISSIONS ==========
+
+export async function createSubmission(data: {
+  name: string;
+  email: string;
+  phone?: string;
+  service?: string;
+  budget?: string;
+  message?: string;
+  source?: string;
+}): Promise<Submission> {
+  const sql = getDB();
+
+  const rows = await sql`
+    INSERT INTO submissions (name, email, phone, service, budget, message, source)
+    VALUES (
+      ${data.name},
+      ${data.email},
+      ${data.phone || null},
+      ${data.service || null},
+      ${data.budget || null},
+      ${data.message || null},
+      ${data.source || "contact"}
+    )
+    RETURNING *
+  `;
+
+  return rows[0] as Submission;
+}
+
+export async function getAllSubmissions(): Promise<Submission[]> {
+  const sql = getDB();
+
+  const rows = await sql`
+    SELECT * FROM submissions ORDER BY created_at DESC
+  `;
+
+  return rows as Submission[];
 }

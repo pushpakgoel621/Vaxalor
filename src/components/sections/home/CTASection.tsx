@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { contactFormSchema, type ContactFormData } from "@/lib/validations";
 import { SERVICE_OPTIONS } from "@/lib/constants";
+import { IndicTexture } from "@/components/ui/IndicTexture";
 
 export function CTASection() {
   const [submitted, setSubmitted] = useState(false);
@@ -40,8 +41,9 @@ export function CTASection() {
   }
 
   return (
-    <section className="bg-ink py-[120px]">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
+    <section className="bg-ink py-[120px] relative overflow-hidden">
+      <IndicTexture variant="mandala" opacity={0.04} />
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8">
         <ScrollReveal>
           <SectionHeading
             eyebrow="Get started"
