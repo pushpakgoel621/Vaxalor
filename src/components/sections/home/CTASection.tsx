@@ -97,7 +97,7 @@ export function CTASection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <Input
-                    label="Name"
+                    label="Name *"
                     name="name"
                     placeholder="Your name"
                     register={register("name")}
@@ -105,7 +105,7 @@ export function CTASection() {
                     variant="dark"
                   />
                   <Input
-                    label="Email"
+                    label="Email *"
                     name="email"
                     type="email"
                     placeholder="you@company.com"
@@ -117,10 +117,10 @@ export function CTASection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <Input
-                    label="Phone"
+                    label="Phone *"
                     name="phone"
                     type="tel"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+91 98765 43210"
                     register={register("phone")}
                     error={errors.phone?.message}
                     variant="dark"

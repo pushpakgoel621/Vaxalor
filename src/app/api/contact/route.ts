@@ -23,22 +23,25 @@ export async function POST(request: Request) {
     }
 
     const { name, email, phone, service, budget, message } = result.data;
+    const msg = message || "";
 
     // Determine source from message content
-    const source = message.includes("Newsletter signup")
+    const source = msg.includes("Newsletter signup")
       ? "newsletter"
-      : message.includes("Quick email signup")
+      : msg.includes("Quick email signup")
       ? "cta-band"
+      : msg.includes("entry popup")
+      ? "popup"
       : "contact";
 
     // 1. Store in database
     try {
-      await createSubmission({ name, email, phone, service, budget, message, source });
+      await createSubmission({ name, email, phone, service, budget, message: msg, source });
     } catch (dbError: unknown) {
       const dbMsg = dbError instanceof Error ? dbError.message : "";
       if (dbMsg.includes("does not exist")) {
         await initDB();
-        await createSubmission({ name, email, phone, service, budget, message, source });
+        await createSubmission({ name, email, phone, service, budget, message: msg, source });
       } else {
         console.error("DB error:", dbMsg);
       }
@@ -61,7 +64,7 @@ export async function POST(request: Request) {
             phone ? `Phone: ${phone}` : null,
             service ? `Service: ${service}` : null,
             budget ? `Budget: ${budget}` : null,
-            `Message: ${message}`,
+            msg ? `Message: ${msg}` : null,
             ``,
             `Source: ${source}`,
             `Time: ${new Date().toISOString()}`,

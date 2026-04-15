@@ -13,21 +13,32 @@ const Logo3D = dynamic(() => import("@/components/global/Logo3D").then(mod => ({
 });
 
 export function Footer() {
-  const [email, setEmail] = useState("");
+  const [footerName, setFooterName] = useState("");
+  const [footerEmail, setFooterEmail] = useState("");
+  const [footerPhone, setFooterPhone] = useState("+91 ");
+  const [footerMessage, setFooterMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  async function handleEmailSubmit(e: React.FormEvent) {
+  async function handleFooterSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!footerName.trim() || !footerEmail.trim() || footerPhone.replace(/\D/g, "").length < 6) return;
+    setSending(true);
     try {
       await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: "Newsletter", email, service: "Newsletter", message: "Newsletter signup from footer" }),
+        body: JSON.stringify({
+          name: footerName,
+          email: footerEmail,
+          phone: footerPhone,
+          service: "General",
+          message: footerMessage || "Quick inquiry from footer",
+        }),
       });
       setSent(true);
-      setEmail("");
     } catch {}
+    setSending(false);
   }
 
   return (
@@ -118,27 +129,48 @@ export function Footer() {
             <h4 className="text-white text-[13px] uppercase tracking-[0.08em] font-semibold mb-5">
               Ready to build?
             </h4>
-            <p className="text-ink-400 text-sm mb-4">
-              Drop us your email and we&apos;ll get back within 24 hours.
-            </p>
             {sent ? (
-              <p className="text-signal-bright text-sm">Thanks! We&apos;ll be in touch.</p>
+              <p className="text-signal-bright text-sm">Thanks! We&apos;ll be in touch within 24 hours.</p>
             ) : (
-              <form className="flex gap-2" onSubmit={handleEmailSubmit}>
+              <form className="flex flex-col gap-2.5" onSubmit={handleFooterSubmit}>
+                <input
+                  type="text"
+                  value={footerName}
+                  onChange={(e) => setFooterName(e.target.value)}
+                  placeholder="Your name *"
+                  required
+                  className="w-full bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white placeholder:text-ink-300 focus:border-signal-bright focus:outline-none transition-colors duration-200"
+                />
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
+                  value={footerEmail}
+                  onChange={(e) => setFooterEmail(e.target.value)}
+                  placeholder="your@email.com *"
                   required
-                  className="flex-1 bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white placeholder:text-ink-300 focus:border-signal-bright focus:outline-none transition-colors duration-200"
+                  className="w-full bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white placeholder:text-ink-300 focus:border-signal-bright focus:outline-none transition-colors duration-200"
+                />
+                <input
+                  type="tel"
+                  value={footerPhone}
+                  onChange={(e) => setFooterPhone(e.target.value)}
+                  placeholder="+91 98765 43210 *"
+                  required
+                  className="w-full bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white placeholder:text-ink-300 focus:border-signal-bright focus:outline-none transition-colors duration-200"
+                />
+                <textarea
+                  value={footerMessage}
+                  onChange={(e) => setFooterMessage(e.target.value)}
+                  placeholder="Tell us about your project"
+                  rows={2}
+                  className="w-full bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white placeholder:text-ink-300 focus:border-signal-bright focus:outline-none transition-colors duration-200 resize-none"
                 />
                 <button
                   type="submit"
-                  className="bg-signal hover:bg-signal-hover text-white text-sm font-medium px-4 py-2.5 rounded-input transition-colors duration-200"
+                  disabled={sending}
+                  className="w-full bg-signal hover:bg-signal-hover text-white text-sm font-medium px-4 py-2.5 rounded-input transition-colors duration-200 disabled:opacity-50"
                   data-cursor="cta"
                 >
-                  Send
+                  {sending ? "Sending..." : "Send →"}
                 </button>
               </form>
             )}

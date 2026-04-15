@@ -79,14 +79,14 @@ export function ContactForm() {
             />
 
             <Input
-              label="Name"
+              label="Name *"
               name="name"
               placeholder="Your name"
               register={register("name")}
               error={errors.name?.message}
             />
             <Input
-              label="Email"
+              label="Email *"
               name="email"
               type="email"
               placeholder="you@company.com"
@@ -94,10 +94,10 @@ export function ContactForm() {
               error={errors.email?.message}
             />
             <Input
-              label="Phone"
+              label="Phone *"
               name="phone"
               type="tel"
-              placeholder="+1 (555) 000-0000"
+              placeholder="+91 98765 43210"
               register={register("phone")}
               error={errors.phone?.message}
             />
