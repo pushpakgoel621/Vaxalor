@@ -1,4 +1,5 @@
 import { PageTransition } from "@/components/layout/PageTransition";
+import { CurrentlyBuilding } from "@/components/sections/home/CurrentlyBuilding";
 import { Hero } from "@/components/sections/home/Hero";
 import { SocialProofBar } from "@/components/sections/home/SocialProofBar";
 import { ServicesOverview } from "@/components/sections/home/ServicesOverview";
@@ -12,6 +13,7 @@ import { CTASection } from "@/components/sections/home/CTASection";
 export default function HomePage() {
   return (
     <PageTransition>
+      <CurrentlyBuilding />
       <Hero />
       <SocialProofBar />
       <ServicesOverview />

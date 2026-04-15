@@ -46,6 +46,21 @@ export async function initDB() {
   `;
 
   await sql`
+    CREATE TABLE IF NOT EXISTS site_config (
+      key VARCHAR(100) PRIMARY KEY,
+      value TEXT NOT NULL,
+      updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    )
+  `;
+
+  // Seed default ticker if empty
+  await sql`
+    INSERT INTO site_config (key, value)
+    VALUES ('currently_building', '{"project": "AI chatbot for a logistics startup", "day": 12, "total": 20}')
+    ON CONFLICT (key) DO NOTHING
+  `;
+
+  await sql`
     CREATE TABLE IF NOT EXISTS chat_conversations (
       id SERIAL PRIMARY KEY,
       session_id VARCHAR(100) NOT NULL,

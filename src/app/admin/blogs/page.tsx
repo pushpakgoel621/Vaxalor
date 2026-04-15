@@ -79,6 +79,12 @@ export default function AdminBlogsPage() {
           >
             Submissions
           </Link>
+          <Link
+            href="/admin/ticker"
+            className="px-4 py-2 text-xs text-ink-400 border border-ink-200 rounded-input hover:border-signal/40 transition-colors"
+          >
+            Ticker
+          </Link>
           <button
             onClick={handleInitDB}
             className="px-4 py-2 text-xs text-ink-400 border border-ink-200 rounded-input hover:border-signal/40 transition-colors"

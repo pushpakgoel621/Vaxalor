@@ -198,6 +198,25 @@ export async function getAllSubmissions(): Promise<Submission[]> {
   return rows as Submission[];
 }
 
+// ========== SITE CONFIG ==========
+
+export async function getSiteConfig(key: string): Promise<string | null> {
+  const sql = getDB();
+  const rows = await sql`
+    SELECT value FROM site_config WHERE key = ${key} LIMIT 1
+  `;
+  return (rows[0] as { value: string })?.value || null;
+}
+
+export async function setSiteConfig(key: string, value: string) {
+  const sql = getDB();
+  await sql`
+    INSERT INTO site_config (key, value, updated_at)
+    VALUES (${key}, ${value}, NOW())
+    ON CONFLICT (key) DO UPDATE SET value = ${value}, updated_at = NOW()
+  `;
+}
+
 // ========== CHAT ==========
 
 export async function saveChatMessage(sessionId: string, role: string, message: string) {

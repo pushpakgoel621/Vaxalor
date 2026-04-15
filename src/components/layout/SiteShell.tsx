@@ -8,6 +8,7 @@ import { CustomCursor } from "@/components/global/CustomCursor";
 import { ChatbotWidget } from "@/components/global/ChatbotWidget";
 import { ScrollProgress } from "@/components/global/ScrollProgress";
 import { EasterEggs } from "@/components/global/EasterEggs";
+import { EntryPopup } from "@/components/global/EntryPopup";
 import { SmoothScrollProvider } from "@/components/animation/SmoothScrollProvider";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
@@ -37,6 +38,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       </SmoothScrollProvider>
       <ChatbotWidget />
       <EasterEggs />
+      <EntryPopup />
     </>
   );
 }
