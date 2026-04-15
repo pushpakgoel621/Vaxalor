@@ -197,3 +197,32 @@ export async function getAllSubmissions(): Promise<Submission[]> {
 
   return rows as Submission[];
 }
+
+// ========== CHAT ==========
+
+export async function saveChatMessage(sessionId: string, role: string, message: string) {
+  const sql = getDB();
+  await sql`
+    INSERT INTO chat_conversations (session_id, role, message)
+    VALUES (${sessionId}, ${role}, ${message})
+  `;
+}
+
+export async function getChatHistory(sessionId: string) {
+  const sql = getDB();
+  const rows = await sql`
+    SELECT role, message FROM chat_conversations
+    WHERE session_id = ${sessionId}
+    ORDER BY created_at ASC
+    LIMIT 50
+  `;
+  return rows as { role: string; message: string }[];
+}
+
+export async function saveChatLead(sessionId: string, email: string, name?: string) {
+  const sql = getDB();
+  await sql`
+    INSERT INTO chat_leads (session_id, email, name)
+    VALUES (${sessionId}, ${email}, ${name || null})
+  `;
+}

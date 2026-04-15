@@ -45,7 +45,70 @@ export async function initDB() {
     )
   `;
 
+  await sql`
+    CREATE TABLE IF NOT EXISTS chat_conversations (
+      id SERIAL PRIMARY KEY,
+      session_id VARCHAR(100) NOT NULL,
+      role VARCHAR(10) NOT NULL,
+      message TEXT NOT NULL,
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    )
+  `;
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS chat_leads (
+      id SERIAL PRIMARY KEY,
+      session_id VARCHAR(100) NOT NULL,
+      email VARCHAR(255),
+      name VARCHAR(255),
+      captured_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    )
+  `;
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS newsletter (
+      id SERIAL PRIMARY KEY,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      subscribed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+      active BOOLEAN DEFAULT true
+    )
+  `;
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS analytics_events (
+      id SERIAL PRIMARY KEY,
+      event VARCHAR(100) NOT NULL,
+      page VARCHAR(255),
+      metadata JSONB DEFAULT '{}'::jsonb,
+      session_id VARCHAR(100),
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    )
+  `;
+
   return { success: true };
+}
+
+export interface ChatMessage {
+  id: number;
+  session_id: string;
+  role: string;
+  message: string;
+  created_at: string;
+}
+
+export interface ChatLead {
+  id: number;
+  session_id: string;
+  email: string | null;
+  name: string | null;
+  captured_at: string;
+}
+
+export interface NewsletterSub {
+  id: number;
+  email: string;
+  subscribed_at: string;
+  active: boolean;
 }
 
 export interface Submission {
