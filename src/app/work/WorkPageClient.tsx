@@ -5,7 +5,7 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { WorkHero } from "@/components/sections/work/WorkHero";
 import { ProjectGrid } from "@/components/sections/work/ProjectGrid";
 import { ProjectDetail } from "@/components/sections/work/ProjectDetail";
-import { CTABand } from "@/components/sections/services/CTABand";
+import { CTASection } from "@/components/sections/home/CTASection";
 import { PROJECTS } from "@/lib/constants";
 import type { Project, ProjectFilter } from "@/types";
 
@@ -31,7 +31,7 @@ export function WorkPageClient() {
     <PageTransition>
       <WorkHero activeFilter={filter} onFilterChange={setFilter} />
       <ProjectGrid projects={filtered} onProjectClick={setSelectedProject} />
-      <CTABand />
+      <CTASection />
       <ProjectDetail
         project={selectedProject}
         onClose={() => setSelectedProject(null)}

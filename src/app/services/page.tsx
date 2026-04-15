@@ -3,7 +3,7 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { ServicesHero } from "@/components/sections/services/ServicesHero";
 import { ServiceDetailBlock } from "@/components/sections/services/ServiceDetailBlock";
 import { TechStack } from "@/components/sections/services/TechStack";
-import { CTABand } from "@/components/sections/services/CTABand";
+import { CTASection } from "@/components/sections/home/CTASection";
 import { SERVICES } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default function ServicesPage() {
         />
       ))}
       <TechStack />
-      <CTABand />
+      <CTASection />
     </PageTransition>
   );
 }

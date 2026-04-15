@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BlogCard } from "@/components/ui/BlogCard";
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { StaggerChildren, StaggerItem } from "@/components/animation/StaggerChildren";
-import { CTABand } from "@/components/sections/services/CTABand";
+import { CTASection } from "@/components/sections/home/CTASection";
 import type { Blog } from "@/lib/db";
 
 const CATEGORIES = ["All", "General", "Strategy", "Business", "Tips", "Engineering"];
@@ -177,7 +177,7 @@ export function BlogPageClient() {
         </div>
       </section>
 
-      <CTABand />
+      <CTASection />
     </PageTransition>
   );
 }

@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { StaggerChildren, StaggerItem } from "@/components/animation/StaggerChildren";
 import { IndicTexture } from "@/components/ui/IndicTexture";
+import { CTASection } from "@/components/sections/home/CTASection";
 import type { ServicePage } from "@/lib/constants";
 
 export function ServicePageClient({ service }: { service: ServicePage }) {
@@ -185,22 +185,7 @@ export function ServicePageClient({ service }: { service: ServicePage }) {
       )}
 
       {/* CTA */}
-      <section className="bg-ink py-[100px] relative overflow-hidden">
-        <IndicTexture variant="paisley" opacity={0.03} />
-        <div className="relative z-10 max-w-xl mx-auto px-6 sm:px-8 text-center">
-          <ScrollReveal>
-            <motion.h2 className="text-white text-h1 mb-4">
-              Ready to start?
-            </motion.h2>
-            <p className="text-ink-400 text-base mb-8">
-              Let&apos;s talk about your {service.title.toLowerCase()} project. Free consultation, no obligations.
-            </p>
-            <Button href="/contact" arrow>
-              Get in touch
-            </Button>
-          </ScrollReveal>
-        </div>
-      </section>
+      <CTASection />
     </PageTransition>
   );
 }

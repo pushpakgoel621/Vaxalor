@@ -4,7 +4,7 @@ import { AboutHero } from "@/components/sections/about/AboutHero";
 import { OurStory } from "@/components/sections/about/OurStory";
 import { OurValues } from "@/components/sections/about/OurValues";
 import { TeamSection } from "@/components/sections/about/TeamSection";
-import { CTABand } from "@/components/sections/services/CTABand";
+import { CTASection } from "@/components/sections/home/CTASection";
 
 export const metadata: Metadata = {
   title: "About Vaxalor — A Small Team That Builds Big Things",
@@ -19,7 +19,7 @@ export default function AboutPage() {
       <OurStory />
       <OurValues />
       <TeamSection />
-      <CTABand />
+      <CTASection />
     </PageTransition>
   );
 }
