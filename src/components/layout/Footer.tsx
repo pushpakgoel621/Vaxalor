@@ -16,6 +16,7 @@ export function Footer() {
   const [footerName, setFooterName] = useState("");
   const [footerEmail, setFooterEmail] = useState("");
   const [footerPhone, setFooterPhone] = useState("+91 ");
+  const [footerService, setFooterService] = useState("");
   const [footerMessage, setFooterMessage] = useState("");
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
@@ -32,7 +33,7 @@ export function Footer() {
           name: footerName,
           email: footerEmail,
           phone: footerPhone,
-          service: "General",
+          service: footerService || "General",
           message: footerMessage || "Quick inquiry from footer",
         }),
       });
@@ -157,6 +158,20 @@ export function Footer() {
                   required
                   className="w-full bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white placeholder:text-ink-300 focus:border-signal-bright focus:outline-none transition-colors duration-200"
                 />
+                <select
+                  value={footerService}
+                  onChange={(e) => setFooterService(e.target.value)}
+                  className="w-full bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white focus:border-signal-bright focus:outline-none transition-colors duration-200 appearance-none"
+                >
+                  <option value="">What do you need?</option>
+                  <option value="Website">Website</option>
+                  <option value="Mobile App">Mobile App</option>
+                  <option value="AI Solution">AI Solution</option>
+                  <option value="ERP/CRM">ERP/CRM</option>
+                  <option value="MVP">MVP</option>
+                  <option value="Design">Design</option>
+                  <option value="Other">Other</option>
+                </select>
                 <textarea
                   value={footerMessage}
                   onChange={(e) => setFooterMessage(e.target.value)}

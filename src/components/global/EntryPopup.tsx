@@ -9,6 +9,7 @@ export function EntryPopup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("+91 ");
+  const [service, setService] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -51,7 +52,7 @@ export function EntryPopup() {
           name,
           email,
           phone,
-          service: "General",
+          service: service || "General",
           message: message || "Lead captured from entry popup",
         }),
       });
@@ -150,6 +151,20 @@ export function EntryPopup() {
                         />
                         {errors.phone && <p className="text-red-500 text-[11px] mt-1">{errors.phone}</p>}
                       </div>
+                      <select
+                        value={service}
+                        onChange={(e) => setService(e.target.value)}
+                        className={`${inputClass} border-canvas-border appearance-none`}
+                      >
+                        <option value="">What do you need? (optional)</option>
+                        <option value="Website">Website</option>
+                        <option value="Mobile App">Mobile App</option>
+                        <option value="AI Solution">AI Solution</option>
+                        <option value="ERP/CRM">ERP/CRM</option>
+                        <option value="MVP">MVP</option>
+                        <option value="Design">Design</option>
+                        <option value="Other">Other</option>
+                      </select>
                       <textarea
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
