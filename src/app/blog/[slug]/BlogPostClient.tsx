@@ -1,11 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { ContentRenderer } from "@/components/sections/blog/ContentRenderer";
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import type { Blog } from "@/lib/db";
+
+function optimizeCloudinaryUrl(url: string, width = 1200): string {
+  if (!url || !url.includes("res.cloudinary.com")) return url;
+  return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width}/`);
+}
 
 interface BlogPostClientProps {
   post: Partial<Blog>;
@@ -63,11 +69,14 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
           {/* Thumbnail */}
           {post.thumbnail_url && (
             <ScrollReveal delay={0.25}>
-              <div className="rounded-card overflow-hidden border border-canvas-border mb-10">
-                <img
-                  src={post.thumbnail_url}
+              <div className="relative rounded-card overflow-hidden border border-canvas-border mb-10 aspect-[16/9]">
+                <Image
+                  src={optimizeCloudinaryUrl(post.thumbnail_url, 1200)}
                   alt={post.thumbnail_alt || post.title || ""}
-                  className="w-full h-auto object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  className="object-cover"
+                  priority
                 />
               </div>
             </ScrollReveal>

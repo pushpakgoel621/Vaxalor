@@ -1,4 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
+
+function optimizeCloudinaryUrl(url: string, width = 800): string {
+  if (!url || !url.includes("res.cloudinary.com")) return url;
+  return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width},c_fill/`);
+}
 
 interface BlogCardProps {
   title: string;
@@ -35,12 +41,15 @@ export function BlogCard({
         data-cursor="hover"
       >
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="h-48 md:h-auto bg-gradient-to-br from-signal-tint via-signal-wash/30 to-canvas-alt">
+          <div className="relative h-48 md:h-auto bg-gradient-to-br from-signal-tint via-signal-wash/30 to-canvas-alt overflow-hidden">
             {thumbnailUrl && (
-              <img
-                src={thumbnailUrl}
+              <Image
+                src={optimizeCloudinaryUrl(thumbnailUrl, 800)}
                 alt={title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
               />
             )}
           </div>
@@ -74,12 +83,15 @@ export function BlogCard({
       className="group block bg-canvas-white border border-canvas-border rounded-card overflow-hidden hover:border-signal-wash transition-colors duration-300 h-full"
       data-cursor="hover"
     >
-      <div className="h-44 bg-gradient-to-br from-signal-tint via-signal-wash/20 to-canvas-alt overflow-hidden">
+      <div className="relative h-44 bg-gradient-to-br from-signal-tint via-signal-wash/20 to-canvas-alt overflow-hidden">
         {thumbnailUrl && (
-          <img
-            src={thumbnailUrl}
+          <Image
+            src={optimizeCloudinaryUrl(thumbnailUrl, 600)}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
           />
         )}
       </div>

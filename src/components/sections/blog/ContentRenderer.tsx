@@ -7,6 +7,11 @@ interface ContentRendererProps {
   content: ContentBlock[];
 }
 
+function optimizeCloudinaryUrl(url: string | undefined, width = 1200): string {
+  if (!url || !url.includes("res.cloudinary.com")) return url || "";
+  return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width}/`);
+}
+
 function ParagraphBlock({ block, index }: { block: ContentBlock; index: number }) {
   return (
     <ScrollReveal delay={0.05 * index}>
@@ -39,8 +44,9 @@ function ImageBlock({ block, index }: { block: ContentBlock; index: number }) {
     <ScrollReveal delay={0.05 * index}>
       <figure className="my-4">
         <div className="relative rounded-card overflow-hidden bg-canvas-alt border border-canvas-border">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={block.url}
+            src={optimizeCloudinaryUrl(block.url, 1200)}
             alt={block.alt || ""}
             className="w-full h-auto object-cover"
             loading="lazy"
@@ -86,7 +92,7 @@ function VideoBlock({ block, index }: { block: ContentBlock; index: number }) {
             </div>
           ) : (
             <video
-              src={block.url}
+              src={optimizeCloudinaryUrl(block.url, 1200)}
               controls
               className="w-full h-auto"
               preload="metadata"

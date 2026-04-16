@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface ProjectCardProps {
   title: string;
   category: string;
@@ -6,6 +8,13 @@ interface ProjectCardProps {
   gradient?: string;
   pattern?: "circles" | "grid" | "waves" | "dots";
   size?: "large" | "small";
+}
+
+// Optimize Cloudinary URLs by adding transformations
+function optimizeCloudinaryUrl(url: string, width = 800): string {
+  if (!url || !url.includes("res.cloudinary.com")) return url;
+  // Insert transformation params after /upload/
+  return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width},c_fill/`);
 }
 
 export function ProjectCard({
@@ -17,6 +26,9 @@ export function ProjectCard({
   pattern = "dots",
   size = "small",
 }: ProjectCardProps) {
+  const isVideo = imageSrc && /\.(mp4|webm|mov)$/i.test(imageSrc);
+  const optimizedSrc = imageSrc ? optimizeCloudinaryUrl(imageSrc, size === "large" ? 1000 : 700) : "";
+
   return (
     <div
       className="group bg-canvas-white border border-canvas-border rounded-card overflow-hidden flex flex-col h-full hover:border-signal-wash/60 transition-colors duration-300"
@@ -28,11 +40,26 @@ export function ProjectCard({
         }`}
       >
         {imageSrc ? (
-          <img
-            src={imageSrc}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-          />
+          isVideo ? (
+            <video
+              src={optimizedSrc}
+              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+            />
+          ) : (
+            <Image
+              src={optimizedSrc}
+              alt={title}
+              fill
+              sizes={size === "large" ? "(max-width: 768px) 100vw, 700px" : "(max-width: 768px) 100vw, 500px"}
+              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+          )
         ) : (
           <div
             className={`w-full h-full bg-gradient-to-br ${gradient} transition-transform duration-500 ease-out group-hover:scale-105 relative`}
