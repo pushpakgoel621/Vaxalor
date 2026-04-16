@@ -22,7 +22,7 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-canvas pt-[180px] pb-[140px] md:pt-[200px]"
+      className="relative overflow-hidden bg-canvas pt-[120px] sm:pt-[160px] lg:pt-[200px] pb-[80px] lg:pb-[140px]"
     >
       {/* Radial gradient washes */}
       <div
@@ -157,6 +157,23 @@ export function Hero() {
               <Button href="/work" variant="secondary">
                 See our work
               </Button>
+            </motion.div>
+
+            {/* Mobile-only hero logo (shows below CTAs on smaller screens) */}
+            <motion.div
+              className="lg:hidden mt-12 w-full h-[280px] sm:h-[340px] relative"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8, ease: EASE_OUT_EXPO }}
+            >
+              <Image
+                src="/images/vaxalor-hero-logo.png"
+                alt="Vaxalor VAi Logo"
+                fill
+                sizes="(max-width: 640px) 100vw, 500px"
+                className="object-contain drop-shadow-[0_10px_30px_rgba(29,92,191,0.15)]"
+                priority
+              />
             </motion.div>
           </div>
 

@@ -14,7 +14,7 @@ const LAST_UPDATED = "April 16, 2026";
 export default function PrivacyPage() {
   return (
     <PageTransition>
-      <section className="bg-canvas pt-[140px] pb-section">
+      <section className="bg-canvas pt-[100px] sm:pt-[140px] pb-section">
         <div className="max-w-3xl mx-auto px-6 sm:px-8">
           <ScrollReveal>
             <SectionHeading

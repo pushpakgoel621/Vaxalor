@@ -98,7 +98,7 @@ export function WhyChooseUs() {
   });
 
   return (
-    <section ref={sectionRef} className="bg-ink py-[120px] min-h-[80vh] overflow-hidden relative">
+    <section ref={sectionRef} className="bg-ink py-20 lg:py-[120px] min-h-[60vh] lg:min-h-[80vh] overflow-hidden relative">
       {/* Animated background grid */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.04]">
         <div

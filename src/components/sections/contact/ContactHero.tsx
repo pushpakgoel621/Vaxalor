@@ -6,7 +6,7 @@ import { SITE_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
 
 export function ContactHero() {
   return (
-    <section className="bg-canvas pt-[140px] pb-section">
+    <section className="bg-canvas pt-[100px] sm:pt-[140px] pb-section">
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 xl:grid-cols-[45%_55%] gap-12 xl:gap-16">
           {/* Left Column: Info */}

@@ -36,12 +36,12 @@ export default function AdminBlogsPage() {
 
   return (
     <AdminShell>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
           <h1 className="text-white text-2xl font-heading font-bold">Blog Posts</h1>
           <p className="text-ink-400 text-sm mt-1">{blogs.length} posts total</p>
         </div>
-        <Link href="/admin/blogs/new" className="px-5 py-2.5 bg-signal hover:bg-signal-hover text-white text-xs font-medium rounded-lg transition-colors">
+        <Link href="/admin/blogs/new" className="self-start px-5 py-2.5 bg-signal hover:bg-signal-hover text-white text-xs font-medium rounded-lg transition-colors">
           + New Post
         </Link>
       </div>
@@ -58,9 +58,9 @@ export default function AdminBlogsPage() {
       ) : (
         <div className="space-y-2">
           {blogs.map((blog) => (
-            <div key={blog.id} className="flex items-center justify-between p-4 bg-[#0A0F1A] border border-ink-200/20 rounded-xl hover:border-signal/15 transition-colors">
-              <div className="flex-1 min-w-0 mr-4">
-                <div className="flex items-center gap-2 mb-1">
+            <div key={blog.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 bg-[#0A0F1A] border border-ink-200/20 rounded-xl hover:border-signal/15 transition-colors">
+              <div className="flex-1 min-w-0 sm:mr-4">
+                <div className="flex flex-wrap items-center gap-2 mb-1">
                   <h3 className="text-white text-sm font-medium truncate">{blog.title}</h3>
                   <span className={`px-2 py-0.5 text-[9px] uppercase tracking-wider rounded-full ${
                     blog.published ? "bg-green-500/10 text-green-400 border border-green-500/20" : "bg-ink-200/30 text-ink-400 border border-ink-200/30"
@@ -71,7 +71,7 @@ export default function AdminBlogsPage() {
                 </div>
                 <p className="text-ink-400 text-xs truncate">/{blog.slug} · {blog.category} · {blog.read_time}</p>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-2 shrink-0 flex-wrap">
                 <button onClick={() => handleTogglePublish(blog)} className="px-3 py-1.5 text-xs text-ink-400 border border-ink-200/30 rounded-lg hover:border-signal/30 hover:text-white transition-colors">
                   {blog.published ? "Unpublish" : "Publish"}
                 </button>

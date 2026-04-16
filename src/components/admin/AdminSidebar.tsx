@@ -1,8 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 const NAV_ITEMS = [
   {
@@ -63,6 +65,12 @@ const NAV_ITEMS = [
 export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Close mobile sidebar when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   const handleLogout = async () => {
     await fetch("/api/auth", { method: "DELETE" });
@@ -75,8 +83,8 @@ export function AdminSidebar() {
     if (data.success) alert("Database initialized successfully");
   };
 
-  return (
-    <aside className="w-[240px] h-screen bg-[#0A0F1A] border-r border-ink-200/30 flex flex-col fixed left-0 top-0">
+  const sidebarContent = (
+    <>
       {/* Logo */}
       <div className="p-5 border-b border-ink-200/20">
         <Link href="/admin/dashboard" className="flex items-center gap-2.5">
@@ -144,6 +152,110 @@ export function AdminSidebar() {
           Logout
         </button>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile top bar */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[#0A0F1A] border-b border-ink-200/20 px-4 py-3 flex items-center justify-between">
+        <Link href="/admin/dashboard" className="flex items-center gap-2">
+          <Image src="/images/logo.png" alt="Vaxalor" width={24} height={20} className="h-5 w-auto brightness-125" />
+          <span className="text-white font-heading font-bold text-sm tracking-tight">VAXALOR</span>
+          <span className="text-ink-400 text-[10px] font-mono">ADMIN</span>
+        </Link>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-white p-2"
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+        >
+          {isOpen ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      {/* Desktop sidebar (always visible on lg+) */}
+      <aside className="hidden lg:flex w-[240px] h-screen bg-[#0A0F1A] border-r border-ink-200/30 flex-col fixed left-0 top-0">
+        {sidebarContent}
+      </aside>
+
+      {/* Mobile sidebar (slides in as overlay) */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              className="lg:hidden fixed inset-0 z-40 bg-black/50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.aside
+              className="lg:hidden fixed left-0 top-[52px] bottom-0 z-40 w-[260px] bg-[#0A0F1A] border-r border-ink-200/30 flex flex-col"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+                {NAV_ITEMS.map((item) => {
+                  const isActive = pathname === item.href || (item.href !== "/admin/dashboard" && pathname.startsWith(item.href));
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-150 ${
+                        isActive
+                          ? "bg-signal/10 text-signal-bright border border-signal/15"
+                          : "text-ink-400 hover:text-white hover:bg-ink-100/50 border border-transparent"
+                      }`}
+                    >
+                      <span className={isActive ? "text-signal-bright" : "text-ink-400"}>{item.icon}</span>
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+              <div className="p-3 border-t border-ink-200/20 space-y-1">
+                <button onClick={handleInitDB} className="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-ink-400 hover:text-white hover:bg-ink-100/50 transition-all duration-150">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <ellipse cx="12" cy="5" rx="9" ry="3" />
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                  </svg>
+                  Init Database
+                </button>
+                <Link href="/" target="_blank" className="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-ink-400 hover:text-white hover:bg-ink-100/50 transition-all duration-150">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View Site
+                </Link>
+                <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-red-400/70 hover:text-red-400 hover:bg-red-500/5 transition-all duration-150">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                  Logout
+                </button>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

@@ -22,7 +22,7 @@ export function CTABand() {
   }
 
   return (
-    <section className="bg-ink py-[100px]">
+    <section className="bg-ink py-16 lg:py-[100px]">
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
         <ScrollReveal>
           <div className="max-w-xl mx-auto text-center">

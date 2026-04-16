@@ -54,7 +54,7 @@ const FAQS = [
 export default function FAQPage() {
   return (
     <PageTransition>
-      <section className="relative bg-canvas pt-[140px] pb-12">
+      <section className="relative bg-canvas pt-[100px] sm:pt-[140px] pb-12">
         <div className="dot-grid" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8">
           <ScrollReveal>

@@ -28,7 +28,7 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
 
   return (
     <PageTransition>
-      <article className="bg-canvas pt-[140px] pb-section">
+      <article className="bg-canvas pt-[100px] sm:pt-[140px] pb-section">
         <div className="max-w-3xl mx-auto px-6 sm:px-8">
           {/* Back link */}
           <ScrollReveal>

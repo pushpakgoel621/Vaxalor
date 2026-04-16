@@ -9,7 +9,8 @@ export function CustomCursor() {
   const [hoverState, setHoverState] = useState<"none" | "interactive" | "cta">("none");
   const [isVisible, setIsVisible] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  // Default to true (touch device) so cursor doesn't flash on mobile during SSR/hydration
+  const [isTouchDevice, setIsTouchDevice] = useState(true);
   const isVisibleRef = useRef(false);
 
   const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
@@ -22,10 +23,27 @@ export function CustomCursor() {
   }, []);
 
   useEffect(() => {
-    if (window.matchMedia("(hover: none)").matches) {
+    // More robust touch detection: check both hover capability AND pointer precision
+    // Also check for ontouchstart support (covers more edge cases like Windows touch laptops)
+    const isTouchCapable =
+      window.matchMedia("(hover: none)").matches ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0;
+
+    if (isTouchCapable) {
       setIsTouchDevice(true);
       return;
     }
+
+    // Confirmed not a touch device — show custom cursor
+    setIsTouchDevice(false);
+
+    // Final safety: if user touches the screen at any point, switch to touch mode
+    const handleTouchStart = () => {
+      setIsTouchDevice(true);
+    };
+    window.addEventListener("touchstart", handleTouchStart, { once: true, passive: true });
 
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -68,6 +86,7 @@ export function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchstart", handleTouchStart);
     };
   }, [cursorX, cursorY, setVisible]);
 

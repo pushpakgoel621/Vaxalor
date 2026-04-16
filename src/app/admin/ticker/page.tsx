@@ -61,12 +61,12 @@ export default function AdminTickerPage() {
 
   return (
     <AdminShell>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
           <h1 className="text-white text-2xl font-heading font-bold">Currently Building</h1>
           <p className="text-ink-400 text-sm mt-1">Manage the live ticker shown on the homepage.</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <button onClick={addTicker} className="px-4 py-2.5 text-xs text-white border border-signal/30 rounded-lg hover:bg-signal/10 transition-colors">
             + Add Project
           </button>
