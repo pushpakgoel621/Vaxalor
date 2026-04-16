@@ -1,13 +1,55 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { PeekingMascot } from "@/components/ui/PeekingMascot";
-import { HeroLogoAnimations } from "@/components/global/HeroLogoAnimations";
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
+
+function HeroLogoMedia({ priority = false }: { priority?: boolean }) {
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  // Render poster image during SSR or when reduced motion is preferred
+  if (!mounted || reduceMotion) {
+    return (
+      <Image
+        src="/images/hero-logo-poster.jpg"
+        alt="Vaxalor VAi Logo"
+        fill
+        sizes="(max-width: 1024px) 100vw, 600px"
+        className="object-contain drop-shadow-[0_10px_40px_rgba(29,92,191,0.15)]"
+        priority={priority}
+      />
+    );
+  }
+
+  return (
+    <video
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      poster="/images/hero-logo-poster.jpg"
+      className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_10px_40px_rgba(29,92,191,0.15)]"
+      aria-label="Vaxalor VAi animated logo"
+    >
+      <source src="/videos/hero-logo.mp4" type="video/mp4" />
+    </video>
+  );
+}
 
 export function Hero() {
   const sectionRef = useRef(null);
@@ -166,32 +208,18 @@ export function Hero() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8, ease: EASE_OUT_EXPO }}
             >
-              <Image
-                src="/images/vaxalor-hero-logo.png"
-                alt="Vaxalor VAi Logo"
-                fill
-                sizes="(max-width: 640px) 100vw, 500px"
-                className="object-contain drop-shadow-[0_10px_30px_rgba(29,92,191,0.15)]"
-                priority
-              />
+              <HeroLogoMedia priority />
             </motion.div>
           </div>
 
-          {/* Right: Hero Logo Image */}
+          {/* Right: Hero Logo Video */}
           <motion.div
             className="hidden lg:block w-[600px] h-[540px] relative -mr-10"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8, ease: EASE_OUT_EXPO }}
           >
-            <Image
-              src="/images/vaxalor-hero-logo.png"
-              alt="Vaxalor VAi Logo"
-              fill
-              className="object-contain drop-shadow-[0_10px_40px_rgba(29,92,191,0.15)]"
-              priority
-            />
-            <HeroLogoAnimations />
+            <HeroLogoMedia priority />
             <PeekingMascot position="bottom-right" size={90} delay={0.8} />
           </motion.div>
         </div>

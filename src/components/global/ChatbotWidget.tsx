@@ -116,21 +116,26 @@ export function ChatbotWidget() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed z-50 right-6 bottom-6 md:right-8 md:bottom-8 w-14 h-14 rounded-full bg-signal hover:bg-signal-hover text-white flex items-center justify-center transition-all duration-200 ${
+        className={`fixed z-50 right-6 bottom-6 md:right-8 md:bottom-8 w-16 h-16 rounded-full bg-gradient-to-br from-signal to-signal-bright hover:from-signal-hover hover:to-signal text-white flex items-center justify-center shadow-lg shadow-signal/30 transition-all duration-200 hover:scale-105 overflow-visible ${
           isOpen ? "" : "animate-chatbot-pulse"
         }`}
         data-cursor="cta"
         aria-label={isOpen ? "Close chat" : "Open chat"}
       >
         {isOpen ? (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         ) : (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
+          <Image
+            src="/images/mascot.png"
+            alt="Vaxalor mascot"
+            width={56}
+            height={42}
+            className="object-contain drop-shadow-md"
+            priority
+          />
         )}
       </button>
 
