@@ -25,7 +25,7 @@ function HeroLogoMedia({ priority = false }: { priority?: boolean }) {
   if (!mounted || reduceMotion) {
     return (
       <Image
-        src="/images/hero-logo-poster.jpg"
+        src="/images/hero-logo-poster.webp"
         alt="Vaxalor VAi Logo"
         fill
         sizes="(max-width: 1024px) 100vw, 600px"
@@ -42,11 +42,11 @@ function HeroLogoMedia({ priority = false }: { priority?: boolean }) {
       muted
       playsInline
       preload="auto"
-      poster="/images/hero-logo-poster.jpg"
+      poster="/images/hero-logo-poster.webp"
       className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_10px_40px_rgba(29,92,191,0.15)]"
       aria-label="Vaxalor VAi animated logo"
     >
-      <source src="/videos/hero-logo.mp4" type="video/mp4" />
+      <source src="/videos/hero-logo.webm" type="video/webm" />
     </video>
   );
 }
