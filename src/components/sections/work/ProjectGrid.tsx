@@ -43,6 +43,7 @@ export function ProjectGrid({ projects, onProjectClick }: ProjectGridProps) {
                       description={project.hook}
                       gradient={project.gradient}
                       pattern={project.pattern}
+                      imageSrc={project.thumbnailUrl ?? undefined}
                       size={isLarge ? "large" : "small"}
                     />
                   </button>

@@ -56,6 +56,7 @@ export interface Project {
   pattern: "grid" | "dots" | "waves" | "circles";
   conceptProject?: boolean;
   projectUrl?: string | null;
+  thumbnailUrl?: string | null;
 }
 
 export type ProjectFilter = "All" | "Websites" | "Mobile" | "AI" | "MVP";

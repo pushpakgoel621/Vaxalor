@@ -36,6 +36,7 @@ function dbToProject(p: Record<string, unknown>): Project {
     pattern: (p.pattern as Project["pattern"]) || "dots",
     conceptProject: p.concept_project as boolean,
     projectUrl: (p.project_url as string) || null,
+    thumbnailUrl: (p.thumbnail_url as string) || null,
   };
 }
 

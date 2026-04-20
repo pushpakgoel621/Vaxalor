@@ -93,13 +93,21 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
 
             {/* Hero image */}
             <div className={`w-full h-56 md:h-72 bg-gradient-to-br ${project.gradient} rounded-t-xl relative overflow-hidden`}>
-              <svg className="w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
-                {project.pattern === "grid" &&
-                  Array.from({ length: 8 }).map((_, i) => (
-                    <line key={i} x1={`${(i + 1) * 12}%`} y1="0" x2={`${(i + 1) * 12}%`} y2="100%" stroke="var(--color-signal)" strokeWidth="0.5" />
-                  ))
-                }
-              </svg>
+              {project.thumbnailUrl ? (
+                <img
+                  src={project.thumbnailUrl}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <svg className="w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
+                  {project.pattern === "grid" &&
+                    Array.from({ length: 8 }).map((_, i) => (
+                      <line key={i} x1={`${(i + 1) * 12}%`} y1="0" x2={`${(i + 1) * 12}%`} y2="100%" stroke="var(--color-signal)" strokeWidth="0.5" />
+                    ))
+                  }
+                </svg>
+              )}
             </div>
 
             {/* Content */}
