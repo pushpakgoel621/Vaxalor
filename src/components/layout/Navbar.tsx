@@ -18,8 +18,8 @@ export function Navbar() {
     <>
       <div
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          hidden && !mobileOpen ? "-translate-y-[calc(100%+20px)]" : "translate-y-0"
-        } ${scrolled ? "pt-3 px-4 md:px-8" : "pt-4 px-4 md:px-10"}`}
+          scrolled ? "pt-3 px-4 md:px-8" : "pt-4 px-4 md:px-10"
+        }`}
       >
         <header
           className={`max-w-[1200px] mx-auto rounded-full border transition-all duration-500 ${

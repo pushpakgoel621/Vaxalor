@@ -92,14 +92,16 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             </button>
 
             {/* Hero image */}
-            <div className={`w-full h-56 md:h-72 bg-gradient-to-br ${project.gradient} rounded-t-xl relative overflow-hidden`}>
-              {project.thumbnailUrl ? (
+            {project.thumbnailUrl ? (
+              <div className="w-full bg-gradient-to-br from-canvas-alt to-canvas-border rounded-t-xl relative overflow-hidden">
                 <img
                   src={project.thumbnailUrl}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="w-full max-h-[500px] object-contain"
                 />
-              ) : (
+              </div>
+            ) : (
+              <div className={`w-full h-56 md:h-72 bg-gradient-to-br ${project.gradient} rounded-t-xl relative overflow-hidden`}>
                 <svg className="w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
                   {project.pattern === "grid" &&
                     Array.from({ length: 8 }).map((_, i) => (
@@ -107,8 +109,8 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                     ))
                   }
                 </svg>
-              )}
-            </div>
+              </div>
+            )}
 
             {/* Content */}
             <div className="px-6 md:px-12 lg:px-16 py-10 max-w-3xl">
