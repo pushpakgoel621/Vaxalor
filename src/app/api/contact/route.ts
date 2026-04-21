@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { contactFormSchema } from "@/lib/validations";
+import { apiContactSchema } from "@/lib/validations";
 import { createSubmission } from "@/lib/db/queries";
 import { initDB } from "@/lib/db";
 import { SITE_EMAIL } from "@/lib/constants";
@@ -8,7 +8,7 @@ import { SITE_EMAIL } from "@/lib/constants";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const result = contactFormSchema.safeParse(body);
+    const result = apiContactSchema.safeParse(body);
 
     if (!result.success) {
       return NextResponse.json(
