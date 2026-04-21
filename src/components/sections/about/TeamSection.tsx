@@ -20,12 +20,20 @@ export function TeamSection() {
           {TEAM_MEMBERS.map((member) => (
             <StaggerItem key={member.name}>
               <div className="text-center group">
-                {/* Avatar placeholder */}
-                <div className="w-full aspect-square rounded-card bg-canvas-alt border border-canvas-border overflow-hidden mb-5 grayscale transition-all duration-400 group-hover:grayscale-0">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-ink-400 text-4xl font-heading font-bold select-none group-hover:text-signal transition-colors duration-400">
+                {/* Avatar */}
+                <div className="w-full aspect-square rounded-card overflow-hidden mb-5 transition-all duration-400 group-hover:shadow-[0_4px_24px_rgba(29,92,191,0.15)]">
+                  <div className="w-full h-full bg-gradient-to-br from-ink via-ink-100 to-ink-200 flex items-center justify-center relative">
+                    {/* Dot pattern */}
+                    <svg className="absolute inset-0 w-full h-full opacity-[0.05]" xmlns="http://www.w3.org/2000/svg">
+                      {Array.from({ length: 36 }).map((_, j) => (
+                        <circle key={j} cx={`${((j % 6) * 16) + 10}%`} cy={`${(Math.floor(j / 6) * 16) + 10}%`} r="1.5" fill="white" />
+                      ))}
+                    </svg>
+                    <span className="text-white/80 text-4xl font-heading font-bold select-none group-hover:text-signal-bright group-hover:scale-110 transition-all duration-400 relative z-10">
                       {member.name.split(" ").map((n) => n[0]).join("")}
                     </span>
+                    {/* Bottom accent line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-signal-bright to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-400" />
                   </div>
                 </div>
                 <h3 className="text-ink text-base font-semibold">{member.name}</h3>

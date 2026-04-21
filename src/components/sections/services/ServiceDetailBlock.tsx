@@ -1,9 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import type { Service } from "@/types";
+
+const SERVICE_IMAGES: Record<string, string> = {
+  "01": "/images/service-website.png",
+  "02": "/images/service-design.png",
+  "03": "/images/service-mobile.png",
+  "04": "/images/service-erp-crm.png",
+  "05": "/images/service-ai-chatbot.png",
+  "06": "/images/service-mvp.png",
+};
 
 interface ServiceDetailBlockProps extends Service {
   reversed?: boolean;
@@ -27,6 +37,8 @@ export function ServiceDetailBlock({
     : index % 2 === 0
     ? "bg-canvas"
     : "bg-canvas-white";
+
+  const imageSrc = SERVICE_IMAGES[number];
 
   return (
     <section className={`${bgColor} py-section-sm`}>
@@ -69,20 +81,31 @@ export function ServiceDetailBlock({
             </div>
           </ScrollReveal>
 
-          {/* Visual Placeholder */}
+          {/* Service Visual */}
           <ScrollReveal
             direction={reversed ? "left" : "right"}
             distance={30}
             className={reversed ? "lg:order-1" : ""}
           >
-            <div className="aspect-[4/3] rounded-card border border-canvas-border overflow-hidden">
-              <div
-                className={`w-full h-full ${
-                  highlighted
-                    ? "bg-gradient-to-br from-signal-tint via-signal-wash to-signal/20"
-                    : "bg-gradient-to-br from-canvas-alt via-signal-wash/30 to-signal-tint"
-                }`}
-              />
+            <div className="aspect-[4/3] rounded-card border border-canvas-border overflow-hidden relative group">
+              {imageSrc ? (
+                <Image
+                  src={imageSrc}
+                  alt={title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 550px"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  loading="lazy"
+                />
+              ) : (
+                <div
+                  className={`w-full h-full ${
+                    highlighted
+                      ? "bg-gradient-to-br from-signal-tint via-signal-wash to-signal/20"
+                      : "bg-gradient-to-br from-canvas-alt via-signal-wash/30 to-signal-tint"
+                  }`}
+                />
+              )}
             </div>
           </ScrollReveal>
         </div>
