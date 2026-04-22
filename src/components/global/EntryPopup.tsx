@@ -21,7 +21,7 @@ export function EntryPopup() {
     // but reappears on refresh or new tab
     const dismissed = sessionStorage.getItem("vaxalor_popup_dismissed");
     if (dismissed) return;
-    const timer = setTimeout(() => setShow(true), 3000);
+    const timer = setTimeout(() => setShow(true), 45000);
     return () => clearTimeout(timer);
   }, []);
 
