@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SITE_NAME, SITE_EMAIL, SITE_TAGLINE, NAV_LINKS, SERVICES, SOCIAL_LINKS } from "@/lib/constants";
 import { IndicTexture } from "@/components/ui/IndicTexture";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 
 const Logo3D = dynamic(() => import("@/components/global/Logo3D").then(mod => ({ default: mod.Logo3D })), {
   ssr: false,
@@ -67,17 +68,36 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-ink-400 text-sm mt-3 max-w-xs">{SITE_TAGLINE}</p>
-            <div className="flex gap-4 mt-5">
+            
+            <div className="mt-6 space-y-4">
+              <div>
+                <p className="text-white text-sm font-semibold mb-1">Pushpak Goel</p>
+                <div className="flex flex-col gap-1 text-ink-300 text-[13px]">
+                  <a href="tel:+919368796606" className="hover:text-signal-bright transition-colors">+91 93687 96606</a>
+                  <a href="mailto:pushpak@vaxalor.com" className="hover:text-signal-bright transition-colors">pushpak@vaxalor.com</a>
+                </div>
+              </div>
+              <div>
+                <p className="text-white text-sm font-semibold mb-1">Anshul Shekhar</p>
+                <div className="flex flex-col gap-1 text-ink-300 text-[13px]">
+                  <a href="tel:+919470218939" className="hover:text-signal-bright transition-colors">+91 94702 18939</a>
+                  <a href="mailto:anshul@vaxalor.com" className="hover:text-signal-bright transition-colors">anshul@vaxalor.com</a>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-4 mt-6">
               {SOCIAL_LINKS.map((link) => (
                 <a
                   key={link.platform}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-ink-300 text-sm hover:text-signal-bright transition-colors duration-200"
+                  className="text-ink-300 hover:text-signal-bright transition-colors duration-200"
+                  aria-label={link.platform}
                   data-cursor="hover"
                 >
-                  {link.platform}
+                  <SocialIcon platform={link.platform} className="w-5 h-5" />
                 </a>
               ))}
             </div>

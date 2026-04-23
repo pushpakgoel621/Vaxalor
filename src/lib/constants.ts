@@ -444,25 +444,25 @@ export const PROJECT_FILTERS = ["All", "Websites", "Mobile", "AI", "MVP"] as con
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    name: "Abhinav Rastogi",
+    name: "Anshul Shekhar",
+    role: "CEO and Co-founder",
+    oneLiner: "Turning ambitious visions into shipped reality.",
+  },
+  {
+    name: "Pushpak Goel",
     role: "Founder & Lead Developer",
     oneLiner: "Obsessed with shipping fast and building things that matter.",
   },
   {
-    name: "Design Lead",
-    role: "UI/UX Design",
-    oneLiner: "Believes every pixel has a purpose.",
-  },
-  {
-    name: "Backend Engineer",
+    name: "Abhinav Rastogi",
     role: "Backend & Infrastructure",
     oneLiner: "If it scales, it ships.",
   },
   {
-    name: "AI Engineer",
-    role: "AI & Machine Learning",
-    oneLiner: "Making machines understand humans, not the other way around.",
-  },
+    name: "Mohak Lakra",
+    role: "UI/UX Design",
+    oneLiner: "Believes every pixel has a purpose.",
+  }
 ];
 
 export const VALUES: Value[] = [
