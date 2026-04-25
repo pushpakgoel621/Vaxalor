@@ -14,7 +14,9 @@ import type { Project, ProjectFilter } from "@/types";
 const FILTER_MAP: Record<string, string | undefined> = {
   All: undefined,
   Websites: "Website",
+  Design: "Design",
   Mobile: "Mobile",
+  CRM: "CRM",
   AI: "AI",
   MVP: "MVP",
 };

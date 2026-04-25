@@ -9,7 +9,7 @@ interface ProjectEditorProps {
   slug?: string;
 }
 
-const CATEGORIES = ["Website", "Mobile", "AI", "MVP", "CRM"];
+const CATEGORIES = ["Website", "Design", "Mobile", "AI", "MVP", "CRM"];
 const PATTERNS = ["dots", "grid", "waves", "circles"];
 const GRADIENTS = [
   "from-signal-tint via-signal-wash to-signal/20",

@@ -438,9 +438,29 @@ export const PROJECTS: Project[] = [
     pattern: "circles",
     conceptProject: true,
   },
+  {
+    slug: "brand-identity-vaxalor",
+    title: "Vaxalor Branding",
+    hook: "A premium digital agency needed a brand identity that matched their code quality.",
+    category: "Design",
+    description:
+      "A complete brand identity system including logo design, color palette, typography selection, and social media templates.",
+    challenge:
+      "Creating a brand that feels high-end, fast, and reliable while standing out in a crowded market of digital agencies.",
+    solution:
+      "We designed a minimalist, signal-blue aesthetic with technical typography and glassmorphic elements to convey speed and premium quality.",
+    result:
+      "A cohesive brand identity that perfectly communicates 'Building digital products with soul'.",
+    timeline: "Shipped in 7 days",
+    year: "2026",
+    techStack: ["Figma", "Illustrator", "Photoshop"],
+    gradient: "from-ink-500 via-canvas-alt to-signal-wash/60",
+    pattern: "grid",
+    conceptProject: true,
+  },
 ];
 
-export const PROJECT_FILTERS = ["All", "Websites", "Mobile", "AI", "MVP"] as const;
+export const PROJECT_FILTERS = ["All", "Websites", "Design", "Mobile", "CRM", "AI", "MVP"] as const;
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {

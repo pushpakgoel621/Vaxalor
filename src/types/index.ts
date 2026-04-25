@@ -44,7 +44,7 @@ export interface Project {
   slug: string;
   title: string;
   hook: string;
-  category: "Website" | "Mobile" | "AI" | "MVP" | "CRM";
+  category: "Website" | "Mobile" | "AI" | "MVP" | "CRM" | "Design";
   description: string;
   challenge: string;
   solution: string;
@@ -59,7 +59,7 @@ export interface Project {
   thumbnailUrl?: string | null;
 }
 
-export type ProjectFilter = "All" | "Websites" | "Mobile" | "AI" | "MVP";
+export type ProjectFilter = "All" | "Websites" | "Design" | "Mobile" | "CRM" | "AI" | "MVP";
 
 export interface TeamMember {
   name: string;
