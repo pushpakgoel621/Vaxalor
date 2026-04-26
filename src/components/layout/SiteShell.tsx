@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
-import { CustomCursor } from "@/components/global/CustomCursor";
 import { ChatbotWidget } from "@/components/global/ChatbotWidget";
 import { ScrollProgress } from "@/components/global/ScrollProgress";
 import { EasterEggs } from "@/components/global/EasterEggs";
@@ -29,7 +28,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <CustomCursor />
       <ScrollProgress />
       <SmoothScrollProvider>
         <Navbar />

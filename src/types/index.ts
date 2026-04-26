@@ -15,6 +15,19 @@ export interface Service {
   highlighted?: boolean;
 }
 
+export interface ServiceOffering {
+  title: string;
+  items: string[];
+}
+
+export interface ServiceCatalogCategory {
+  pillar: string;
+  icon: string;
+  description: string;
+  categories: ServiceOffering[];
+}
+
+
 export interface ProcessStep {
   number: string;
   title: string;

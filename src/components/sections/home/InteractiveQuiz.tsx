@@ -9,7 +9,7 @@ import { ScrollReveal } from "@/components/animation/ScrollReveal";
 const STEPS = [
   {
     question: "What are you looking to build?",
-    options: ["Website", "Mobile App", "AI Solution", "MVP", "Not sure yet"],
+    options: ["Website or App", "AI or Automation", "Design & Branding", "Marketing & Growth", "Strategy & Consulting", "Not sure yet"],
   },
   {
     question: "What's your timeline?",
@@ -24,18 +24,39 @@ const STEPS = [
 function getRecommendation(answers: string[]): { title: string; description: string } {
   const [type, timeline] = answers;
 
-  if (type === "MVP" || type === "Not sure yet") {
+  if (type === "Not sure yet") {
     return {
-      title: "We'd suggest starting with an MVP",
+      title: "Let's figure it out together",
       description:
-        "And you qualify for our 50% discount. Test your idea fast, validate with real users, and iterate.",
+        "Book a free strategy call and we'll map out exactly what you need — no pressure, no jargon.",
     };
   }
-  if (type === "AI Solution") {
+  if (type === "AI or Automation") {
     return {
-      title: "An AI solution sounds perfect",
+      title: "AI & Automation — smart choice",
       description:
-        "We can build a custom chatbot or AI integration that handles your workload 24/7.",
+        "From chatbots to workflow automation, we'll build intelligent systems that save you time and scale effortlessly.",
+    };
+  }
+  if (type === "Design & Branding") {
+    return {
+      title: "Let's make your brand unforgettable",
+      description:
+        "UI/UX, branding, motion graphics — we'll craft a visual identity that turns heads and builds trust.",
+    };
+  }
+  if (type === "Marketing & Growth") {
+    return {
+      title: "Growth is our middle name",
+      description:
+        "SEO, paid ads, social media — we'll build a data-driven marketing engine that actually moves the needle.",
+    };
+  }
+  if (type === "Strategy & Consulting") {
+    return {
+      title: "Expert guidance, zero fluff",
+      description:
+        "From pitch decks to GTM strategy, we'll help you navigate the complexities of building a digital business.",
     };
   }
   if (timeline === "ASAP") {
@@ -46,9 +67,9 @@ function getRecommendation(answers: string[]): { title: string; description: str
     };
   }
   return {
-    title: `A ${type?.toLowerCase() || "custom project"} — great choice`,
+    title: "A custom build — great choice",
     description:
-      "We'll design and build it from scratch, tailored to your business. No templates.",
+      "We'll design and build it from scratch, tailored to your business. No templates, no shortcuts.",
   };
 }
 

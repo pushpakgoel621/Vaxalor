@@ -11,8 +11,8 @@ export function ServicesHero() {
         <ScrollReveal>
           <SectionHeading
             eyebrow="Our services"
-            heading="Everything you need to go digital."
-            subheading="From a simple website to a full AI-powered platform — we build it all."
+            heading="Everything your business needs to grow."
+            subheading="Technology. Design. Marketing. Strategy. All under one roof — so you never have to juggle vendors again."
             headingAs="h1"
           />
         </ScrollReveal>

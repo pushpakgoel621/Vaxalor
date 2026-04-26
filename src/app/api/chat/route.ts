@@ -10,7 +10,7 @@ About Vaxalor:
 - MVP development gets 50% off
 - Our tech stack: React, Next.js, Node.js, Python, Flutter, PostgreSQL, AWS, OpenAI
 - We serve startups and small businesses worldwide
-- Contact email: hello@vaxalor.com
+- Contact email: official@vaxalor.com
 
 Services & Rough Pricing:
 - Website Development: Custom design, SEO-ready, CMS integration. Starting from $3K
@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
 
       try {
         await saveChatMessage(sessionId, "assistant", reply);
-      } catch {}
+      } catch { }
 
       return NextResponse.json({ reply });
     }
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
     // Save assistant reply to DB
     try {
       await saveChatMessage(sessionId, "assistant", reply);
-    } catch {}
+    } catch { }
 
     return NextResponse.json({ reply });
   } catch (error: unknown) {
@@ -139,7 +139,7 @@ function getFallbackResponse(message: string): string {
     return "Hey! 👋 Great to have you here. I can help you learn about our services, pricing, or process. What are you looking to build?";
   }
   if (lower.includes("email") || lower.includes("contact") || lower.includes("talk") || lower.includes("call")) {
-    return "You can reach us at hello@vaxalor.com, or fill out the form on our Contact page. We reply within 24 hours — usually much faster!";
+    return "You can reach us at official@vaxalor.com, or fill out the form on our Contact page. We reply within 24 hours — usually much faster!";
   }
   if (lower.includes("thank")) {
     return "You're welcome! If you need anything else, I'm right here. Or head to /contact to start a project conversation. 🚀";

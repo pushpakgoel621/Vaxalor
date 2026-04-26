@@ -1,8 +1,8 @@
-import type { NavLink, Service, ProcessStep, Testimonial, Stat, SocialLink, Project, TeamMember, Value } from "@/types";
+import type { NavLink, Service, ServiceCatalogCategory, ProcessStep, Testimonial, Stat, SocialLink, Project, TeamMember, Value } from "@/types";
 
 export const SITE_NAME = "Vaxalor";
 export const SITE_URL = "https://vaxalor.com";
-export const SITE_EMAIL = "hello@vaxalor.com";
+export const SITE_EMAIL = "official@vaxalor.com";
 export const SITE_TAGLINE = "We build digital products with soul.";
 
 export const NAV_LINKS: NavLink[] = [
@@ -184,14 +184,181 @@ export const TECH_STACK = [
 ];
 
 export const SERVICE_OPTIONS = [
-  "Website",
-  "Mobile App",
-  "AI Solution",
-  "ERP/CRM",
-  "MVP",
-  "SaaS",
-  "Design",
+  "Web & App Development",
+  "Enterprise Systems (SaaS/ERP/CRM)",
+  "Backend & Integration",
+  "AI & Machine Learning",
+  "Automation & Data",
+  "UI/UX Design",
+  "Visual Branding",
+  "Video & Motion",
+  "SEO & Content",
+  "Growth Marketing & Ads",
+  "Social Media & Outreach",
+  "Founder & Startup Support",
+  "Advisory & Consulting",
+  "MVP Development",
   "Other",
+];
+
+export const SERVICE_CATALOG: ServiceCatalogCategory[] = [
+  {
+    pillar: "Technology & Software Development",
+    icon: "code",
+    description: "From corporate websites to enterprise-grade SaaS — we engineer the digital backbone of your business.",
+    categories: [
+      {
+        title: "Web & App Development",
+        items: [
+          "Corporate Websites",
+          "Mobile Apps (Native/Hybrid)",
+          "Full-Stack JS (MERN)",
+          "Progressive Web Apps (PWA)",
+          "E-commerce Storefronts (Shopify/Magento)",
+        ],
+      },
+      {
+        title: "Enterprise Systems",
+        items: [
+          "SaaS Product Architecture",
+          "ERP Systems",
+          "CRM Portals",
+          "Custom Business Management Tools",
+        ],
+      },
+      {
+        title: "Backend & Integration",
+        items: [
+          "Custom API Development",
+          "Database Architecture (SQL/Vector)",
+          "Legacy System Modernization",
+          "No-Code/Low-Code Development",
+        ],
+      },
+    ],
+  },
+  {
+    pillar: "Data, AI & Automation",
+    icon: "brain",
+    description: "Harness the power of artificial intelligence and data-driven automation to work smarter, not harder.",
+    categories: [
+      {
+        title: "Artificial Intelligence",
+        items: [
+          "AI Chatbots",
+          "LLM Fine-tuning",
+          "RAG Pipelines",
+          "AI Visuals & Creative Assets",
+          "Machine Learning Models",
+        ],
+      },
+      {
+        title: "Automation & Data",
+        items: [
+          "Workflow Automation (n8n/Zapier)",
+          "CRM Data Hygiene & Migration",
+          "Business Intelligence Dashboards",
+          "Predictive Analytics",
+        ],
+      },
+    ],
+  },
+  {
+    pillar: "Design & Creative Services",
+    icon: "palette",
+    description: "Beautiful design that doesn't just look good — it communicates, converts, and builds lasting brand loyalty.",
+    categories: [
+      {
+        title: "User Experience",
+        items: [
+          "UI/UX Design (Figma)",
+          "Wireframing & Prototyping",
+          "User Research",
+          "Digital Accessibility (WCAG) Auditing",
+        ],
+      },
+      {
+        title: "Visual Branding",
+        items: [
+          "Logo Design",
+          "Brand Identity & Strategy",
+          "Digital Graphics (Social/Ad Assets)",
+          "Interactive Content (Quizzes/Calculators)",
+        ],
+      },
+      {
+        title: "Video & Motion",
+        items: [
+          "Motion Graphics",
+          "High-End Video/Reel Production",
+          "Short-Form Video (TikTok/Reels)",
+          "Podcast Production",
+          "AR/VR Filter Design",
+        ],
+      },
+    ],
+  },
+  {
+    pillar: "Digital Marketing & Growth",
+    icon: "rocket",
+    description: "Data-driven marketing that puts your brand in front of the right people at the right time.",
+    categories: [
+      {
+        title: "Search Optimization",
+        items: [
+          "Technical SEO",
+          "Content Engine (Blogging/Copywriting)",
+          "Generative Engine Optimization (GEO)",
+          "Voice Search Optimization",
+          "Hyper-Local SEO",
+        ],
+      },
+      {
+        title: "Growth Marketing",
+        items: [
+          "Performance Marketing (Google/Meta Ads)",
+          "Programmatic & CTV Advertising",
+          "Affiliate Program Management",
+          "Conversion Funnel Optimization (CRO)",
+        ],
+      },
+      {
+        title: "Social & Outreach",
+        items: [
+          "Social Media Growth",
+          "Community Management (Discord/Slack)",
+          "Influencer Campaign Management",
+          "B2B Cold Outreach Systems",
+        ],
+      },
+    ],
+  },
+  {
+    pillar: "Strategy, Consulting & Support",
+    icon: "compass",
+    description: "Expert guidance for founders and businesses navigating the complexities of digital transformation.",
+    categories: [
+      {
+        title: "Founder Support",
+        items: [
+          "Startup Roadmapping",
+          "Pitch Deck Mastery",
+          "Capital/Investor Strategy",
+          "Market Intelligence",
+          "GTM (Go-To-Market) Strategy",
+        ],
+      },
+      {
+        title: "Advisory",
+        items: [
+          "Digital Transformation",
+          "Digital Reputation Management",
+          "Loyalty & Gamification Strategy",
+          "Technical Feasibility Studies",
+        ],
+      },
+    ],
+  },
 ];
 
 export const BUDGET_OPTIONS = [

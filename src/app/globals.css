@@ -165,15 +165,7 @@ body {
   pointer-events: none;
 }
 
-/* ================================================================
-   CUSTOM CURSOR (hide default on desktop)
-   ================================================================ */
 
-@media (hover: hover) and (pointer: fine) {
-  body:not(.admin-page) * {
-    cursor: none !important;
-  }
-}
 
 /* ================================================================
    CUSTOM SCROLLBAR

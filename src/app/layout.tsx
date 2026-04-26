@@ -59,11 +59,11 @@ export default function RootLayout({
               url: SITE_URL,
               logo: `${SITE_URL}/images/logo.png`,
               description: "We build custom websites, mobile apps, AI chatbots, and MVPs for startups and small businesses. 20-day delivery. Built with soul.",
-              email: "hello@vaxalor.com",
+              email: "official@vaxalor.com",
               foundingDate: "2025",
               contactPoint: {
                 "@type": "ContactPoint",
-                email: "hello@vaxalor.com",
+                email: "official@vaxalor.com",
                 contactType: "sales",
                 availableLanguage: ["English", "Hindi"],
               },

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { SERVICE_OPTIONS } from "@/lib/constants";
 
 export function EntryPopup() {
   const [show, setShow] = useState(false);
@@ -157,13 +158,9 @@ export function EntryPopup() {
                         className={`${inputClass} border-canvas-border appearance-none`}
                       >
                         <option value="">What do you need? (optional)</option>
-                        <option value="Website">Website</option>
-                        <option value="Mobile App">Mobile App</option>
-                        <option value="AI Solution">AI Solution</option>
-                        <option value="ERP/CRM">ERP/CRM</option>
-                        <option value="MVP">MVP</option>
-                        <option value="Design">Design</option>
-                        <option value="Other">Other</option>
+                        {SERVICE_OPTIONS.map((opt) => (
+                          <option key={opt} value={opt}>{opt}</option>
+                        ))}
                       </select>
                       <textarea
                         value={message}

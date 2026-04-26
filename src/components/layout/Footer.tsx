@@ -4,7 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { SITE_NAME, SITE_EMAIL, SITE_TAGLINE, NAV_LINKS, SERVICES, SOCIAL_LINKS } from "@/lib/constants";
+import { SITE_NAME, SITE_EMAIL, SITE_TAGLINE, NAV_LINKS, SERVICES, SOCIAL_LINKS, SERVICE_OPTIONS } from "@/lib/constants";
 import { IndicTexture } from "@/components/ui/IndicTexture";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 
@@ -184,13 +184,9 @@ export function Footer() {
                   className="w-full bg-ink-100 border border-ink-200 rounded-input px-4 py-2.5 text-sm text-white focus:border-signal-bright focus:outline-none transition-colors duration-200 appearance-none"
                 >
                   <option value="">What do you need?</option>
-                  <option value="Website">Website</option>
-                  <option value="Mobile App">Mobile App</option>
-                  <option value="AI Solution">AI Solution</option>
-                  <option value="ERP/CRM">ERP/CRM</option>
-                  <option value="MVP">MVP</option>
-                  <option value="Design">Design</option>
-                  <option value="Other">Other</option>
+                  {SERVICE_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
                 </select>
                 <textarea
                   value={footerMessage}

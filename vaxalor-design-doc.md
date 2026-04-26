@@ -746,7 +746,7 @@ Same condensed CTA as Services page.
 [Title: "Let's build                         Name
  something together."]                       Email
                                              Phone
-[Email: hello@vaxalor.com]                   Service (dropdown)
+[Email: official@vaxalor.com]                   Service (dropdown)
 [Response time: "Within 24 hours"]           Budget Range (dropdown)
                                              Tell us about your project
 [Social Links: LinkedIn, Twitter, etc.]      

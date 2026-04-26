@@ -81,13 +81,13 @@ export function ChatbotWidget() {
       } else {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", text: "Sorry, something went wrong. Try again or reach us at hello@vaxalor.com" },
+          { role: "assistant", text: "Sorry, something went wrong. Try again or reach us at official@vaxalor.com" },
         ]);
       }
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", text: "Connection issue. You can reach us directly at hello@vaxalor.com" },
+        { role: "assistant", text: "Connection issue. You can reach us directly at official@vaxalor.com" },
       ]);
     } finally {
       setIsTyping(false);
@@ -116,9 +116,8 @@ export function ChatbotWidget() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed z-50 right-6 bottom-6 md:right-8 md:bottom-8 w-16 h-16 rounded-full bg-gradient-to-br from-signal to-signal-bright hover:from-signal-hover hover:to-signal text-white flex items-center justify-center shadow-lg shadow-signal/30 transition-all duration-200 hover:scale-105 overflow-visible ${
-          isOpen ? "" : "animate-chatbot-pulse"
-        }`}
+        className={`fixed z-50 right-6 bottom-6 md:right-8 md:bottom-8 w-16 h-16 rounded-full bg-gradient-to-br from-signal to-signal-bright hover:from-signal-hover hover:to-signal text-white flex items-center justify-center shadow-lg shadow-signal/30 transition-all duration-200 hover:scale-105 overflow-visible ${isOpen ? "" : "animate-chatbot-pulse"
+          }`}
         data-cursor="cta"
         aria-label={isOpen ? "Close chat" : "Open chat"}
       >
@@ -191,11 +190,10 @@ export function ChatbotWidget() {
                     </div>
                   )}
                   <div
-                    className={`max-w-[78%] px-4 py-2.5 text-sm leading-relaxed ${
-                      msg.role === "user"
+                    className={`max-w-[78%] px-4 py-2.5 text-sm leading-relaxed ${msg.role === "user"
                         ? "bg-signal text-white rounded-2xl rounded-br-md"
                         : "bg-canvas-alt border border-canvas-border text-ink-200 rounded-2xl rounded-bl-md"
-                    }`}
+                      }`}
                   >
                     {msg.text}
                   </div>

@@ -38,7 +38,7 @@ Allowed: Yes
 # - API endpoints (/api)
 # - User-submitted data
 
-# Contact: hello@vaxalor.com
+# Contact: official@vaxalor.com
 # Last updated: ${new Date().toISOString().split("T")[0]}
 `;
 

@@ -170,7 +170,7 @@ Each submission is tagged with its source:
 Name, email, phone, service interest, budget range, message, source, timestamp.
 
 ### Email Notifications
-If `RESEND_API_KEY` is configured, you'll receive an email at `hello@vaxalor.com` for every submission.
+If `RESEND_API_KEY` is configured, you'll receive an email at `official@vaxalor.com` for every submission.
 
 ---
 
@@ -377,7 +377,7 @@ GPT-4o-mini costs ~$0.01-0.03 per conversation. At 100 conversations/day, that's
 - Submissions tagged as source: `popup`
 
 ### Email Notifications
-Every form submission sends an email to `hello@vaxalor.com` (if Resend is configured).
+Every form submission sends an email to `official@vaxalor.com` (if Resend is configured).
 
 ---
 
