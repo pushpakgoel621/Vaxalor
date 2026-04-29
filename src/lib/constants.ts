@@ -632,14 +632,14 @@ export const PROJECT_FILTERS = ["All", "Websites", "Design", "Mobile", "CRM", "A
 export const LEADERSHIP_MEMBERS: LeadershipMember[] = [
   {
     name: "Anshul Shekhar",
-    roleBadge: "CEO",
+    roleBadge: "Founder & CEO",
     description: "I lead go-to-market strategy, brand partnerships, and growth initiatives at Vaxalor. My work centers on building scalable acquisition systems that accelerate testing, lower customer acquisition costs, and improve campaign velocity.",
     linkedinUrl: "https://www.linkedin.com/in/anshul-shekhar-/",
     image: "/images/team/anshul.png",
   },
   {
     name: "Pushpak Goel",
-    roleBadge: "CIO",
+    roleBadge: "Co-founder & CIO",
     description: "I lead Vaxalor's product vision and long-term strategy, building digital products with soul that enable brands to scale. My focus is on combining automation, creative workflows, and high-performance engineering into one unified system.",
     linkedinUrl: "https://www.linkedin.com/in/pushpakgoel56/",
     image: "/images/team/pushpak.png",
