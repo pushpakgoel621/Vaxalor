@@ -668,7 +668,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "Charu Lata",
-    role: "Software Engineer",
+    role: "Social Media & Content Marketing",
     oneLiner: "Writing clean, efficient, and scalable code.",
     image: "/images/team/charu.jpg",
   }
