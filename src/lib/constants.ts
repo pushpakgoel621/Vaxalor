@@ -1,4 +1,4 @@
-import type { NavLink, Service, ServiceCatalogCategory, ProcessStep, Testimonial, Stat, SocialLink, Project, TeamMember, Value } from "@/types";
+import type { NavLink, Service, ServiceCatalogCategory, ProcessStep, Testimonial, Stat, SocialLink, Project, TeamMember, LeadershipMember, Value } from "@/types";
 
 export const SITE_NAME = "Vaxalor";
 export const SITE_URL = "https://vaxalor.com";
@@ -629,17 +629,29 @@ export const PROJECTS: Project[] = [
 
 export const PROJECT_FILTERS = ["All", "Websites", "Design", "Mobile", "CRM", "AI", "MVP"] as const;
 
-export const TEAM_MEMBERS: TeamMember[] = [
+export const LEADERSHIP_MEMBERS: LeadershipMember[] = [
   {
     name: "Anshul Shekhar",
-    role: "CEO and Co-founder",
-    oneLiner: "Turning ambitious visions into shipped reality.",
+    roleBadge: "CEO",
+    description: "I lead go-to-market strategy, brand partnerships, and growth initiatives at Vaxalor. My work centers on building scalable acquisition systems that accelerate testing, lower customer acquisition costs, and improve campaign velocity.",
+    linkedinUrl: "https://www.linkedin.com/in/anshul-shekhar-/",
   },
   {
     name: "Pushpak Goel",
-    role: "Founder & Lead Developer",
-    oneLiner: "Obsessed with shipping fast and building things that matter.",
+    roleBadge: "CEO",
+    description: "I lead Vaxalor's product vision and long-term strategy, building digital products with soul that enable brands to scale. My focus is on combining automation, creative workflows, and high-performance engineering into one unified system.",
+    linkedinUrl: "https://www.linkedin.com/in/pushpakgoel56/",
+
   },
+  {
+    name: "Durgesh Chandra",
+    roleBadge: "Business Head",
+    description: "I oversee Vaxalor's daily Business Development processes, ensuring that our projects are delivered on time, within budget, and to the highest quality standards. My focus is on scaling our internal processes and team capabilities.",
+    linkedinUrl: "https://www.linkedin.com/in/durgesh-chandra-67b9aa192/",
+  }
+];
+
+export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "Abhinav Rastogi",
     role: "Backend & Infrastructure",
@@ -649,6 +661,11 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Mohak Lakra",
     role: "UI/UX Design",
     oneLiner: "Believes every pixel has a purpose.",
+  },
+  {
+    name: "Charu Lata",
+    role: "Software Engineer",
+    oneLiner: "Writing clean, efficient, and scalable code.",
   }
 ];
 

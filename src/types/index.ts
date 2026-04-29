@@ -74,6 +74,14 @@ export interface Project {
 
 export type ProjectFilter = "All" | "Websites" | "Design" | "Mobile" | "CRM" | "AI" | "MVP";
 
+export interface LeadershipMember {
+  name: string;
+  roleBadge: string;
+  description: string;
+  linkedinUrl: string;
+  image?: string;
+}
+
 export interface TeamMember {
   name: string;
   role: string;
