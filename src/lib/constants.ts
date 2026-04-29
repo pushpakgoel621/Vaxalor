@@ -638,7 +638,7 @@ export const LEADERSHIP_MEMBERS: LeadershipMember[] = [
   },
   {
     name: "Pushpak Goel",
-    roleBadge: "CEO",
+    roleBadge: "CIO",
     description: "I lead Vaxalor's product vision and long-term strategy, building digital products with soul that enable brands to scale. My focus is on combining automation, creative workflows, and high-performance engineering into one unified system.",
     linkedinUrl: "https://www.linkedin.com/in/pushpakgoel56/",
 
