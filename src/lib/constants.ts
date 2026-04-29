@@ -649,7 +649,7 @@ export const LEADERSHIP_MEMBERS: LeadershipMember[] = [
     roleBadge: "Business Head",
     description: "I oversee Vaxalor's daily Business Development processes, ensuring that our projects are delivered on time, within budget, and to the highest quality standards. My focus is on scaling our internal processes and team capabilities.",
     linkedinUrl: "https://www.linkedin.com/in/durgesh-chandra-67b9aa192/",
-    image: "/images/team/durgesh.png",
+    image: "/images/team/durgesh.jpg",
   }
 ];
 
@@ -670,7 +670,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Charu Lata",
     role: "Software Engineer",
     oneLiner: "Writing clean, efficient, and scalable code.",
-    image: "/images/team/charu.png",
+    image: "/images/team/charu.jpg",
   }
 ];
 
