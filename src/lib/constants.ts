@@ -635,19 +635,21 @@ export const LEADERSHIP_MEMBERS: LeadershipMember[] = [
     roleBadge: "CEO",
     description: "I lead go-to-market strategy, brand partnerships, and growth initiatives at Vaxalor. My work centers on building scalable acquisition systems that accelerate testing, lower customer acquisition costs, and improve campaign velocity.",
     linkedinUrl: "https://www.linkedin.com/in/anshul-shekhar-/",
+    image: "/images/team/anshul.png",
   },
   {
     name: "Pushpak Goel",
     roleBadge: "CIO",
     description: "I lead Vaxalor's product vision and long-term strategy, building digital products with soul that enable brands to scale. My focus is on combining automation, creative workflows, and high-performance engineering into one unified system.",
     linkedinUrl: "https://www.linkedin.com/in/pushpakgoel56/",
-
+    image: "/images/team/pushpak.png",
   },
   {
     name: "Durgesh Chandra",
     roleBadge: "Business Head",
     description: "I oversee Vaxalor's daily Business Development processes, ensuring that our projects are delivered on time, within budget, and to the highest quality standards. My focus is on scaling our internal processes and team capabilities.",
     linkedinUrl: "https://www.linkedin.com/in/durgesh-chandra-67b9aa192/",
+    image: "/images/team/durgesh.png",
   }
 ];
 
@@ -656,16 +658,19 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Abhinav Rastogi",
     role: "Backend & Infrastructure",
     oneLiner: "If it scales, it ships.",
+    image: "/images/team/abhinav.png",
   },
   {
     name: "Mohak Lakra",
     role: "UI/UX Design",
     oneLiner: "Believes every pixel has a purpose.",
+    image: "/images/team/mohak.png",
   },
   {
     name: "Charu Lata",
     role: "Software Engineer",
     oneLiner: "Writing clean, efficient, and scalable code.",
+    image: "/images/team/charu.png",
   }
 ];
 

@@ -5,6 +5,7 @@ import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { StaggerChildren, StaggerItem } from "@/components/animation/StaggerChildren";
 import { TEAM_MEMBERS, LEADERSHIP_MEMBERS } from "@/lib/constants";
 import { SocialIcon } from "@/components/ui/SocialIcon";
+import Image from "next/image";
 
 export function TeamSection() {
   return (
@@ -29,15 +30,21 @@ export function TeamSection() {
               >
                 {/* Avatar */}
                 <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 rounded-full overflow-hidden bg-gradient-to-br from-ink via-ink-100 to-ink-200 flex items-center justify-center relative shadow-sm border-4 border-white outline outline-1 outline-canvas-border">
-                  {/* Dot pattern */}
-                  <svg className="absolute inset-0 w-full h-full opacity-[0.05]" xmlns="http://www.w3.org/2000/svg">
-                    {Array.from({ length: 36 }).map((_, j) => (
-                      <circle key={j} cx={`${((j % 6) * 16) + 10}%`} cy={`${(Math.floor(j / 6) * 16) + 10}%`} r="1.5" fill="white" />
-                    ))}
-                  </svg>
-                  <span className="text-white/80 text-3xl sm:text-4xl font-heading font-bold select-none relative z-10">
-                    {leader.name.split(" ").map((n) => n[0]).join("")}
-                  </span>
+                  {leader.image ? (
+                    <Image src={leader.image} alt={leader.name} fill className="object-cover" />
+                  ) : (
+                    <>
+                      {/* Dot pattern */}
+                      <svg className="absolute inset-0 w-full h-full opacity-[0.05]" xmlns="http://www.w3.org/2000/svg">
+                        {Array.from({ length: 36 }).map((_, j) => (
+                          <circle key={j} cx={`${((j % 6) * 16) + 10}%`} cy={`${(Math.floor(j / 6) * 16) + 10}%`} r="1.5" fill="white" />
+                        ))}
+                      </svg>
+                      <span className="text-white/80 text-3xl sm:text-4xl font-heading font-bold select-none relative z-10">
+                        {leader.name.split(" ").map((n) => n[0]).join("")}
+                      </span>
+                    </>
+                  )}
                 </div>
 
                 {/* Details */}
@@ -76,19 +83,25 @@ export function TeamSection() {
             <StaggerItem key={member.name}>
               <div className="text-center group">
                 {/* Avatar */}
-                <div className="w-full aspect-square rounded-card overflow-hidden mb-5 transition-all duration-400 group-hover:shadow-[0_4px_24px_rgba(29,92,191,0.15)]">
+                <div className="w-full aspect-square rounded-card overflow-hidden mb-5 transition-all duration-400 group-hover:shadow-[0_4px_24px_rgba(29,92,191,0.15)] relative">
                   <div className="w-full h-full bg-gradient-to-br from-ink via-ink-100 to-ink-200 flex items-center justify-center relative">
-                    {/* Dot pattern */}
-                    <svg className="absolute inset-0 w-full h-full opacity-[0.05]" xmlns="http://www.w3.org/2000/svg">
-                      {Array.from({ length: 36 }).map((_, j) => (
-                        <circle key={j} cx={`${((j % 6) * 16) + 10}%`} cy={`${(Math.floor(j / 6) * 16) + 10}%`} r="1.5" fill="white" />
-                      ))}
-                    </svg>
-                    <span className="text-white/80 text-4xl font-heading font-bold select-none group-hover:text-signal-bright group-hover:scale-110 transition-all duration-400 relative z-10">
-                      {member.name.split(" ").map((n) => n[0]).join("")}
-                    </span>
+                    {member.image ? (
+                      <Image src={member.image} alt={member.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                    ) : (
+                      <>
+                        {/* Dot pattern */}
+                        <svg className="absolute inset-0 w-full h-full opacity-[0.05]" xmlns="http://www.w3.org/2000/svg">
+                          {Array.from({ length: 36 }).map((_, j) => (
+                            <circle key={j} cx={`${((j % 6) * 16) + 10}%`} cy={`${(Math.floor(j / 6) * 16) + 10}%`} r="1.5" fill="white" />
+                          ))}
+                        </svg>
+                        <span className="text-white/80 text-4xl font-heading font-bold select-none group-hover:text-signal-bright group-hover:scale-110 transition-all duration-400 relative z-10">
+                          {member.name.split(" ").map((n) => n[0]).join("")}
+                        </span>
+                      </>
+                    )}
                     {/* Bottom accent line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-signal-bright to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-400" />
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-signal-bright to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-400 z-20" />
                   </div>
                 </div>
                 <h3 className="text-ink text-base font-semibold">{member.name}</h3>
