@@ -668,8 +668,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "Charu Lata",
-    role: "Social Media & Content Marketing",
-    oneLiner: "Writing clean, efficient, and scalable code.",
+    role: "Creative Head",
+    oneLiner: "Turns ideas into reality.",
     image: "/images/team/charu.jpg",
   }
 ];
