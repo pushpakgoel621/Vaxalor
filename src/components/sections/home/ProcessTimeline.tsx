@@ -71,12 +71,12 @@ export function ProcessTimeline() {
     offset: ["start 0.6", "end 0.3"],
   });
 
-  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (v < 0.1) setActiveStep(0);
-    else if (v < 0.35) setActiveStep(1);
-    else if (v < 0.65) setActiveStep(2);
+    if (v < 0.2) setActiveStep(0);
+    else if (v < 0.45) setActiveStep(1);
+    else if (v < 0.75) setActiveStep(2);
     else setActiveStep(3);
   });
 
@@ -103,138 +103,108 @@ export function ProcessTimeline() {
           />
         </ScrollReveal>
 
-        <div className="mt-16">
-          {/* Progress bar — desktop */}
-          <div className="hidden md:block relative mb-12">
-            <div className="h-[3px] bg-canvas-border rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-signal rounded-full origin-left"
-                style={{ width: progressWidth }}
-              />
-            </div>
-            {/* Step markers */}
-            <div className="flex justify-between -mt-[7px]">
-              {PROCESS_STEPS.map((step, i) => (
-                <div key={step.number} className="flex flex-col items-center">
-                  <motion.div
-                    className="w-[14px] h-[14px] rounded-full border-2 transition-all duration-300"
-                    animate={{
-                      borderColor: i <= activeStep ? "var(--color-signal)" : "var(--color-canvas-border)",
-                      backgroundColor: i <= activeStep ? "var(--color-signal)" : "var(--color-canvas-alt)",
-                      scale: i === activeStep ? 1.3 : 1,
-                    }}
-                  />
-                  <span
-                    className={`text-[10px] font-mono mt-2 transition-colors duration-300 ${
-                      i <= activeStep ? "text-signal" : "text-ink-400"
-                    }`}
-                  >
-                    {DAY_RANGES[i]}
-                  </span>
-                </div>
-              ))}
-            </div>
+        <div className="mt-16 max-w-4xl mx-auto relative">
+          {/* Vertical Progress line background */}
+          <div className="absolute top-[39px] bottom-[39px] left-[23px] md:left-[39px] w-[2px] bg-canvas-border overflow-hidden">
+            <motion.div
+              className="w-full bg-signal origin-top"
+              style={{ height: progressHeight }}
+            />
           </div>
 
-          {/* Cards — desktop */}
-          <div className="hidden md:grid grid-cols-4 gap-5">
+          <div className="space-y-6 md:space-y-12">
             {PROCESS_STEPS.map((step, i) => {
               const isActive = i <= activeStep;
               const isCurrent = i === activeStep;
+              
               return (
-                <motion.div
-                  key={step.number}
-                  className={`relative p-6 rounded-card border transition-colors duration-500 ${
-                    isActive
-                      ? "bg-canvas-white border-signal/20"
-                      : "bg-canvas-alt/50 border-canvas-border"
-                  }`}
-                  animate={{
-                    y: isCurrent ? -6 : 0,
-                    boxShadow: isCurrent
-                      ? "0 8px 30px rgba(29, 92, 191, 0.1)"
-                      : "0 0px 0px rgba(0,0,0,0)",
-                  }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {/* Icon */}
-                  <div
-                    className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 ${
-                      isActive
-                        ? "bg-signal-tint border border-signal/20"
-                        : "bg-canvas-alt border border-canvas-border"
-                    }`}
-                  >
-                    {STEP_ICONS[i](isActive)}
+                <div key={step.number} className="relative flex items-stretch gap-4 md:gap-8 group">
+                  {/* Timeline Marker */}
+                  <div className="relative z-10 flex flex-col items-center justify-start pt-8 shrink-0 w-12 md:w-20">
+                    <motion.div
+                      className="w-[14px] h-[14px] rounded-full border-2 transition-all duration-300"
+                      animate={{
+                        borderColor: isActive ? "var(--color-signal)" : "var(--color-canvas-border)",
+                        backgroundColor: isActive ? "var(--color-signal)" : "var(--color-canvas-alt)",
+                        scale: isCurrent ? 1.3 : 1,
+                      }}
+                    />
+                    <span
+                      className={`text-[10px] md:text-xs font-mono mt-3 transition-colors duration-300 text-center ${
+                        isActive ? "text-signal" : "text-ink-400"
+                      }`}
+                    >
+                      {DAY_RANGES[i]}
+                    </span>
                   </div>
 
-                  <p
-                    className={`text-xs font-semibold font-mono uppercase tracking-wider mb-2 transition-colors duration-500 ${
-                      isActive ? "text-signal" : "text-ink-400"
+                  {/* Card */}
+                  <motion.div
+                    className={`flex-1 relative p-6 md:p-8 rounded-card border transition-colors duration-500 flex flex-col md:flex-row items-start gap-5 md:gap-8 ${
+                      isActive
+                        ? "bg-canvas-white border-signal/20"
+                        : "bg-canvas-alt/50 border-canvas-border"
                     }`}
-                  >
-                    Step {step.number}
-                  </p>
-
-                  <h3
-                    className={`text-[20px] font-semibold font-heading mb-2 transition-colors duration-500 ${
-                      isActive ? "text-ink" : "text-ink-300"
-                    }`}
-                  >
-                    {step.title}
-                  </h3>
-
-                  <motion.p
-                    className="text-sm leading-relaxed"
                     animate={{
-                      color: isActive ? "var(--color-ink-200)" : "var(--color-ink-400)",
-                      opacity: isActive ? 1 : 0.6,
+                      x: isCurrent ? -6 : 0,
+                      boxShadow: isCurrent
+                        ? "0 8px 30px rgba(29, 92, 191, 0.1)"
+                        : "0 0px 0px rgba(0,0,0,0)",
                     }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    {step.description}
-                  </motion.p>
+                    {/* Icon */}
+                    <div
+                      className={`w-14 h-14 md:w-16 md:h-16 shrink-0 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                        isActive
+                          ? "bg-signal-tint border border-signal/20"
+                          : "bg-canvas-alt border border-canvas-border"
+                      }`}
+                    >
+                      {STEP_ICONS[i](isActive)}
+                    </div>
 
-                  {/* Current step pulse */}
-                  {isCurrent && (
-                    <motion.div
-                      className="absolute -top-1 left-8 w-2 h-2 rounded-full bg-signal"
-                      animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                  )}
-                </motion.div>
+                    <div className="flex-1">
+                      <p
+                        className={`text-xs font-semibold font-mono uppercase tracking-wider mb-2 transition-colors duration-500 ${
+                          isActive ? "text-signal" : "text-ink-400"
+                        }`}
+                      >
+                        Step {step.number}
+                      </p>
+
+                      <h3
+                        className={`text-[20px] md:text-2xl font-semibold font-heading mb-3 transition-colors duration-500 ${
+                          isActive ? "text-ink" : "text-ink-300"
+                        }`}
+                      >
+                        {step.title}
+                      </h3>
+
+                      <motion.p
+                        className="text-sm md:text-base leading-relaxed"
+                        animate={{
+                          color: isActive ? "var(--color-ink-200)" : "var(--color-ink-400)",
+                          opacity: isActive ? 1 : 0.6,
+                        }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        {step.description}
+                      </motion.p>
+                    </div>
+
+                    {/* Current step pulse (visible on desktop) */}
+                    {isCurrent && (
+                      <motion.div
+                        className="absolute top-1/2 -left-[5px] -translate-y-1/2 w-2 h-2 rounded-full bg-signal hidden md:block"
+                        animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
+                    )}
+                  </motion.div>
+                </div>
               );
             })}
-          </div>
-
-          {/* Cards — mobile (vertical) */}
-          <div className="md:hidden space-y-4">
-            {PROCESS_STEPS.map((step, i) => (
-              <ScrollReveal key={step.number} delay={i * 0.1}>
-                <div className="flex gap-4">
-                  {/* Vertical line + dot */}
-                  <div className="flex flex-col items-center">
-                    <div className="w-3 h-3 rounded-full bg-signal ring-4 ring-canvas-alt shrink-0" />
-                    {i < PROCESS_STEPS.length - 1 && (
-                      <div className="w-px flex-1 bg-canvas-border mt-1" />
-                    )}
-                  </div>
-
-                  <div className="pb-8">
-                    <p className="text-signal text-xs font-semibold font-mono uppercase tracking-wider mb-1">
-                      {step.number} — {DAY_RANGES[i]}
-                    </p>
-                    <h3 className="text-ink text-[20px] font-semibold font-heading mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-ink-300 text-sm leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export function TeamSection() {
                 {/* Avatar */}
                 <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 rounded-full overflow-hidden bg-gradient-to-br from-ink via-ink-100 to-ink-200 flex items-center justify-center relative shadow-sm border-4 border-white outline outline-1 outline-canvas-border">
                   {leader.image ? (
-                    <Image src={leader.image} alt={leader.name} fill className="object-cover" />
+                    <Image src={leader.image} alt={leader.name} fill sizes="(max-width: 768px) 100px, 128px" className="object-cover" />
                   ) : (
                     <>
                       {/* Dot pattern */}
@@ -86,7 +86,7 @@ export function TeamSection() {
                 <div className="w-full aspect-square rounded-card overflow-hidden mb-5 transition-all duration-400 group-hover:shadow-[0_4px_24px_rgba(29,92,191,0.15)] relative">
                   <div className="w-full h-full bg-gradient-to-br from-ink via-ink-100 to-ink-200 flex items-center justify-center relative">
                     {member.image ? (
-                      <Image src={member.image} alt={member.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <Image src={member.image} alt={member.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     ) : (
                       <>
                         {/* Dot pattern */}

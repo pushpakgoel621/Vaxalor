@@ -665,13 +665,13 @@ export const TEAM_MEMBERS: TeamMember[] = [
     role: "UI/UX Design",
     oneLiner: "Believes every pixel has a purpose.",
     image: "/images/team/mohak.png",
-  },
-  {
-    name: "Charu Lata",
-    role: "Creative Head",
-    oneLiner: "Turns ideas into reality.",
-    image: "/images/team/charu.jpg",
   }
+  // {
+  //   name: "Charu Lata",
+  //   role: "Creative Head",
+  //   oneLiner: "Turns ideas into reality.",
+  //   image: "/images/team/charu.jpg",
+  // }
 ];
 
 export const VALUES: Value[] = [
