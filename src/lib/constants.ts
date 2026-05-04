@@ -136,18 +136,21 @@ export const TESTIMONIALS: Testimonial[] = [
       "They redesigned our entire online presence and our lead generation doubled. Best investment we've made this year.",
     authorName: "Sarah Chen",
     authorTitle: "Founder, FreshBite",
+    authorImage: "/images/testimonials/sarah.png",
   },
   {
     quote:
       "We went from idea to a working product in 18 days. The speed and quality were honestly unbelievable.",
     authorName: "James Morton",
     authorTitle: "CEO, TrackFlow",
+    authorImage: "/images/testimonials/james.png",
   },
   {
     quote:
       "The AI chatbot they built handles 80% of our support tickets now. Our team can finally focus on what matters.",
     authorName: "Priya Sharma",
     authorTitle: "COO, ShopAssist",
+    authorImage: "/images/testimonials/priya.png",
   },
 ];
 

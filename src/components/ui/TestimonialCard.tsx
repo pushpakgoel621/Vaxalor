@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface TestimonialCardProps {
   quote: string;
   authorName: string;
@@ -21,11 +23,15 @@ export function TestimonialCard({
       </blockquote>
       <div className="flex items-center gap-3">
         {authorImage ? (
-          <img
-            src={authorImage}
-            alt={authorName}
-            className="w-12 h-12 rounded-full object-cover"
-          />
+          <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
+            <Image
+              src={authorImage}
+              alt={authorName}
+              fill
+              sizes="48px"
+              className="object-cover"
+            />
+          </div>
         ) : (
           <div className="w-12 h-12 rounded-full bg-signal-wash flex items-center justify-center text-signal font-semibold text-sm">
             {authorName
