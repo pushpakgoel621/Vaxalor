@@ -97,6 +97,8 @@ export function InteractiveQuiz() {
 
   const recommendation = done ? getRecommendation(answers) : null;
 
+  return null;
+
   // return (
   //   <section className="bg-canvas-alt py-section">
   //     <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
