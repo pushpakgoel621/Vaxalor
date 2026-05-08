@@ -77,13 +77,13 @@ export function Footer() {
                   <a href="mailto:pushpak@vaxalor.com" className="hover:text-signal-bright transition-colors">pushpak@vaxalor.com</a>
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <p className="text-white text-sm font-semibold mb-1">Anshul Shekhar</p>
                 <div className="flex flex-col gap-1 text-ink-300 text-[13px]">
                   <a href="tel:+919470218939" className="hover:text-signal-bright transition-colors">+91 94702 18939</a>
                   <a href="mailto:anshul@vaxalor.com" className="hover:text-signal-bright transition-colors">anshul@vaxalor.com</a>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex gap-4 mt-6">
