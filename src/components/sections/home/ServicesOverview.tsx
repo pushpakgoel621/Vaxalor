@@ -57,21 +57,23 @@ const PILLAR_COLORS = [
 export function ServicesOverview() {
   return (
     <section className="bg-canvas py-section relative overflow-visible">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 relative">
-        <ScrollReveal>
-          <SectionHeading
-            eyebrow="What we do"
-            heading="Full-spectrum digital services"
-            subheading="Five pillars. One partner. Everything your business needs to grow."
-          />
-        </ScrollReveal>
+      <div className="max-w-[1200px] mx-auto md:px-6 lg:px-8 relative">
+        <div className="px-6 md:px-0">
+          <ScrollReveal>
+            <SectionHeading
+              eyebrow="What we do"
+              heading="Full-spectrum digital services"
+              subheading="Five pillars. One partner. Everything your business needs to grow."
+            />
+          </ScrollReveal>
+        </div>
 
-        {/* Top row: 3 cards */}
-        <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
+        {/* Top row: 3 cards — horizontal swipe on mobile */}
+        <StaggerChildren className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mt-10 md:mt-14 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide px-6 md:px-0">
           {SERVICE_CATALOG.slice(0, 3).map((pillar, i) => {
             const colors = PILLAR_COLORS[i];
             return (
-              <StaggerItem key={pillar.pillar}>
+              <StaggerItem key={pillar.pillar} className="shrink-0 w-[82%] sm:w-[60%] md:w-auto snap-start">
                 <Link
                   href="/services"
                   className={`group block ${colors.bg} border ${colors.border} rounded-card overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1 h-full`}
@@ -100,12 +102,12 @@ export function ServicesOverview() {
           })}
         </StaggerChildren>
 
-        {/* Bottom row: 2 cards centered */}
-        <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5 max-w-[800px] mx-auto">
+        {/* Bottom row: 2 cards centered — horizontal swipe on mobile */}
+        <StaggerChildren className="flex md:grid md:grid-cols-2 gap-4 md:gap-5 mt-4 md:mt-5 max-w-[800px] mx-auto overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide px-6 md:px-0">
           {SERVICE_CATALOG.slice(3).map((pillar, i) => {
             const colors = PILLAR_COLORS[i + 3];
             return (
-              <StaggerItem key={pillar.pillar}>
+              <StaggerItem key={pillar.pillar} className="shrink-0 w-[82%] sm:w-[60%] md:w-auto snap-start">
                 <Link
                   href="/services"
                   className={`group block ${colors.bg} border ${colors.border} rounded-card overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1 h-full`}

@@ -78,9 +78,9 @@ export function TeamSection() {
           </div>
         </ScrollReveal>
 
-        <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        <StaggerChildren className="flex sm:grid sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0">
           {TEAM_MEMBERS.map((member) => (
-            <StaggerItem key={member.name}>
+            <StaggerItem key={member.name} className="shrink-0 w-[70%] sm:w-auto snap-start">
               <div className="text-center group">
                 {/* Avatar */}
                 <div className="w-full aspect-square rounded-card overflow-hidden mb-5 transition-all duration-400 group-hover:shadow-[0_4px_24px_rgba(29,92,191,0.15)] relative">

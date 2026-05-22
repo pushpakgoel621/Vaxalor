@@ -38,7 +38,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-canvas-white border border-canvas-border rounded-[14px] p-8 md:p-9">
+    <div className="bg-canvas-white border border-canvas-border rounded-[14px] p-5 sm:p-7 md:p-9">
       <AnimatePresence mode="wait">
         {submitted ? (
           <motion.div

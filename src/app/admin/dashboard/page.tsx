@@ -7,12 +7,11 @@ import { AdminShell } from "@/components/admin/AdminShell";
 
 interface DashboardStats {
   blogs: number;
-  projects: number;
   submissions: number;
 }
 
 export default function AdminDashboardPage() {
-  const [stats, setStats] = useState<DashboardStats>({ blogs: 0, projects: 0, submissions: 0 });
+  const [stats, setStats] = useState<DashboardStats>({ blogs: 0, submissions: 0 });
   const [recentSubmissions, setRecentSubmissions] = useState<{ name: string; email: string; source: string; created_at: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -20,13 +19,11 @@ export default function AdminDashboardPage() {
   useEffect(() => {
     Promise.all([
       fetch("/api/blogs?all=true").then((r) => { if (r.status === 401) { router.push("/admin"); return null; } return r.json(); }),
-      fetch("/api/projects?all=true").then((r) => r.json()),
       fetch("/api/submissions").then((r) => { if (r.status === 401) return null; return r.json(); }),
     ])
-      .then(([blogsData, projectsData, subsData]) => {
+      .then(([blogsData, subsData]) => {
         setStats({
           blogs: blogsData?.blogs?.length || 0,
-          projects: projectsData?.projects?.length || 0,
           submissions: subsData?.submissions?.length || 0,
         });
         if (subsData?.submissions) {
@@ -56,7 +53,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Stats cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <Link href="/admin/blogs" className="p-5 bg-[#0A0F1A] border border-ink-200/20 rounded-xl hover:border-signal/20 transition-colors group">
           <div className="flex items-center justify-between mb-3">
             <span className="text-ink-400 text-xs uppercase tracking-wider font-medium">Blog Posts</span>
@@ -69,19 +66,6 @@ export default function AdminDashboardPage() {
           </div>
           <p className="text-white text-3xl font-bold">{stats.blogs}</p>
           <p className="text-signal-bright text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Manage posts →</p>
-        </Link>
-
-        <Link href="/admin/projects" className="p-5 bg-[#0A0F1A] border border-ink-200/20 rounded-xl hover:border-signal/20 transition-colors group">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-ink-400 text-xs uppercase tracking-wider font-medium">Projects</span>
-            <div className="w-8 h-8 rounded-lg bg-signal/10 flex items-center justify-center">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-signal-bright)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
-              </svg>
-            </div>
-          </div>
-          <p className="text-white text-3xl font-bold">{stats.projects}</p>
-          <p className="text-signal-bright text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Manage projects →</p>
         </Link>
 
         <Link href="/admin/submissions" className="p-5 bg-[#0A0F1A] border border-ink-200/20 rounded-xl hover:border-signal/20 transition-colors group">
@@ -100,14 +84,10 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Quick actions */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
         <Link href="/admin/blogs/new" className="p-4 bg-signal/5 border border-signal/10 rounded-xl text-center hover:bg-signal/10 transition-colors">
           <span className="text-signal-bright text-2xl">+</span>
           <p className="text-white text-xs font-medium mt-1">New Blog Post</p>
-        </Link>
-        <Link href="/admin/projects/new" className="p-4 bg-signal/5 border border-signal/10 rounded-xl text-center hover:bg-signal/10 transition-colors">
-          <span className="text-signal-bright text-2xl">+</span>
-          <p className="text-white text-xs font-medium mt-1">New Project</p>
         </Link>
         <Link href="/admin/ticker" className="p-4 bg-ink-100/50 border border-ink-200/20 rounded-xl text-center hover:border-signal/20 transition-colors">
           <span className="text-ink-400 text-2xl">⏱</span>

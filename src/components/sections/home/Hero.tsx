@@ -64,23 +64,23 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-canvas pt-[120px] sm:pt-[160px] lg:pt-[200px] pb-[80px] lg:pb-[140px]"
+      className="relative overflow-hidden bg-canvas pt-[96px] sm:pt-[140px] lg:pt-[200px] pb-[60px] lg:pb-[140px]"
     >
-      {/* Radial gradient washes */}
+      {/* Radial gradient washes — desktop only, they're a heavy paint cost on mobile */}
       <div
-        className="absolute -top-[150px] -right-[100px] w-[800px] h-[800px] pointer-events-none opacity-80 blur-3xl"
+        className="hidden sm:block absolute -top-[150px] -right-[100px] w-[800px] h-[800px] pointer-events-none opacity-80 blur-3xl"
         style={{
           background: "radial-gradient(circle, var(--color-signal-wash) 0%, transparent 65%)",
         }}
       />
       <div
-        className="absolute -bottom-[50px] -left-[50px] w-[500px] h-[500px] pointer-events-none opacity-70 blur-3xl"
+        className="hidden sm:block absolute -bottom-[50px] -left-[50px] w-[500px] h-[500px] pointer-events-none opacity-70 blur-3xl"
         style={{
           background: "radial-gradient(circle, var(--color-signal-wash) 0%, transparent 60%)",
         }}
       />
       <div
-        className="absolute top-[30%] left-[40%] w-[300px] h-[300px] pointer-events-none opacity-50 blur-2xl"
+        className="hidden sm:block absolute top-[30%] left-[40%] w-[300px] h-[300px] pointer-events-none opacity-50 blur-2xl"
         style={{
           background: "radial-gradient(circle, var(--color-signal-bright) 0%, transparent 70%)",
         }}
@@ -212,9 +212,9 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: Hero Logo Video */}
+          {/* Right: Hero Logo Video — scales gracefully at the lg breakpoint */}
           <motion.div
-            className="hidden lg:block w-[600px] h-[540px] relative -mr-10"
+            className="hidden lg:block w-[min(600px,52vw)] aspect-[10/9] relative lg:-mr-6 xl:-mr-10"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8, ease: EASE_OUT_EXPO }}

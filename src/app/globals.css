@@ -32,16 +32,16 @@
   --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
 
   /* ── Font sizes (fluid) ── */
-  --font-size-display: clamp(2.5rem, 5vw, 4.5rem);
-  --font-size-h1: clamp(2rem, 4vw, 3rem);
-  --font-size-h2: clamp(1.25rem, 2vw, 1.5rem);
+  --font-size-display: clamp(2rem, 7vw, 4.5rem);
+  --font-size-h1: clamp(1.625rem, 5vw, 3rem);
+  --font-size-h2: clamp(1.125rem, 2.5vw, 1.5rem);
   --font-size-body: 0.9375rem;
   --font-size-body-sm: 0.875rem;
   --font-size-eyebrow: 0.8125rem;
   --font-size-caption: 0.8125rem;
 
   /* ── Spacing ── */
-  --spacing-section: clamp(5rem, 10vw, 11.25rem);
+  --spacing-section: clamp(4rem, 10vw, 11.25rem);
   --spacing-section-sm: clamp(3rem, 6vw, 7.5rem);
 
   /* ── Radii ── */
@@ -186,6 +186,15 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-ink-400);
+}
+
+/* Hide scrollbar on horizontal mobile scrollers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* ================================================================

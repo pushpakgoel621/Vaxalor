@@ -81,7 +81,7 @@ export function EntryPopup() {
           />
 
           <motion.div
-            className="fixed z-[90] top-1/2 left-1/2 w-[calc(100vw-2rem)] max-w-[440px] bg-canvas-white rounded-2xl shadow-2xl border border-canvas-border overflow-hidden"
+            className="fixed z-[90] top-1/2 left-1/2 w-[calc(100vw-1.5rem)] max-w-[440px] max-h-[90dvh] overflow-y-auto bg-canvas-white rounded-2xl shadow-2xl border border-canvas-border"
             initial={{ opacity: 0, y: 40, x: "-50%", translateY: "-50%" }}
             animate={{ opacity: 1, y: 0, x: "-50%", translateY: "-50%" }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
@@ -101,13 +101,13 @@ export function EntryPopup() {
 
             <div className="h-1 bg-gradient-to-r from-signal via-signal-bright to-signal" />
 
-            <div className="p-7 md:p-8">
-              <div className="flex justify-center mb-4">
+            <div className="p-5 md:p-8">
+              <div className="flex justify-center mb-3 md:mb-4">
                 <motion.div
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <Image src="/images/mascot.png" alt="Vaxalor mascot" width={70} height={50} className="drop-shadow-md" />
+                  <Image src="/images/mascot.png" alt="Vaxalor mascot" width={70} height={50} className="w-12 md:w-[70px] h-auto drop-shadow-md" />
                 </motion.div>
               </div>
 

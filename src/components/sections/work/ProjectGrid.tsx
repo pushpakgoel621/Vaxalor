@@ -12,10 +12,10 @@ interface ProjectGridProps {
 export function ProjectGrid({ projects, onProjectClick }: ProjectGridProps) {
   return (
     <section className="bg-canvas pb-section">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
+      <div className="max-w-[1200px] mx-auto md:px-6 lg:px-8">
         <AnimatePresence mode="popLayout">
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-12 gap-5"
+            className="flex md:grid md:grid-cols-12 gap-4 md:gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide px-6 md:px-0 [scroll-padding-inline:1.5rem]"
             layout
           >
             {projects.map((project, i) => {
@@ -25,7 +25,7 @@ export function ProjectGrid({ projects, onProjectClick }: ProjectGridProps) {
               return (
                 <motion.div
                   key={project.slug}
-                  className={colSpan}
+                  className={`shrink-0 w-[82%] sm:w-[60%] md:w-auto snap-start ${colSpan}`}
                   layout
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -53,8 +53,21 @@ export function ProjectGrid({ projects, onProjectClick }: ProjectGridProps) {
           </motion.div>
         </AnimatePresence>
 
+        {/* Mobile swipe hint */}
+        {projects.length > 1 && (
+          <div className="md:hidden mt-4 flex items-center justify-center gap-2 text-ink-400 text-xs">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            Swipe to explore {projects.length} projects
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
+        )}
+
         {projects.length === 0 && (
-          <div className="text-center py-20">
+          <div className="text-center py-20 px-6">
             <p className="text-ink-300 text-lg">No projects in this category yet.</p>
           </div>
         )}

@@ -16,10 +16,10 @@ export function OurValues() {
           />
         </ScrollReveal>
 
-        <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-14">
+        <StaggerChildren className="flex md:grid md:grid-cols-3 gap-4 md:gap-5 mt-10 md:mt-14 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
           {VALUES.map((value) => (
-            <StaggerItem key={value.number}>
-              <div className="bg-canvas-white border border-canvas-border rounded-card p-8 h-full">
+            <StaggerItem key={value.number} className="shrink-0 w-[82%] sm:w-[60%] md:w-auto snap-start">
+              <div className="bg-canvas-white border border-canvas-border rounded-card p-6 md:p-8 h-full">
                 <p className="text-signal text-[13px] font-semibold font-mono uppercase tracking-wider mb-4">
                   {value.number}
                 </p>

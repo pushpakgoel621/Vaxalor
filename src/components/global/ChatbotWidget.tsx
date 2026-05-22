@@ -116,13 +116,14 @@ export function ChatbotWidget() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed z-50 right-6 bottom-6 md:right-8 md:bottom-8 w-16 h-16 rounded-full bg-gradient-to-br from-signal to-signal-bright hover:from-signal-hover hover:to-signal text-white flex items-center justify-center shadow-lg shadow-signal/30 transition-all duration-200 hover:scale-105 overflow-visible ${isOpen ? "" : "animate-chatbot-pulse"
+        style={{ bottom: "max(1rem, env(safe-area-inset-bottom))" }}
+        className={`fixed z-50 right-4 md:right-8 md:!bottom-8 w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-signal to-signal-bright hover:from-signal-hover hover:to-signal text-white flex items-center justify-center shadow-lg shadow-signal/30 transition-all duration-200 hover:scale-105 overflow-visible ${isOpen ? "" : "animate-chatbot-pulse"
           }`}
         data-cursor="cta"
         aria-label={isOpen ? "Close chat" : "Open chat"}
       >
         {isOpen ? (
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
@@ -132,7 +133,7 @@ export function ChatbotWidget() {
             alt="Vaxalor mascot"
             width={56}
             height={42}
-            className="object-contain drop-shadow-md"
+            className="w-9 h-7 md:w-14 md:h-10 object-contain drop-shadow-md"
             priority
           />
         )}

@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { CategoryMockup } from "@/components/ui/CategoryMockup";
 import type { Project } from "@/types";
 
 interface ProjectDetailProps {
@@ -79,11 +81,12 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             onWheel={(e) => e.stopPropagation()}
           >
-            {/* Close button */}
+            {/* Close button — fixed to the modal viewport so it never overlaps content */}
             <button
               onClick={onClose}
-              className="sticky top-4 float-right mr-4 mt-4 z-10 w-10 h-10 rounded-full bg-canvas-alt border border-canvas-border flex items-center justify-center hover:bg-canvas-border transition-colors"
+              className="fixed top-6 md:top-14 right-6 md:right-[calc(10%+1rem)] z-20 w-9 h-9 md:w-10 md:h-10 rounded-full bg-canvas-white border border-canvas-border shadow-md flex items-center justify-center hover:bg-canvas-alt transition-colors"
               data-cursor="hover"
+              aria-label="Close project"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18" />
@@ -94,33 +97,38 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             {/* Hero image */}
             {project.thumbnailUrl ? (
               <div className="w-full bg-gradient-to-br from-canvas-alt to-canvas-border rounded-t-xl relative overflow-hidden">
-                <img
+                <Image
                   src={project.thumbnailUrl}
                   alt={project.title}
+                  width={1400}
+                  height={900}
                   className="w-full max-h-[500px] object-contain"
+                  priority
                 />
               </div>
             ) : (
-              <div className={`w-full h-56 md:h-72 bg-gradient-to-br ${project.gradient} rounded-t-xl relative overflow-hidden`}>
-                <svg className="w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
-                  {project.pattern === "grid" &&
-                    Array.from({ length: 8 }).map((_, i) => (
-                      <line key={i} x1={`${(i + 1) * 12}%`} y1="0" x2={`${(i + 1) * 12}%`} y2="100%" stroke="var(--color-signal)" strokeWidth="0.5" />
-                    ))
-                  }
-                </svg>
+              <div className="w-full h-64 md:h-80 rounded-t-xl relative overflow-hidden">
+                <CategoryMockup category={project.category} gradient={project.gradient} />
               </div>
             )}
 
             {/* Content */}
-            <div className="px-6 md:px-12 lg:px-16 py-10 max-w-3xl">
+            <div className="px-5 md:px-12 lg:px-16 py-6 md:py-10 max-w-3xl">
               {/* Meta */}
-              <div className="flex flex-wrap items-center gap-3 text-ink-300 text-sm mb-4">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-ink-300 text-xs md:text-sm mb-4">
                 <Badge>{project.category}</Badge>
-                <span>&middot;</span>
-                <span>{project.timeline}</span>
-                <span>&middot;</span>
-                <span>{project.year}</span>
+                {project.timeline && (
+                  <>
+                    <span>&middot;</span>
+                    <span>{project.timeline}</span>
+                  </>
+                )}
+                {project.year && (
+                  <>
+                    <span>&middot;</span>
+                    <span>{project.year}</span>
+                  </>
+                )}
                 {project.conceptProject && (
                   <>
                     <span>&middot;</span>
@@ -129,12 +137,14 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                 )}
               </div>
 
-              <h2 className="text-display !text-[36px] md:!text-[40px] mb-4">
+              <h2 className="text-display !text-[26px] md:!text-[40px] mb-4 leading-tight">
                 {project.title}
               </h2>
-              <p className="text-ink-200 text-lg leading-relaxed mb-10">
-                {project.description}
-              </p>
+              {(project.description || project.hook) && (
+                <p className="text-ink-200 text-lg leading-relaxed mb-10">
+                  {project.description || project.hook}
+                </p>
+              )}
 
               {/* Challenge / Solution / Result */}
               <div className="space-y-8">

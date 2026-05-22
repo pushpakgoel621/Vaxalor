@@ -21,61 +21,25 @@ const FILTER_MAP: Record<string, string | undefined> = {
   MVP: "MVP",
 };
 
-function dbToProject(p: Record<string, unknown>): Project {
-  return {
-    slug: p.slug as string,
-    title: p.title as string,
-    hook: (p.hook as string) || "",
-    category: p.category as Project["category"],
-    description: (p.description as string) || "",
-    challenge: (p.challenge as string) || "",
-    solution: (p.solution as string) || "",
-    result: (p.result as string) || "",
-    timeline: (p.timeline as string) || "",
-    year: (p.year as string) || "",
-    techStack: (p.tech_stack as string[]) || [],
-    gradient: (p.gradient as string) || "from-signal-tint via-signal-wash to-signal/20",
-    pattern: (p.pattern as Project["pattern"]) || "dots",
-    conceptProject: p.concept_project as boolean,
-    projectUrl: (p.project_url as string) || null,
-    thumbnailUrl: (p.thumbnail_url as string) || null,
-  };
-}
-
 export function WorkPageClient() {
   const searchParams = useSearchParams();
   const [filter, setFilter] = useState<ProjectFilter>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [projects, setProjects] = useState<Project[]>(PROJECTS);
-  const [loaded, setLoaded] = useState(false);
 
+  // Auto-open project modal from URL query param (?project=<slug>)
   useEffect(() => {
-    fetch("/api/projects")
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.projects?.length > 0) {
-          setProjects(data.projects.map(dbToProject));
-        }
-      })
-      .catch(() => {})
-      .finally(() => setLoaded(true));
-  }, []);
-
-  // Auto-open project modal from URL query param
-  useEffect(() => {
-    if (!loaded) return;
     const projectSlug = searchParams.get("project");
     if (projectSlug) {
-      const found = projects.find((p) => p.slug === projectSlug);
+      const found = PROJECTS.find((p) => p.slug === projectSlug);
       if (found) setSelectedProject(found);
     }
-  }, [loaded, searchParams, projects]);
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     const category = FILTER_MAP[filter];
-    if (!category) return projects;
-    return projects.filter((p) => p.category === category);
-  }, [filter, projects]);
+    if (!category) return PROJECTS;
+    return PROJECTS.filter((p) => p.category === category);
+  }, [filter]);
 
   return (
     <PageTransition>
