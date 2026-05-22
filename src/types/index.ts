@@ -4,23 +4,13 @@ export interface NavLink {
   disabled?: boolean;
 }
 
-export interface Service {
-  number: string;
-  title: string;
-  description: string;
-  features: string[];
-  ctaText: string;
-  ctaHref: string;
-  badge?: string;
-  highlighted?: boolean;
-}
-
 export interface ServiceOffering {
   title: string;
   items: string[];
 }
 
 export interface ServiceCatalogCategory {
+  slug: string;
   pillar: string;
   icon: string;
   description: string;

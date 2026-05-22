@@ -4,7 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { SITE_NAME, SITE_EMAIL, SITE_TAGLINE, NAV_LINKS, SERVICES, SOCIAL_LINKS, SERVICE_OPTIONS } from "@/lib/constants";
+import { SITE_NAME, SITE_EMAIL, SITE_TAGLINE, NAV_LINKS, SERVICE_CATALOG, SOCIAL_LINKS, SERVICE_OPTIONS } from "@/lib/constants";
 import { IndicTexture } from "@/components/ui/IndicTexture";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 
@@ -131,14 +131,14 @@ export function Footer() {
               Services
             </h4>
             <ul className="space-y-3">
-              {SERVICES.map((service) => (
-                <li key={service.number}>
+              {SERVICE_CATALOG.map((pillar) => (
+                <li key={pillar.slug}>
                   <Link
-                    href="/services"
+                    href={`/services/${pillar.slug}`}
                     className="text-ink-500 text-sm hover:text-white transition-colors duration-200"
                     data-cursor="hover"
                   >
-                    {service.title}
+                    {pillar.pillar}
                   </Link>
                 </li>
               ))}

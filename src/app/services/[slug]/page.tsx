@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { SERVICE_PAGES, SITE_NAME } from "@/lib/constants";
+import { SERVICE_CATALOG, SITE_NAME } from "@/lib/constants";
 import { ServicePageClient } from "./ServicePageClient";
 
 export function generateStaticParams() {
-  return SERVICE_PAGES.map((s) => ({ slug: s.slug }));
+  return SERVICE_CATALOG.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -13,24 +13,25 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const service = SERVICE_PAGES.find((s) => s.slug === slug);
-  if (!service) return {};
+  const pillar = SERVICE_CATALOG.find((p) => p.slug === slug);
+  if (!pillar) return {};
 
   return {
-    title: `${service.title} — ${SITE_NAME}`,
-    description: service.description,
+    title: `${pillar.pillar} — ${SITE_NAME}`,
+    description: pillar.description,
   };
 }
 
-export default async function ServiceDetailPage({
+export default async function ServicePillarPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const service = SERVICE_PAGES.find((s) => s.slug === slug);
+  const pillarIndex = SERVICE_CATALOG.findIndex((p) => p.slug === slug);
+  const pillar = pillarIndex >= 0 ? SERVICE_CATALOG[pillarIndex] : null;
 
-  if (!service) notFound();
+  if (!pillar) notFound();
 
-  return <ServicePageClient service={service} />;
+  return <ServicePageClient pillar={pillar} pillarIndex={pillarIndex} />;
 }

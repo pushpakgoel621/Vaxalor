@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL, SERVICE_PAGES } from "@/lib/constants";
+import { SITE_URL, SERVICE_CATALOG } from "@/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -15,8 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    ...SERVICE_PAGES.map((s) => ({
-      url: `${SITE_URL}/services/${s.slug}`,
+    ...SERVICE_CATALOG.map((p) => ({
+      url: `${SITE_URL}/services/${p.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
