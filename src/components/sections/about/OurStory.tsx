@@ -45,7 +45,7 @@ export function OurStory() {
               </div>
 
               <div className="absolute top-6 right-6 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/10">
-                <p className="text-signal-bright text-2xl font-bold font-heading">50+</p>
+                <p className="text-signal-bright text-2xl font-bold font-heading">20+</p>
                 <p className="text-white/60 text-[11px] uppercase tracking-wider">Projects</p>
               </div>
 

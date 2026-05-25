@@ -66,7 +66,7 @@ export const TESTIMONIALS: Testimonial[] = [
 ];
 
 export const STATS: Stat[] = [
-  { number: 50, suffix: "+", label: "Projects Shipped" },
+  { number: 20, suffix: "+", label: "Projects Shipped" },
   { number: 20, suffix: "", label: "Day Delivery", highlight: true },
   { number: 98, suffix: "%", label: "Client Satisfaction" },
 ];

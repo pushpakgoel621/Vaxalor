@@ -77,7 +77,7 @@ const USP_DATA = [
 ];
 
 const STAT_CONFIG = [
-  { variant: "ring" as const, target: 50, suffix: "+", label: "Projects Shipped" },
+  { variant: "ring" as const, target: 20, suffix: "+", label: "Projects Shipped" },
   { variant: "timeline" as const, target: 20, suffix: "", label: "Day Delivery", highlight: true },
   { variant: "gauge" as const, target: 98, suffix: "%", label: "Client Satisfaction" },
 ];
@@ -141,11 +141,10 @@ export function WhyChooseUs() {
             return (
               <motion.div
                 key={usp.title}
-                className={`shrink-0 w-[82%] sm:w-[60%] md:w-auto snap-start relative p-6 md:p-7 rounded-card border cursor-default transition-colors duration-500 ${
-                  isActive
+                className={`shrink-0 w-[82%] sm:w-[60%] md:w-auto snap-start relative p-6 md:p-7 rounded-card border cursor-default transition-colors duration-500 ${isActive
                     ? "bg-ink-100 border-signal/30"
                     : "bg-ink-100/50 border-ink-200/50"
-                }`}
+                  }`}
                 animate={{
                   y: isActive ? -8 : 0,
                   boxShadow: isActive
@@ -156,17 +155,15 @@ export function WhyChooseUs() {
               >
                 {/* Icon */}
                 <div
-                  className={`w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-all duration-500 ${
-                    isActive ? "bg-signal/10 border border-signal/20" : "bg-ink-200/30 border border-ink-200/50"
-                  }`}
+                  className={`w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-all duration-500 ${isActive ? "bg-signal/10 border border-signal/20" : "bg-ink-200/30 border border-ink-200/50"
+                    }`}
                 >
                   {isActive ? usp.iconActive : usp.iconInactive}
                 </div>
 
                 <h3
-                  className={`text-[20px] font-semibold font-heading mb-3 transition-colors duration-500 ${
-                    isActive ? "text-white" : "text-ink-400"
-                  }`}
+                  className={`text-[20px] font-semibold font-heading mb-3 transition-colors duration-500 ${isActive ? "text-white" : "text-ink-400"
+                    }`}
                 >
                   {usp.title}
                 </h3>
