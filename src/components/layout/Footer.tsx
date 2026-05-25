@@ -39,7 +39,7 @@ export function Footer() {
         }),
       });
       setSent(true);
-    } catch {}
+    } catch { }
     setSending(false);
   }
 
@@ -68,7 +68,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-ink-400 text-sm mt-3 max-w-xs">{SITE_TAGLINE}</p>
-            
+
             <div className="mt-6 space-y-4">
               <div>
                 <p className="text-white text-sm font-semibold mb-1">Pushpak Goel</p>
@@ -77,13 +77,13 @@ export function Footer() {
                   <a href="mailto:pushpak@vaxalor.com" className="hover:text-signal-bright transition-colors">pushpak@vaxalor.com</a>
                 </div>
               </div>
-              {/* <div>
+              <div>
                 <p className="text-white text-sm font-semibold mb-1">Anshul Shekhar</p>
                 <div className="flex flex-col gap-1 text-ink-300 text-[13px]">
                   <a href="tel:+919470218939" className="hover:text-signal-bright transition-colors">+91 94702 18939</a>
                   <a href="mailto:anshul@vaxalor.com" className="hover:text-signal-bright transition-colors">anshul@vaxalor.com</a>
                 </div>
-              </div> */}
+              </div>
             </div>
 
             <div className="flex gap-4 mt-6">
@@ -113,9 +113,8 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.disabled ? "#" : link.href}
-                    className={`text-ink-500 text-sm transition-colors duration-200 ${
-                      link.disabled ? "pointer-events-none opacity-50" : "hover:text-white"
-                    }`}
+                    className={`text-ink-500 text-sm transition-colors duration-200 ${link.disabled ? "pointer-events-none opacity-50" : "hover:text-white"
+                      }`}
                     data-cursor="hover"
                   >
                     {link.label}

@@ -475,13 +475,13 @@ export const PROJECTS: Project[] = [
 export const PROJECT_FILTERS = ["All", "Websites", "Design", "Mobile", "CRM", "AI", "MVP"] as const;
 
 export const LEADERSHIP_MEMBERS: LeadershipMember[] = [
-  // {
-  //   name: "Anshul Shekhar",
-  //   roleBadge: "Founder & CEO",
-  //   description: "I lead go-to-market strategy, brand partnerships, and growth initiatives at Vaxalor. My work centers on building scalable acquisition systems that accelerate testing, lower customer acquisition costs, and improve campaign velocity.",
-  //   linkedinUrl: "https://www.linkedin.com/in/anshul-shekhar-/",
-  //   image: "/images/team/anshul.png",
-  // },
+  {
+    name: "Anshul Shekhar",
+    roleBadge: "Founder & CEO",
+    description: "I lead go-to-market strategy, brand partnerships, and growth initiatives at Vaxalor. My work centers on building scalable acquisition systems that accelerate testing, lower customer acquisition costs, and improve campaign velocity.",
+    linkedinUrl: "https://www.linkedin.com/in/anshul-shekhar-/",
+    image: "/images/team/anshul.png",
+  },
   {
     name: "Pushpak Goel",
     roleBadge: "Co-founder & CIO",

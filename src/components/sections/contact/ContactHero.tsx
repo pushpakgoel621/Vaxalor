@@ -36,13 +36,13 @@ export function ContactHero() {
                       <a href="mailto:pushpak@vaxalor.com" className="hover:text-signal transition-colors">pushpak@vaxalor.com</a>
                     </div>
                   </div>
-                  {/* <div>
+                  <div>
                     <p className="text-ink text-sm font-semibold mb-1">Anshul Shekhar</p>
                     <div className="flex flex-col gap-1 sm:flex-row sm:gap-4 text-ink-300 text-sm">
                       <a href="tel:+919470218939" className="hover:text-signal transition-colors">+91 94702 18939</a>
                       <a href="mailto:anshul@vaxalor.com" className="hover:text-signal transition-colors">anshul@vaxalor.com</a>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-2 text-ink-300 text-sm pt-2">
