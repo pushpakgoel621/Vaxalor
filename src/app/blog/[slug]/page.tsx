@@ -1,4 +1,9 @@
+import type { Metadata } from "next";
 import { BlogPostClient } from "./BlogPostClient";
+import { ArticleSchema, BreadcrumbSchema } from "@/components/seo/JsonLd";
+import { getBlogBySlug } from "@/lib/db/queries";
+import { SITE_NAME } from "@/lib/constants";
+import type { ContentBlock } from "@/lib/db";
 
 const FALLBACK_CONTENT: Record<string, {
   title: string;
@@ -6,7 +11,7 @@ const FALLBACK_CONTENT: Record<string, {
   date: string;
   readTime: string;
   excerpt: string;
-  content: { type: string; text?: string; level?: number; author?: string }[];
+  content: ContentBlock[];
 }> = {
   "how-much-does-a-website-cost-2026": {
     title: "How Much Does a Website Cost in 2026?",
@@ -29,58 +34,115 @@ const FALLBACK_CONTENT: Record<string, {
   },
 };
 
+// Helper: fetch a blog post from DB or fallback
+async function getPost(slug: string) {
+  // Try database first
+  try {
+    const dbPost = await getBlogBySlug(slug);
+    if (dbPost && dbPost.published) return dbPost;
+  } catch {
+    // DB might not be ready — fall through
+  }
+
+  // Try fallback content
+  const fallback = FALLBACK_CONTENT[slug];
+  if (fallback) {
+    return {
+      title: fallback.title,
+      slug,
+      category: fallback.category,
+      read_time: fallback.readTime,
+      excerpt: fallback.excerpt,
+      author: "Vaxalor Team",
+      created_at: fallback.date,
+      updated_at: fallback.date,
+      content: fallback.content,
+      thumbnail_url: null,
+      thumbnail_alt: null,
+      meta_title: null,
+      meta_description: null,
+    };
+  }
+
+  // Generic placeholder for unknown slugs
+  return {
+    title: slug.split("-").map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(" "),
+    slug,
+    category: "Blog",
+    read_time: "3 min",
+    excerpt: "",
+    author: "Vaxalor Team",
+    created_at: "2026-04-01",
+    updated_at: "2026-04-01",
+    content: [
+      { type: "paragraph" as const, text: "This article is currently being written. Check back soon for the full piece." },
+      { type: "paragraph" as const, text: "In the meantime, explore our other articles or get in touch to learn how Vaxalor can help your business grow." },
+    ],
+    thumbnail_url: null,
+    thumbnail_alt: null,
+    meta_title: null,
+    meta_description: null,
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  return {
+    title: post.meta_title || `${post.title} — ${SITE_NAME}`,
+    description: post.meta_description || post.excerpt || `Read ${post.title} on the ${SITE_NAME} blog.`,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || undefined,
+      type: "article",
+      publishedTime: post.created_at,
+      authors: [post.author],
+      images: post.thumbnail_url ? [post.thumbnail_url] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt || undefined,
+      images: post.thumbnail_url ? [post.thumbnail_url] : [],
+    },
+  };
+}
+
 export default async function BlogPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const post = await getPost(slug);
 
-  let post = null;
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/blogs/${slug}`, {
-      cache: "no-store",
-    });
-    if (res.ok) {
-      const data = await res.json();
-      post = data.blog;
-    }
-  } catch {
-    // Fall through to fallback
-  }
-
-  if (!post) {
-    const fallback = FALLBACK_CONTENT[slug];
-    if (fallback) {
-      post = {
-        title: fallback.title,
-        slug,
-        category: fallback.category,
-        read_time: fallback.readTime,
-        excerpt: fallback.excerpt,
-        author: "Vaxalor Team",
-        created_at: fallback.date,
-        content: fallback.content,
-        thumbnail_url: null,
-      };
-    } else {
-      post = {
-        title: slug.split("-").map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(" "),
-        slug,
-        category: "Blog",
-        read_time: "3 min",
-        excerpt: "",
-        author: "Vaxalor Team",
-        created_at: "2026-04-01",
-        content: [
-          { type: "paragraph", text: "This article is currently being written. Check back soon for the full piece." },
-          { type: "paragraph", text: "In the meantime, explore our other articles or get in touch to learn how Vaxalor can help your business grow." },
-        ],
-        thumbnail_url: null,
-      };
-    }
-  }
-
-  return <BlogPostClient post={post} />;
+  return (
+    <>
+      <ArticleSchema
+        title={post.title}
+        description={post.excerpt || ""}
+        slug={slug}
+        datePublished={post.created_at}
+        dateModified={post.updated_at || post.created_at}
+        author={post.author}
+        image={post.thumbnail_url}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Blog", href: "/blog" },
+          { name: post.title, href: `/blog/${slug}` },
+        ]}
+      />
+      <BlogPostClient post={post} />
+    </>
+  );
 }

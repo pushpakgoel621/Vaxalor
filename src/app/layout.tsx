@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { sora, inter } from "@/lib/fonts";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { GoogleAnalytics } from "@/components/seo/GoogleAnalytics";
 import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/constants";
 import "./globals.css";
 
@@ -49,6 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sora.variable} ${inter.variable}`}>
       <head>
+        <GoogleAnalytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

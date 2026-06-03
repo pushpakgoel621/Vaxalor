@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SERVICE_CATALOG, SITE_NAME } from "@/lib/constants";
 import { ServicePageClient } from "./ServicePageClient";
+import { ServiceSchema, BreadcrumbSchema } from "@/components/seo/JsonLd";
 
 export function generateStaticParams() {
   return SERVICE_CATALOG.map((p) => ({ slug: p.slug }));
@@ -19,6 +20,9 @@ export async function generateMetadata({
   return {
     title: `${pillar.pillar} — ${SITE_NAME}`,
     description: pillar.description,
+    alternates: {
+      canonical: `/services/${slug}`,
+    },
   };
 }
 
@@ -33,5 +37,22 @@ export default async function ServicePillarPage({
 
   if (!pillar) notFound();
 
-  return <ServicePageClient pillar={pillar} pillarIndex={pillarIndex} />;
+  return (
+    <>
+      <ServiceSchema
+        name={pillar.pillar}
+        description={pillar.description}
+        slug={pillar.slug}
+        categories={pillar.categories}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: pillar.pillar, href: `/services/${pillar.slug}` },
+        ]}
+      />
+      <ServicePageClient pillar={pillar} pillarIndex={pillarIndex} />
+    </>
+  );
 }

@@ -4,10 +4,14 @@ import { ScrollReveal } from "@/components/animation/ScrollReveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { IndicTexture } from "@/components/ui/IndicTexture";
+import { FAQSchema, BreadcrumbSchema } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "FAQ — Frequently Asked Questions",
   description: "Answers to common questions about our services, pricing, timeline, and process.",
+  alternates: {
+    canonical: "/faq",
+  },
 };
 
 const FAQS = [
@@ -54,6 +58,21 @@ const FAQS = [
 export default function FAQPage() {
   return (
     <PageTransition>
+      <FAQSchema
+        items={FAQS.flatMap((section) =>
+          section.items.map((item) => ({
+            question: item.q,
+            answer: item.a,
+          }))
+        )}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "FAQ", href: "/faq" },
+        ]}
+      />
+
       <section className="relative bg-canvas pt-[100px] sm:pt-[140px] pb-12">
         <div className="dot-grid" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8">
