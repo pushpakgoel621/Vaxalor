@@ -43,25 +43,22 @@ export const PROCESS_STEPS: ProcessStep[] = [
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    quote:
-      "They redesigned our entire online presence and our lead generation doubled. Best investment we've made this year.",
-    authorName: "Sarah Chen",
-    authorTitle: "Founder, FreshBite",
-    authorImage: "/images/testimonials/sarah.png",
+    quote: "They redesigned our entire online presence and our lead generation doubled. Best investment we've made this year.",
+    authorName: "Priyanshu Garg",
+    authorTitle: "Pictor",
+    authorImage: "",
   },
   {
-    quote:
-      "We went from idea to a working product in 18 days. The speed and quality were honestly unbelievable.",
-    authorName: "James Morton",
-    authorTitle: "CEO, TrackFlow",
-    authorImage: "/images/testimonials/james.png",
+    quote: "A seasoned business leader with an extensive corporate portfolio. Brings a wealth of market experience having collaborated with industry-leading brands such as Kellogg's, Hero MotoCorp, Afors Consulting, Asian Paints, and Amrit Food. Oversees comprehensive business operations, driving commercial growth, strategic partnerships, and market expansion.",
+    authorName: "Balaji Soundaraj",
+    authorTitle: "Tribe Fortis",
+    authorImage: "",
   },
   {
-    quote:
-      "The AI chatbot they built handles 80% of our support tickets now. Our team can finally focus on what matters.",
-    authorName: "Priya Sharma",
-    authorTitle: "COO, ShopAssist",
-    authorImage: "/images/testimonials/priya.png",
+    quote: "For the development of my website his technical expertise, professional approach, and attention to detail were instrumental in delivering a refined and effective digital presence. The project was executed with efficiency, reliability, and a clear understanding of business requirements.",
+    authorName: "Md. Zaid Ashraf",
+    authorTitle: "CEO, Cosmo Green Energy",
+    authorImage: "",
   },
 ];
 
