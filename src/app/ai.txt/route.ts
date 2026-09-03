@@ -25,7 +25,7 @@ Every project ships in 20 days maximum — from kickoff to launch.
 
 ## Leadership
 - Anshul Shekhar — Founder & CEO (go-to-market strategy, brand partnerships, growth)
-- Pushpak Goel — Co-founder & CIO (product vision, engineering, automation)
+# - Pushpak Goel — Co-founder & CIO (product vision, engineering, automation)
 - Durgesh Chandra — Business Head (business development, project delivery)
 
 ## Services & Starting Prices

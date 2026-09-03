@@ -29,13 +29,13 @@ export function ContactHero() {
                 </div>
 
                 <div className="space-y-4 pt-2">
-                  <div>
+                  {/* <div>
                     <p className="text-ink text-sm font-semibold mb-1">Pushpak Goel</p>
                     <div className="flex flex-col gap-1 sm:flex-row sm:gap-4 text-ink-300 text-sm">
                       <a href="tel:+919368796606" className="hover:text-signal transition-colors">+91 93687 96606</a>
                       <a href="mailto:pushpak@vaxalor.com" className="hover:text-signal transition-colors">pushpak@vaxalor.com</a>
                     </div>
-                  </div>
+                  </div> */}
                   <div>
                     <p className="text-ink text-sm font-semibold mb-1">Anshul Shekhar</p>
                     <div className="flex flex-col gap-1 sm:flex-row sm:gap-4 text-ink-300 text-sm">

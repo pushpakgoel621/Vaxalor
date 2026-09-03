@@ -479,13 +479,13 @@ export const LEADERSHIP_MEMBERS: LeadershipMember[] = [
     linkedinUrl: "https://www.linkedin.com/in/anshul-shekhar-/",
     image: "/images/team/anshul.png",
   },
-  {
-    name: "Pushpak Goel",
-    roleBadge: "Co-founder & CIO",
-    description: "I lead Vaxalor's product vision and long-term strategy, building digital products with soul that enable brands to scale. My focus is on combining automation, creative workflows, and high-performance engineering into one unified system.",
-    linkedinUrl: "https://www.linkedin.com/in/pushpakgoel56/",
-    image: "/images/team/pushpak.png",
-  },
+  // {
+  //   name: "Pushpak Goel",
+  //   roleBadge: "Co-founder & CIO",
+  //   description: "I lead Vaxalor's product vision and long-term strategy, building digital products with soul that enable brands to scale. My focus is on combining automation, creative workflows, and high-performance engineering into one unified system.",
+  //   linkedinUrl: "https://www.linkedin.com/in/pushpakgoel56/",
+  //   image: "/images/team/pushpak.png",
+  // },
   {
     name: "Durgesh Chandra",
     roleBadge: "Business Head",
